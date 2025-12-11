@@ -88,39 +88,39 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="relative flex justify-center lg:justify-end"
           >
-            <div className="relative">
+            <div className="relative max-w-[280px] sm:max-w-[320px] lg:max-w-[360px] mx-auto">
               {/* Glow effect */}
-              <div className="absolute inset-0 bg-primary/15 blur-3xl rounded-full scale-90" />
+              <div className="absolute inset-0 bg-primary/15 blur-3xl rounded-full scale-75" />
               
               {/* Phone image */}
               <motion.div
-                animate={{ y: [0, -12, 0] }}
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 className="relative z-10"
               >
                 <img
                   src={phoneMockup}
                   alt="Purelytics app showing ingredient analysis with safety score"
-                  className="w-full max-w-xs sm:max-w-sm lg:max-w-md drop-shadow-2xl"
+                  className="w-full drop-shadow-2xl"
                 />
               </motion.div>
 
-              {/* Floating badges */}
+              {/* Floating badges - positioned relative to phone container */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1, duration: 0.5 }}
-                className="absolute -left-4 sm:-left-8 top-1/4 glass-card rounded-2xl p-3 sm:p-4 shadow-elevated"
+                className="absolute left-0 top-[20%] -translate-x-[70%] glass-card rounded-2xl p-3 shadow-elevated hidden sm:block"
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">Safety Score</p>
-                    <p className="font-bold text-primary text-lg sm:text-xl">92/100</p>
+                    <p className="font-bold text-primary text-lg">92/100</p>
                   </div>
                 </div>
               </motion.div>
@@ -129,17 +129,17 @@ export function HeroSection() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.2, duration: 0.5 }}
-                className="absolute -right-4 sm:-right-8 bottom-1/3 glass-card rounded-2xl p-3 sm:p-4 shadow-elevated"
+                className="absolute right-0 bottom-[30%] translate-x-[70%] glass-card rounded-2xl p-3 shadow-elevated hidden sm:block"
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber/10 flex items-center justify-center">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-amber" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-xl bg-amber/10 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-amber" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">1 Alert Found</p>
-                    <p className="font-semibold text-sm">Fragrance detected</p>
+                    <p className="text-xs text-muted-foreground">1 Alert</p>
+                    <p className="font-semibold text-sm">Fragrance</p>
                   </div>
                 </div>
               </motion.div>
@@ -149,11 +149,11 @@ export function HeroSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.4, duration: 0.5 }}
-                className="absolute left-1/2 -translate-x-1/2 -bottom-4 glass-card rounded-full px-4 py-2 shadow-card"
+                className="absolute left-1/2 -translate-x-1/2 -bottom-2 glass-card rounded-full px-3 py-1.5 shadow-card"
               >
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  <span className="text-xs font-medium text-muted-foreground">Scanning in real-time</span>
+                  <span className="text-xs font-medium text-muted-foreground">Scanning</span>
                 </div>
               </motion.div>
             </div>

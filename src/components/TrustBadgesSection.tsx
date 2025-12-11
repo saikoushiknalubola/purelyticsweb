@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
-import { Shield, Database, Award, Users, Lock, Microscope } from "lucide-react";
+import { Shield, Database, Award, Lock, Microscope } from "lucide-react";
 
 const badges = [
   { icon: Shield, label: "100% Secure" },
   { icon: Database, label: "Science-Backed" },
   { icon: Award, label: "Made in India" },
-  { icon: Users, label: "10K+ Waitlist" },
   { icon: Lock, label: "Privacy First" },
-  { icon: Microscope, label: "Lab Verified" },
+  { icon: Microscope, label: "Trusted Research" },
 ];
 
 export function TrustBadgesSection() {

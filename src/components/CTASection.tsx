@@ -25,7 +25,7 @@ export function CTASection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/20 text-primary-foreground font-medium text-sm mb-6">
             <Sparkles className="w-4 h-4" />
-            Join 10,000+ on the waitlist
+            Be part of the health revolution
           </div>
 
           {/* Heading */}
@@ -51,9 +51,8 @@ export function CTASection() {
               </a>
             </Button>
             <Button 
-              variant="outline" 
               size="xl" 
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground/50"
+              className="bg-primary-foreground/20 text-primary-foreground border-2 border-primary-foreground/40 hover:bg-primary-foreground/30 hover:border-primary-foreground/60"
               asChild
             >
               <a href="#how-it-works">

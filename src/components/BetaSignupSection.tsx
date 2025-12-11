@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const categories = [
   { id: "skincare", label: "Skincare" },
@@ -39,22 +40,46 @@ export function BetaSignupSection() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const { error } = await supabase.from("beta_signups").insert({
+        name: formData.name,
+        email: formData.email,
+        age: formData.age || null,
+        city: formData.city || null,
+        categories: formData.categories.length > 0 ? formData.categories : null,
+        frustration: formData.frustration || null,
+      });
 
-    toast.success("You're on the list!", {
-      description: "We'll be in touch soon with early access details.",
-    });
+      if (error) {
+        if (error.code === "23505") {
+          toast.error("You're already on the list!", {
+            description: "This email has already been registered for early access.",
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        toast.success("You're on the list!", {
+          description: "We'll be in touch soon with early access details.",
+        });
 
-    setFormData({
-      name: "",
-      email: "",
-      age: "",
-      city: "",
-      categories: [],
-      frustration: "",
-    });
-    setIsSubmitting(false);
+        setFormData({
+          name: "",
+          email: "",
+          age: "",
+          city: "",
+          categories: [],
+          frustration: "",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Something went wrong", {
+        description: "Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
