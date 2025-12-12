@@ -19,7 +19,7 @@ const footerLinks = {
 const socialLinks = [
   { icon: Twitter, href: "https://twitter.com/purelytics", label: "Twitter" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/saikoushiknalubola/", label: "LinkedIn" },
-  { icon: Instagram, href: "https://instagram.com/pure_lytics", label: "Instagram" },
+  { icon: Instagram, href: "https://www.instagram.com/pure_lytics/", label: "Instagram" },
 ];
 
 export function Footer() {
