@@ -9,6 +9,7 @@ const footerLinks = {
   ],
   company: [
     { label: "About Us", href: "/about", isHash: false },
+    { label: "Blog", href: "/blog", isHash: false },
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy", isHash: false },
@@ -139,21 +140,51 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Made in Bharat Section */}
+        <div className="py-10 border-t border-primary-foreground/10">
+          <div className="flex flex-col items-center gap-6">
+            {/* Premium Made in India Badge */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-white to-green-600 blur-xl opacity-30 rounded-full" />
+              <div className="relative flex items-center gap-4 px-8 py-4 rounded-2xl bg-gradient-to-r from-orange-500/10 via-primary-foreground/5 to-green-600/10 border border-primary-foreground/20 backdrop-blur-sm">
+                {/* Indian Flag Colors */}
+                <div className="flex flex-col gap-0.5">
+                  <div className="w-8 h-2 rounded-sm bg-orange-500" />
+                  <div className="w-8 h-2 rounded-sm bg-white" />
+                  <div className="w-8 h-2 rounded-sm bg-green-600" />
+                </div>
+                
+                <div className="flex flex-col">
+                  <span className="text-lg font-bold text-primary-foreground">
+                    Proudly Made in Bharat
+                  </span>
+                  <span className="text-sm text-primary-foreground/60">
+                    Developed with <Heart className="w-3 h-3 inline fill-primary text-primary mx-1" /> in Warangal, Telangana
+                  </span>
+                </div>
+
+                {/* Ashoka Chakra representation */}
+                <div className="w-10 h-10 rounded-full border-2 border-blue-600 flex items-center justify-center">
+                  <div className="w-6 h-6 rounded-full border border-blue-600/50" />
+                </div>
+              </div>
+            </div>
+
+            {/* Tagline */}
+            <p className="text-sm text-primary-foreground/50 text-center max-w-md">
+              Empowering Indian consumers with transparency and trust in every product they choose
+            </p>
+          </div>
+        </div>
+
+        {/* Copyright */}
         <div className="py-6 border-t border-primary-foreground/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-sm text-primary-foreground/50">
-              <span>© 2025 Purelytics. All rights reserved.</span>
+            <div className="text-sm text-primary-foreground/50">
+              © 2025 Purelytics. All rights reserved.
             </div>
-            
-            {/* Made in India badge */}
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20">
-                <span className="text-lg">🇮🇳</span>
-                <span className="text-sm font-medium text-primary-foreground/80">
-                  Made with <Heart className="w-3 h-3 inline fill-primary text-primary mx-1" /> in India
-                </span>
-              </div>
+            <div className="text-sm text-primary-foreground/40">
+              Advancing health technology across India and beyond
             </div>
           </div>
         </div>

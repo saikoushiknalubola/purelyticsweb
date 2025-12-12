@@ -9,6 +9,7 @@ import { SocialProofSection } from "@/components/SocialProofSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { BetaSignupSection } from "@/components/BetaSignupSection";
 import { FAQSection } from "@/components/FAQSection";
+import { BlogSection } from "@/components/BlogSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 
@@ -27,6 +28,7 @@ const Index = () => {
         <TestimonialsSection />
         <BetaSignupSection />
         <FAQSection />
+        <BlogSection />
         <CTASection />
       </main>
       <Footer />
