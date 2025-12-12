@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { 
   ArrowRight, 
   Linkedin, 
-  Instagram,
   Mail, 
   Eye, 
   Target, 
@@ -131,12 +130,6 @@ export default function About() {
                       <a href="https://www.linkedin.com/in/saikoushiknalubola/" target="_blank" rel="noopener noreferrer">
                         <Linkedin className="w-4 h-4 mr-2" />
                         LinkedIn
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="sm" asChild>
-                      <a href="https://instagram.com/pure_lytics" target="_blank" rel="noopener noreferrer">
-                        <Instagram className="w-4 h-4 mr-2" />
-                        Instagram
                       </a>
                     </Button>
                     <Button variant="outline" size="sm" asChild>

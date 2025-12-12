@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Scan, Shield, AlertTriangle } from "lucide-react";
 import { motion } from "framer-motion";
-import phoneMockup from "@/assets/phone-mockup-new.png";
 
 const trustPoints = [
   "Free during beta",
@@ -11,28 +10,28 @@ const trustPoints = [
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 sm:pt-24 pb-12 sm:pb-16 overflow-hidden gradient-hero">
+    <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden gradient-hero">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -right-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -left-32 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-soft-blue/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -right-32 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -left-32 w-[300px] h-[300px] bg-soft-blue/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="text-center lg:text-left order-2 lg:order-1"
+            className="text-center lg:text-left"
           >
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-green-light border border-primary/20 text-primary font-medium text-xs sm:text-sm mb-6 sm:mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-light border border-primary/20 text-primary font-medium text-sm mb-8"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -42,18 +41,18 @@ export function HeroSection() {
             </motion.div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.15] mb-4 sm:mb-6 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] mb-6 tracking-tight">
               Scan any product.{" "}
               <span className="text-primary">Instantly know</span> what's inside.
             </h1>
 
             {/* Subheadline */}
-            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 sm:mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-lg lg:text-xl text-muted-foreground mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               Purelytics decodes ingredients, reveals toxicity, and recommends safer alternatives — all in seconds.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button variant="hero" size="xl" asChild>
                 <a href="#beta">
                   Get Early Access
@@ -68,11 +67,11 @@ export function HeroSection() {
             </div>
 
             {/* Trust indicators */}
-            <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 sm:gap-y-3 justify-center lg:justify-start">
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 justify-center lg:justify-start">
               {trustPoints.map((point) => (
-                <div key={point} className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                  <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-green-light flex items-center justify-center">
-                    <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-primary" />
+                <div key={point} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="w-5 h-5 rounded-full bg-green-light flex items-center justify-center">
+                    <Check className="w-3 h-3 text-primary" />
                   </div>
                   {point}
                 </div>
@@ -80,83 +79,91 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Right Content - Phone Mockup */}
+          {/* Right Content - Feature Cards (replacing phone mockup) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-            className="relative flex justify-center lg:justify-end order-1 lg:order-2"
+            className="relative"
           >
-            <div className="relative w-[200px] sm:w-[260px] lg:w-[320px] mx-auto">
-              {/* Glow effect - subtle */}
-              <div className="absolute inset-0 bg-primary/10 blur-3xl rounded-full scale-75 opacity-50" />
-              
-              {/* Phone image */}
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="relative z-10"
-              >
-                <img
-                  src={phoneMockup}
-                  alt="Purelytics app showing ingredient analysis with safety score"
-                  className="w-full drop-shadow-xl"
-                  loading="eager"
-                />
-              </motion.div>
-
-              {/* Floating badges - hidden on mobile, visible on sm+ */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8, duration: 0.4 }}
-                className="absolute -left-4 sm:-left-16 lg:-left-20 top-[25%] glass-card rounded-xl sm:rounded-2xl p-2 sm:p-3 shadow-card hidden sm:block"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center">
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground">Safety Score</p>
-                    <p className="font-bold text-primary text-sm sm:text-lg">92/100</p>
-                  </div>
-                </div>
-              </motion.div>
-
+            <div className="grid gap-4 sm:gap-6">
+              {/* Scan Card */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1, duration: 0.4 }}
-                className="absolute -right-4 sm:-right-16 lg:-right-20 bottom-[35%] glass-card rounded-xl sm:rounded-2xl p-2 sm:p-3 shadow-card hidden sm:block"
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="bg-card rounded-2xl p-6 shadow-card border border-border/50 hover:shadow-elevated transition-shadow"
               >
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-amber/10 flex items-center justify-center">
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-amber" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Scan className="w-7 h-7 text-primary" />
                   </div>
                   <div>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground">1 Alert</p>
-                    <p className="font-semibold text-xs sm:text-sm">Fragrance</p>
+                    <h3 className="font-bold text-foreground text-lg mb-1">Instant Scanning</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      Point your camera at any product label and get instant ingredient analysis
+                    </p>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Scan animation indicator */}
+              {/* Safety Score Card */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2, duration: 0.4 }}
-                className="absolute left-1/2 -translate-x-1/2 -bottom-1 sm:-bottom-2 glass-card rounded-full px-2 sm:px-3 py-1 sm:py-1.5 shadow-card"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="bg-card rounded-2xl p-6 shadow-card border border-border/50 hover:shadow-elevated transition-shadow"
               >
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary animate-pulse" />
-                  <span className="text-[10px] sm:text-xs font-medium text-muted-foreground">Scanning</span>
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-green-light flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-7 h-7 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between mb-1">
+                      <h3 className="font-bold text-foreground text-lg">Safety Score</h3>
+                      <span className="text-2xl font-bold text-primary">92/100</span>
+                    </div>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      Clear toxicity ratings help you make safer choices
+                    </p>
+                    <div className="mt-3 h-2 bg-muted rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: "92%" }}
+                        transition={{ delay: 1, duration: 0.8 }}
+                        className="h-full bg-primary rounded-full"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Alert Card */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+                className="bg-card rounded-2xl p-6 shadow-card border border-border/50 hover:shadow-elevated transition-shadow"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-amber/10 flex items-center justify-center flex-shrink-0">
+                    <AlertTriangle className="w-7 h-7 text-amber" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-bold text-foreground text-lg">1 Alert Found</h3>
+                      <span className="px-2 py-0.5 rounded-full bg-amber/10 text-amber text-xs font-medium">Caution</span>
+                    </div>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      <span className="font-medium text-foreground">Fragrance:</span> May contain allergens. Consider fragrance-free alternatives.
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             </div>
+
+            {/* Floating decoration */}
+            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl" />
           </motion.div>
         </div>
       </div>
