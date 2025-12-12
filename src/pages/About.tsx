@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { 
   ArrowRight, 
   Linkedin, 
+  Instagram,
   Mail, 
   Eye, 
   Target, 
@@ -15,6 +16,7 @@ import {
   Users,
   MapPin
 } from "lucide-react";
+import founderPhoto from "@/assets/founder-photo.jpg";
 
 const values = [
   {
@@ -90,47 +92,57 @@ export default function About() {
       </section>
 
       {/* Founder Section */}
-      <section className="py-16 lg:py-24 bg-secondary/30">
+      <section className="py-12 sm:py-16 lg:py-24 bg-secondary/30">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="max-w-4xl mx-auto"
           >
-            <div className="bg-card rounded-3xl p-8 lg:p-12 shadow-card border border-border/50">
-              <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
-                {/* Founder Image Placeholder */}
-                <div className="w-40 h-40 lg:w-48 lg:h-48 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0">
-                  <span className="text-6xl lg:text-7xl font-bold text-primary">S</span>
+            <div className="bg-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-card border border-border/50">
+              <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 items-center">
+                {/* Founder Image */}
+                <div className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 rounded-2xl overflow-hidden flex-shrink-0 shadow-elevated">
+                  <img 
+                    src={founderPhoto} 
+                    alt="Saikoushik Nalubola - Founder & CEO of Purelytics" 
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
                 
                 <div className="text-center lg:text-left">
-                  <p className="text-primary font-semibold mb-2">Founded by</p>
-                  <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
+                  <p className="text-primary font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Founded by</p>
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-1 sm:mb-2">
                     Saikoushik Nalubola
                   </h2>
-                  <p className="text-muted-foreground mb-4">Founder & CEO • Established 2025</p>
+                  <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">Founder & CEO • Established 2025</p>
                   
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    With a passion for health technology and consumer safety, Saikoushik Nalubola 
-                    founded Purelytics to bridge the gap between complex ingredient labels and 
-                    everyday consumers. Our mission is to democratize health information and 
-                    empower individuals to make informed choices.
+                  <p className="text-muted-foreground mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
+                    With a passion for health technology and consumer safety, Saikoushik founded 
+                    Purelytics to bridge the gap between complex ingredient labels and everyday consumers. 
+                    Our mission is to democratize health information and empower informed choices.
                   </p>
                   
-                  <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
                     <Button variant="outline" size="sm" asChild>
-                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                      <a href="https://www.linkedin.com/in/saikoushiknalubola/" target="_blank" rel="noopener noreferrer">
                         <Linkedin className="w-4 h-4 mr-2" />
-                        Connect on LinkedIn
+                        LinkedIn
                       </a>
                     </Button>
                     <Button variant="outline" size="sm" asChild>
-                      <a href="mailto:saikoushik42@gmail.com">
+                      <a href="https://instagram.com/pure_lytics" target="_blank" rel="noopener noreferrer">
+                        <Instagram className="w-4 h-4 mr-2" />
+                        Instagram
+                      </a>
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <a href="mailto:purelytics@gmail.com">
                         <Mail className="w-4 h-4 mr-2" />
-                        saikoushik42@gmail.com
+                        Contact
                       </a>
                     </Button>
                   </div>
@@ -142,23 +154,23 @@ export default function About() {
       </section>
 
       {/* Vision, Mission, Values */}
-      <section className="py-16 lg:py-24">
+      <section className="py-12 sm:py-16 lg:py-24">
         <div className="container">
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {values.map((item, index) => (
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-card rounded-2xl p-8 shadow-card border border-border/50 hover:shadow-elevated transition-shadow duration-300"
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="bg-card rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-card border border-border/50 hover:shadow-elevated transition-shadow duration-300"
               >
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                  <item.icon className="w-7 h-7 text-primary" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-4 sm:mb-6">
+                  <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 sm:mb-3">{item.title}</h3>
+                <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{item.description}</p>
               </motion.div>
             ))}
           </div>
