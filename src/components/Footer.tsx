@@ -112,6 +112,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       to={link.href}
+                      onClick={() => window.scrollTo(0, 0)}
                       className="text-sm text-primary-foreground/60 hover:text-primary transition-colors"
                     >
                       {link.label}
@@ -129,6 +130,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       to={link.href}
+                      onClick={() => window.scrollTo(0, 0)}
                       className="text-sm text-primary-foreground/60 hover:text-primary transition-colors"
                     >
                       {link.label}
@@ -141,38 +143,40 @@ export function Footer() {
         </div>
 
         {/* Made in Bharat Section */}
-        <div className="py-10 border-t border-primary-foreground/10">
-          <div className="flex flex-col items-center gap-6">
+        <div className="py-12 lg:py-16 border-t border-primary-foreground/10">
+          <div className="flex flex-col items-center gap-8">
             {/* Premium Made in India Badge */}
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-white to-green-600 blur-xl opacity-30 rounded-full" />
-              <div className="relative flex items-center gap-4 px-8 py-4 rounded-2xl bg-gradient-to-r from-orange-500/10 via-primary-foreground/5 to-green-600/10 border border-primary-foreground/20 backdrop-blur-sm">
-                {/* Indian Flag Colors */}
-                <div className="flex flex-col gap-0.5">
-                  <div className="w-8 h-2 rounded-sm bg-orange-500" />
-                  <div className="w-8 h-2 rounded-sm bg-white" />
-                  <div className="w-8 h-2 rounded-sm bg-green-600" />
+            <div className="relative w-full max-w-md">
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 via-transparent to-green-600/20 blur-2xl opacity-50" />
+              
+              <div className="relative flex flex-col sm:flex-row items-center gap-5 px-6 sm:px-8 py-6 rounded-3xl bg-gradient-to-br from-primary-foreground/[0.03] to-primary-foreground/[0.08] border border-primary-foreground/10 backdrop-blur-sm">
+                {/* Indian Flag - Vertical on mobile, horizontal on desktop */}
+                <div className="flex sm:flex-col gap-1 shrink-0">
+                  <div className="w-10 h-3 sm:w-10 sm:h-2.5 rounded-full bg-gradient-to-r from-orange-400 to-orange-500 shadow-sm shadow-orange-500/30" />
+                  <div className="w-10 h-3 sm:w-10 sm:h-2.5 rounded-full bg-gradient-to-r from-gray-100 to-white shadow-sm" />
+                  <div className="w-10 h-3 sm:w-10 sm:h-2.5 rounded-full bg-gradient-to-r from-green-500 to-green-600 shadow-sm shadow-green-500/30" />
                 </div>
                 
-                <div className="flex flex-col">
-                  <span className="text-lg font-bold text-primary-foreground">
-                    Proudly Made in Bharat
+                <div className="flex flex-col items-center sm:items-start text-center sm:text-left flex-1">
+                  <span className="text-xl sm:text-2xl font-bold text-primary-foreground tracking-tight">
+                    Made in Bharat
                   </span>
-                  <span className="text-sm text-primary-foreground/60">
-                    Developed with <Heart className="w-3 h-3 inline fill-primary text-primary mx-1" /> in Warangal, Telangana
+                  <span className="text-sm text-primary-foreground/50 flex items-center gap-1.5 mt-1">
+                    Crafted with <Heart className="w-3.5 h-3.5 fill-primary text-primary animate-pulse" /> in Warangal
                   </span>
                 </div>
 
-                {/* Ashoka Chakra representation */}
-                <div className="w-10 h-10 rounded-full border-2 border-blue-600 flex items-center justify-center">
-                  <div className="w-6 h-6 rounded-full border border-blue-600/50" />
+                {/* Ashoka Chakra */}
+                <div className="hidden sm:flex w-12 h-12 rounded-full border-2 border-blue-500/60 items-center justify-center bg-blue-500/5 shrink-0">
+                  <div className="w-7 h-7 rounded-full border-2 border-dashed border-blue-500/40 animate-spin" style={{ animationDuration: '20s' }} />
                 </div>
               </div>
             </div>
 
             {/* Tagline */}
-            <p className="text-sm text-primary-foreground/50 text-center max-w-md">
-              Empowering Indian consumers with transparency and trust in every product they choose
+            <p className="text-sm text-primary-foreground/40 text-center max-w-sm leading-relaxed">
+              Empowering Indian consumers with transparency and trust in every product
             </p>
           </div>
         </div>
