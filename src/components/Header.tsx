@@ -121,7 +121,12 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     className="px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-secondary"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => {
+                      if (location.pathname === "/") {
+                        e.preventDefault();
+                      }
+                      handleNavClick(link.href);
+                    }}
                   >
                     {link.label}
                   </a>
@@ -130,14 +135,29 @@ export function Header() {
                     key={link.href}
                     to={link.href}
                     className="px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-secondary"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     {link.label}
                   </Link>
                 )
               ))}
               <Button variant="default" size="lg" className="mt-2" asChild>
-                <a href="/#beta" onClick={() => setIsMobileMenuOpen(false)}>
+                <a 
+                  href="/#beta" 
+                  onClick={(e) => {
+                    if (location.pathname === "/") {
+                      e.preventDefault();
+                      const element = document.querySelector("#beta");
+                      if (element) {
+                        element.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
                   Join Beta
                 </a>
               </Button>
