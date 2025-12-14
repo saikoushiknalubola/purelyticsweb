@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     question: "When will the app be available?",
-    answer: "We're currently in closed beta testing. Join our early access list to be among the first to try Purelytics when we launch publicly in early 2025.",
+    answer: "We're currently in closed beta testing. Join our early access list to be among the first to try Purelytics when we launch publicly in early 2026.",
   },
   {
     question: "Can I suggest features or provide feedback?",
