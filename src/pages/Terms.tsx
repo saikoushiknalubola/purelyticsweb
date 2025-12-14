@@ -20,7 +20,7 @@ export default function Terms() {
               Terms of Service
             </h1>
             <p className="text-muted-foreground mb-8">
-              Last updated: January 2025
+              Last updated: December 2025
             </p>
 
             <div className="prose prose-lg max-w-none">

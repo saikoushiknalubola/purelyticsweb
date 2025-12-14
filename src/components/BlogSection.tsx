@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, Clock, Leaf, Shield, Heart } from "lucide-react";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
+
+// Import blog images
+import blogParabens from "@/assets/blog-parabens.jpg";
+import blogFoodLabels from "@/assets/blog-food-labels.jpg";
+import blogBabyProducts from "@/assets/blog-baby-products.jpg";
 
 const blogPosts = [
   {
@@ -8,30 +13,27 @@ const blogPosts = [
     title: "Understanding Parabens: What You Need to Know",
     excerpt: "Parabens are common preservatives found in cosmetics and skincare. Learn about their safety profile and how to identify them on labels.",
     category: "Ingredient Safety",
-    icon: Shield,
+    image: blogParabens,
     readTime: "5 min read",
     date: "Dec 10, 2025",
-    gradient: "from-primary/20 to-primary/5",
   },
   {
     id: "reading-food-labels",
     title: "How to Read Food Labels Like a Pro",
     excerpt: "Master the art of decoding nutrition labels. Understand hidden sugars, sodium content, and what those E-numbers really mean.",
     category: "Product Analysis",
-    icon: Leaf,
+    image: blogFoodLabels,
     readTime: "7 min read",
     date: "Dec 8, 2025",
-    gradient: "from-accent/20 to-accent/5",
   },
   {
     id: "baby-safe-products",
     title: "Choosing Safe Products for Your Baby",
     excerpt: "A parent's guide to identifying harmful ingredients in baby products and finding safer alternatives for your little one.",
     category: "Health Awareness",
-    icon: Heart,
+    image: blogBabyProducts,
     readTime: "6 min read",
     date: "Dec 5, 2025",
-    gradient: "from-secondary/40 to-secondary/10",
   },
 ];
 
@@ -58,7 +60,7 @@ export function BlogSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {blogPosts.map((post, index) => (
             <motion.article
               key={post.id}
@@ -68,32 +70,36 @@ export function BlogSection() {
               transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
               className="group"
             >
-              <Link to={`/blog/${post.id}`} className="block">
+              <Link to={`/blog/${post.id}`} onClick={() => window.scrollTo(0, 0)} className="block">
                 <div className="bg-card rounded-2xl border border-border/50 overflow-hidden hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500">
-                  {/* Header with gradient */}
-                  <div className={`h-48 bg-gradient-to-br ${post.gradient} flex items-center justify-center relative overflow-hidden`}>
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_70%)]" />
-                    <post.icon className="w-16 h-16 text-foreground/20 group-hover:scale-110 transition-transform duration-500" />
+                  {/* Image */}
+                  <div className="h-48 sm:h-52 overflow-hidden relative">
+                    <img 
+                      src={post.image} 
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
                   </div>
                   
                   {/* Content */}
-                  <div className="p-6">
+                  <div className="p-5 sm:p-6">
                     <div className="flex items-center gap-4 mb-4">
                       <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
                         {post.category}
                       </span>
                     </div>
                     
-                    <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                    <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
                       {post.title}
                     </h3>
                     
-                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-2 sm:line-clamp-3">
                       {post.excerpt}
                     </p>
                     
                     <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <div className="flex items-center gap-3 sm:gap-4 text-xs text-muted-foreground">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
                           {post.date}
@@ -121,6 +127,7 @@ export function BlogSection() {
         >
           <Link
             to="/blog"
+            onClick={() => window.scrollTo(0, 0)}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card border border-border hover:border-primary/50 text-foreground font-medium transition-all duration-300 hover:shadow-lg"
           >
             View All Articles

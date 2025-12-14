@@ -34,11 +34,17 @@ export function Header() {
         window.location.href = href;
       } else {
         // Already on home, just scroll
-        const element = document.querySelector(href.replace("/", ""));
+        const sectionId = href.replace("/#", "#");
+        const element = document.querySelector(sectionId);
         if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: "smooth" });
+          }, 100);
         }
       }
+    } else {
+      // For non-hash links, scroll to top
+      window.scrollTo(0, 0);
     }
   };
 

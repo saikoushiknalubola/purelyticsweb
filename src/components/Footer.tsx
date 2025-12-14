@@ -187,8 +187,22 @@ export function Footer() {
             <div className="text-sm text-primary-foreground/50">
               © 2025 Purelytics. All rights reserved.
             </div>
-            <div className="text-sm text-primary-foreground/40">
-              Advancing health technology across India and beyond
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+              <span className="text-sm text-primary-foreground/40">
+                Built by{" "}
+                <a 
+                  href="https://www.linkedin.com/in/saikoushiknalubola/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline font-medium"
+                >
+                  Saikoushik Nalubola
+                </a>
+              </span>
+              <span className="hidden md:inline text-primary-foreground/30">•</span>
+              <span className="text-sm text-primary-foreground/40">
+                Advancing health technology across India
+              </span>
             </div>
           </div>
         </div>
