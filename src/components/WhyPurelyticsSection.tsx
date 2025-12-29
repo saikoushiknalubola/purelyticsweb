@@ -6,31 +6,37 @@ const benefits = [
     icon: Zap,
     title: "Ingredient clarity in seconds",
     description: "No more guessing or searching. Get instant, accurate ingredient analysis.",
+    gradient: "from-primary to-green-medium",
   },
   {
     icon: Globe,
     title: "India-first regulatory intelligence",
     description: "Built with India's regulatory landscape in mind, from FSSAI to CDSCO.",
+    gradient: "from-soft-blue to-primary",
   },
   {
     icon: UserCheck,
     title: "Personalized safety scoring",
     description: "Tailored analysis based on your specific allergies and sensitivities.",
+    gradient: "from-purple to-soft-blue",
   },
   {
     icon: MessageCircle,
     title: "Clean, honest explanations",
     description: "No jargon, no confusion — just clear answers in everyday language.",
+    gradient: "from-amber to-primary",
   },
   {
     icon: Database,
     title: "Trustworthy scientific data",
     description: "Backed by peer-reviewed research and verified toxicity databases.",
+    gradient: "from-primary to-purple",
   },
   {
     icon: ShoppingBag,
     title: "Built for everyday shoppers",
     description: "Whether you're a parent, health enthusiast, or casual buyer — we've got you.",
+    gradient: "from-green-medium to-soft-blue",
   },
 ];
 
@@ -39,7 +45,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
+      staggerChildren: 0.1,
       delayChildren: 0.1,
     },
   },
@@ -60,28 +66,29 @@ const itemVariants = {
 
 export function WhyPurelyticsSection() {
   return (
-    <section id="why-purelytics" className="py-16 sm:py-20 lg:py-32 bg-background relative overflow-hidden">
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 via-transparent to-secondary/20 pointer-events-none" />
+    <section id="why-purelytics" className="py-24 lg:py-32 bg-charcoal relative overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/[0.05] rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-soft-blue/[0.05] rounded-full blur-[120px]" />
+      </div>
       
-      {/* Decorative elements */}
-      <div className="absolute top-20 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-20 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-      
-      <div className="container relative z-10 px-4 sm:px-6">
+      <div className="container relative z-10">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-10 sm:mb-14 lg:mb-20"
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center mb-16 lg:mb-20"
         >
-          <span className="inline-block text-primary font-semibold mb-3 sm:mb-4 tracking-wide text-xs sm:text-sm uppercase">Why Purelytics</span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-5 tracking-[-0.02em] leading-tight">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary font-semibold text-sm mb-6">
+            Why Purelytics
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-display-md font-bold text-primary-foreground mb-5 tracking-tight">
             Transparency you can trust
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-2">
+          <p className="text-lg text-primary-foreground/60 max-w-2xl mx-auto leading-relaxed">
             We're building the ingredient transparency platform that consumers deserve.
           </p>
         </motion.div>
@@ -92,26 +99,30 @@ export function WhyPurelyticsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-30px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {benefits.map((benefit, index) => (
+          {benefits.map((benefit) => (
             <motion.div
               key={benefit.title}
               variants={itemVariants}
-              className="bg-card rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-7 shadow-soft hover:shadow-card transition-all duration-500 border border-border/50 hover:border-primary/30 group hover:-translate-y-1"
+              className="group relative"
             >
-              {/* Icon */}
-              <div className="w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center mb-4 sm:mb-5 group-hover:scale-110 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-500">
-                <benefit.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-              </div>
+              <div className="glass-premium rounded-3xl p-7 lg:p-8 h-full transition-all duration-500 hover:bg-primary-foreground/[0.08] group-hover:-translate-y-1">
+                {/* Icon with gradient background */}
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${benefit.gradient} p-0.5 mb-6 group-hover:scale-110 group-hover:shadow-glow transition-all duration-500`}>
+                  <div className="w-full h-full rounded-[14px] bg-charcoal flex items-center justify-center">
+                    <benefit.icon className="w-6 h-6 text-primary" />
+                  </div>
+                </div>
 
-              {/* Content */}
-              <h3 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-2.5 leading-snug">
-                {benefit.title}
-              </h3>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                {benefit.description}
-              </p>
+                {/* Content */}
+                <h3 className="text-lg font-bold text-primary-foreground mb-3 leading-snug">
+                  {benefit.title}
+                </h3>
+                <p className="text-primary-foreground/60 leading-relaxed">
+                  {benefit.description}
+                </p>
+              </div>
             </motion.div>
           ))}
         </motion.div>
