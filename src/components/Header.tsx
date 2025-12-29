@@ -45,25 +45,22 @@ export function Header() {
   };
 
   const isExternal = (href: string) => href.startsWith("/#");
-  const isOnDarkHero = location.pathname === "/" && !isScrolled;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? "bg-background/95 backdrop-blur-xl shadow-soft border-b border-border/50" 
+          ? "bg-navy/95 backdrop-blur-xl shadow-lg border-b border-white/5" 
           : "bg-transparent"
       }`}
     >
       <nav className="container mx-auto flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-glow group-hover:shadow-glow-lg transition-shadow duration-300">
-            <span className="text-primary-foreground font-bold text-lg">P</span>
+          <div className="w-9 h-9 rounded-xl bg-mint flex items-center justify-center shadow-glow group-hover:shadow-glow-lg transition-all duration-300">
+            <span className="text-navy font-bold text-lg">P</span>
           </div>
-          <span className={`font-bold text-xl transition-colors duration-300 ${
-            isOnDarkHero ? "text-primary-foreground" : "text-foreground"
-          }`}>
+          <span className="font-bold text-xl text-white">
             Purelytics
           </span>
         </Link>
@@ -81,11 +78,7 @@ export function Header() {
                     handleNavClick(link.href);
                   }
                 }}
-                className={`px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-lg hover:bg-primary/10 ${
-                  isOnDarkHero 
-                    ? "text-primary-foreground/70 hover:text-primary-foreground" 
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+                className="px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-300"
               >
                 {link.label}
               </a>
@@ -93,11 +86,7 @@ export function Header() {
               <Link
                 key={link.href}
                 to={link.href}
-                className={`px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-lg hover:bg-primary/10 ${
-                  isOnDarkHero 
-                    ? "text-primary-foreground/70 hover:text-primary-foreground" 
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+                className="px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-colors duration-300"
               >
                 {link.label}
               </Link>
@@ -108,11 +97,7 @@ export function Header() {
         {/* CTA Button */}
         <div className="hidden md:block">
           <Button 
-            className={`rounded-xl font-semibold transition-all duration-300 ${
-              isOnDarkHero 
-                ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-glow" 
-                : "bg-primary text-primary-foreground hover:bg-primary/90"
-            }`}
+            className="bg-mint hover:bg-mint-light text-navy font-bold rounded-full px-6 shadow-glow"
             asChild
           >
             <a href="/#beta">Join Beta</a>
@@ -121,9 +106,7 @@ export function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden p-2 rounded-lg transition-colors ${
-            isOnDarkHero ? "text-primary-foreground" : "text-foreground"
-          }`}
+          className="md:hidden p-2 rounded-lg text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -138,7 +121,7 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-charcoal/98 backdrop-blur-xl border-t border-primary-foreground/10"
+            className="md:hidden bg-navy/98 backdrop-blur-xl border-t border-white/5"
           >
             <div className="container py-6 flex flex-col gap-2">
               {navLinks.map((link) => (
@@ -146,7 +129,7 @@ export function Header() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="px-4 py-3.5 text-base font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors rounded-xl hover:bg-primary-foreground/5"
+                    className="px-4 py-3.5 text-base font-medium text-white/70 hover:text-white transition-colors rounded-xl hover:bg-white/5"
                     onClick={(e) => {
                       if (location.pathname === "/") {
                         e.preventDefault();
@@ -160,7 +143,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="px-4 py-3.5 text-base font-medium text-primary-foreground/70 hover:text-primary-foreground transition-colors rounded-xl hover:bg-primary-foreground/5"
+                    className="px-4 py-3.5 text-base font-medium text-white/70 hover:text-white transition-colors rounded-xl hover:bg-white/5"
                     onClick={() => {
                       setIsMobileMenuOpen(false);
                       window.scrollTo(0, 0);
@@ -172,7 +155,7 @@ export function Header() {
               ))}
               <Button 
                 size="lg" 
-                className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl font-semibold shadow-glow" 
+                className="mt-4 bg-mint hover:bg-mint-light text-navy font-bold rounded-full shadow-glow" 
                 asChild
               >
                 <a 
