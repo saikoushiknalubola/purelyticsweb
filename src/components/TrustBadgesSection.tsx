@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shield, Database, Award, Lock, Microscope, CheckCircle } from "lucide-react";
+import { Shield, Database, Award, Lock, Microscope } from "lucide-react";
 
 const badges = [
   { icon: Shield, label: "100% Secure" },
@@ -11,7 +11,7 @@ const badges = [
 
 export function TrustBadgesSection() {
   return (
-    <section className="py-16 lg:py-20 bg-charcoal border-y border-primary-foreground/10">
+    <section className="py-16 lg:py-20 bg-navy border-y border-white/5">
       <div className="container">
         <motion.div
           initial={{ opacity: 0 }}
@@ -21,8 +21,8 @@ export function TrustBadgesSection() {
           className="flex flex-col items-center gap-8"
         >
           {/* Section label */}
-          <p className="text-primary-foreground/50 text-sm font-medium uppercase tracking-wider">
-            Trusted by thousands of conscious shoppers
+          <p className="text-white/40 text-sm font-medium uppercase tracking-wider">
+            Trusted by conscious shoppers
           </p>
 
           {/* Badges */}
@@ -34,10 +34,10 @@ export function TrustBadgesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="flex items-center gap-3 text-primary-foreground/70 hover:text-primary transition-colors duration-300 group"
+                className="flex items-center gap-3 text-white/60 hover:text-mint transition-colors duration-300 group"
               >
-                <div className="w-10 h-10 rounded-xl bg-primary-foreground/5 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                  <badge.icon className="w-5 h-5 text-primary" />
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-mint/20 transition-colors duration-300">
+                  <badge.icon className="w-5 h-5 text-mint" />
                 </div>
                 <span className="font-medium text-sm whitespace-nowrap">{badge.label}</span>
               </motion.div>

@@ -21,21 +21,11 @@ const features = [
   { icon: Lock, title: "Secure & private", description: "Your data stays yours. Period." },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.15 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
-};
-
 export function FeaturesSection() {
   return (
-    <section id="features" className="py-24 lg:py-32 bg-secondary/50 relative overflow-hidden">
+    <section id="features" className="py-24 lg:py-32 bg-navy-light relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-[100px]" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-mint/[0.03] rounded-full blur-[120px]" />
       </div>
       
       <div className="container relative z-10">
@@ -46,38 +36,37 @@ export function FeaturesSection() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16 lg:mb-20"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-semibold text-sm mb-6">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-mint/10 border border-mint/20 text-mint font-semibold text-sm mb-6">
             Features
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-display-md font-bold text-foreground mb-5 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5 tracking-tight">
             Everything you need to shop smarter
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-white/60 max-w-2xl mx-auto">
             Powerful features designed with simplicity in mind.
           </p>
         </motion.div>
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
-        >
-          {features.map((feature) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              variants={itemVariants}
-              className="bg-card rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-card transition-all duration-500 group hover:-translate-y-1"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className="group"
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-500">
-                <feature.icon className="w-6 h-6 text-primary" />
+              <div className="glass-card rounded-2xl p-6 h-full transition-all duration-500 hover:bg-white/[0.08] group-hover:-translate-y-1">
+                <div className="w-12 h-12 rounded-xl bg-mint/10 flex items-center justify-center mb-4 group-hover:bg-mint/20 group-hover:scale-110 transition-all duration-500">
+                  <feature.icon className="w-6 h-6 text-mint" />
+                </div>
+                <h3 className="font-semibold text-white mb-1.5">{feature.title}</h3>
+                <p className="text-sm text-white/60 leading-relaxed">{feature.description}</p>
               </div>
-              <h3 className="font-semibold text-foreground mb-1.5">{feature.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
