@@ -1,39 +1,208 @@
 import { Link, useLocation } from "react-router-dom";
-import { Twitter, Linkedin, Instagram, Mail, MapPin, Heart } from "lucide-react";
+import { Instagram, Linkedin, Mail, MapPin, Twitter } from "lucide-react";
 
 const footerLinks = {
-  product: [{ label: "How It Works", href: "/#how-it-works" }, { label: "Features", href: "/#features" }, { label: "Beta Access", href: "/#beta" }],
-  company: [{ label: "About Us", href: "/about" }, { label: "Blog", href: "/blog" }],
-  legal: [{ label: "Privacy Policy", href: "/privacy" }, { label: "Terms of Service", href: "/terms" }],
+  quick: [
+    { label: "Home", href: "/" },
+    { label: "About us", href: "/about" },
+    { label: "Blog", href: "/blog" },
+    { label: "Contact us", href: "/#beta" },
+  ],
+  resources: [
+    { label: "Blog", href: "/blog" },
+    { label: "Help center", href: "/#faq" },
+    { label: "Support", href: "/#beta" },
+  ],
+  solution: [
+    { label: "How it works", href: "/#how-it-works" },
+    { label: "Features", href: "/#features" },
+    { label: "Why Purelytics", href: "/#why-purelytics" },
+  ],
+  about: [
+    { label: "Company", href: "/about" },
+    { label: "Privacy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
+  ],
 };
-const socialLinks = [{ icon: Twitter, href: "https://twitter.com/purelytics", label: "Twitter" }, { icon: Linkedin, href: "https://www.linkedin.com/in/saikoushiknalubola/", label: "LinkedIn" }, { icon: Instagram, href: "https://www.instagram.com/pure_lytics/", label: "Instagram" }];
+
+const socialLinks = [
+  { icon: Twitter, href: "https://twitter.com/purelytics", label: "Twitter" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/saikoushiknalubola/", label: "LinkedIn" },
+  { icon: Instagram, href: "https://www.instagram.com/pure_lytics/", label: "Instagram" },
+];
 
 export function Footer() {
   const location = useLocation();
-  const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => { if (href.startsWith("/#") && location.pathname === "/") { e.preventDefault(); document.querySelector(href.replace("/", ""))?.scrollIntoView({ behavior: "smooth" }); } };
+
+  const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/#") && location.pathname === "/") {
+      e.preventDefault();
+      document.querySelector(href.replace("/", ""))?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <footer style={{ background: '#0f172a' }} className="text-white">
+    <footer className="panel-olive">
       <div className="container">
-        <div className="py-16 lg:py-20">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
-            <div className="col-span-2 md:col-span-4 lg:col-span-2">
-              <Link to="/" className="flex items-center gap-2 mb-4"><div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: '#22c55e' }}><span style={{ color: '#0f172a' }} className="font-bold text-xl">P</span></div><span className="font-bold text-2xl">Purelytics</span></Link>
-              <p className="mb-6 max-w-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>Empowering consumers with instant ingredient clarity.</p>
-              <div className="space-y-3 mb-6">
-                <a href="mailto:purelytics@gmail.com" className="flex items-center gap-3 transition-colors hover:text-emerald" style={{ color: 'rgba(255,255,255,0.6)' }}><Mail className="w-4 h-4" /><span className="text-sm">purelytics@gmail.com</span></a>
-                <div className="flex items-center gap-3" style={{ color: 'rgba(255,255,255,0.6)' }}><MapPin className="w-4 h-4" /><span className="text-sm">Warangal, Telangana, India</span></div>
+        <div className="py-14 lg:py-16">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-14">
+            {/* Brand */}
+            <div className="lg:col-span-4">
+              <Link to="/" className="inline-flex items-center gap-2">
+                <span className="font-display text-3xl">Purelytics</span>
+              </Link>
+              <p className="mt-4 max-w-sm leading-relaxed" style={{ color: "hsl(var(--primary-foreground) / 0.75)" }}>
+                Empowering consumers with instant ingredient clarity.
+              </p>
+
+              <div className="mt-6 space-y-3">
+                <a
+                  href="mailto:purelytics@gmail.com"
+                  className="flex items-center gap-3 text-sm transition-colors"
+                  style={{ color: "hsl(var(--primary-foreground) / 0.78)" }}
+                >
+                  <Mail className="w-4 h-4" /> purelytics@gmail.com
+                </a>
+                <div className="flex items-center gap-3 text-sm" style={{ color: "hsl(var(--primary-foreground) / 0.78)" }}>
+                  <MapPin className="w-4 h-4" /> Warangal, Telangana, India
+                </div>
               </div>
-              <div className="flex items-center gap-3">{socialLinks.map((s) => (<a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300" style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.6)' }}><s.icon className="w-5 h-5" /></a>))}</div>
+
+              <div className="mt-6 flex items-center gap-3">
+                {socialLinks.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                    style={{ background: "hsl(var(--primary-foreground) / 0.08)", color: "hsl(var(--primary-foreground) / 0.85)" }}
+                  >
+                    <s.icon className="w-5 h-5" />
+                  </a>
+                ))}
+              </div>
             </div>
-            <div><h4 className="font-semibold mb-4">Product</h4><ul className="space-y-3">{footerLinks.product.map((l) => (<li key={l.label}><a href={l.href} onClick={(e) => handleHashClick(e, l.href)} className="text-sm transition-colors" style={{ color: 'rgba(255,255,255,0.5)' }}>{l.label}</a></li>))}</ul></div>
-            <div><h4 className="font-semibold mb-4">Company</h4><ul className="space-y-3">{footerLinks.company.map((l) => (<li key={l.label}><Link to={l.href} onClick={() => window.scrollTo(0, 0)} className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>{l.label}</Link></li>))}</ul></div>
-            <div><h4 className="font-semibold mb-4">Legal</h4><ul className="space-y-3">{footerLinks.legal.map((l) => (<li key={l.label}><Link to={l.href} onClick={() => window.scrollTo(0, 0)} className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>{l.label}</Link></li>))}</ul></div>
+
+            {/* Columns */}
+            <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-4 gap-8">
+              <div>
+                <h4 className="font-semibold mb-4">Quick Link</h4>
+                <ul className="space-y-3">
+                  {footerLinks.quick.map((l) => (
+                    <li key={l.label}>
+                      {l.href.startsWith("/#") ? (
+                        <a
+                          href={l.href}
+                          onClick={(e) => handleHashClick(e, l.href)}
+                          className="text-sm"
+                          style={{ color: "hsl(var(--primary-foreground) / 0.72)" }}
+                        >
+                          {l.label}
+                        </a>
+                      ) : (
+                        <Link
+                          to={l.href}
+                          onClick={() => window.scrollTo(0, 0)}
+                          className="text-sm"
+                          style={{ color: "hsl(var(--primary-foreground) / 0.72)" }}
+                        >
+                          {l.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-semibold mb-4">Resources</h4>
+                <ul className="space-y-3">
+                  {footerLinks.resources.map((l) => (
+                    <li key={l.label}>
+                      <a
+                        href={l.href}
+                        onClick={(e) => handleHashClick(e, l.href)}
+                        className="text-sm"
+                        style={{ color: "hsl(var(--primary-foreground) / 0.72)" }}
+                      >
+                        {l.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-semibold mb-4">Solution</h4>
+                <ul className="space-y-3">
+                  {footerLinks.solution.map((l) => (
+                    <li key={l.label}>
+                      <a
+                        href={l.href}
+                        onClick={(e) => handleHashClick(e, l.href)}
+                        className="text-sm"
+                        style={{ color: "hsl(var(--primary-foreground) / 0.72)" }}
+                      >
+                        {l.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-semibold mb-4">About Us</h4>
+                <ul className="space-y-3">
+                  {footerLinks.about.map((l) => (
+                    <li key={l.label}>
+                      <Link
+                        to={l.href}
+                        onClick={() => window.scrollTo(0, 0)}
+                        className="text-sm"
+                        style={{ color: "hsl(var(--primary-foreground) / 0.72)" }}
+                      >
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Newsletter */}
+            <div className="lg:col-span-3">
+              <h4 className="font-display text-2xl mb-4">Newsletter-sign up</h4>
+              <p className="text-sm leading-relaxed" style={{ color: "hsl(var(--primary-foreground) / 0.72)" }}>
+                Subscribe to our newsletter to receive updates on ingredient safety and product transparency.
+              </p>
+
+              <form className="mt-5 flex items-center gap-3">
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="h-12 w-full rounded-2xl px-4 bg-background/10 border border-white/15 text-primary-foreground placeholder:text-primary-foreground/50 outline-none"
+                />
+                <button type="submit" className="h-12 px-5 rounded-2xl bg-accent text-accent-foreground font-semibold">
+                  Send
+                </button>
+              </form>
+            </div>
           </div>
         </div>
-        <div className="py-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-          <div className="text-sm" style={{ color: 'rgba(255,255,255,0.4)' }}>© 2025 Purelytics. All rights reserved.</div>
-          <div className="flex items-center gap-2 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>Crafted by <a href="https://in.linkedin.com/in/saikoushiknalubola" target="_blank" rel="noopener noreferrer" className="font-semibold transition-colors" style={{ color: '#22c55e' }}>Saikoushik Nalubola</a> with <Heart className="w-3.5 h-3.5" style={{ color: '#22c55e', fill: '#22c55e' }} /> in India</div>
+
+        <div className="py-8 border-t" style={{ borderColor: "hsl(var(--primary-foreground) / 0.14)" }}>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="text-sm" style={{ color: "hsl(var(--primary-foreground) / 0.6)" }}>
+              © {new Date().getFullYear()} Purelytics. All rights reserved.
+            </div>
+            <div className="flex items-center gap-4 text-sm" style={{ color: "hsl(var(--primary-foreground) / 0.6)" }}>
+              <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
+              <span>|</span>
+              <Link to="/terms" className="hover:underline">Terms & Condition</Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

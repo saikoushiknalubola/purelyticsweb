@@ -11,7 +11,7 @@ const badges = [
 
 export function TrustBadgesSection() {
   return (
-    <section className="py-16 lg:py-20" style={{ background: '#0f172a', borderTop: '1px solid rgba(255, 255, 255, 0.05)', borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+    <section className="py-16 lg:py-20 bg-background border-y border-border/60">
       <div className="container">
         <motion.div
           initial={{ opacity: 0 }}
@@ -20,7 +20,7 @@ export function TrustBadgesSection() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center gap-8"
         >
-          <p className="text-sm font-medium uppercase tracking-wider" style={{ color: 'rgba(255, 255, 255, 0.4)' }}>
+          <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
             Trusted by conscious shoppers
           </p>
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16">
@@ -33,13 +33,10 @@ export function TrustBadgesSection() {
                 transition={{ duration: 0.4, delay: index * 0.08 }}
                 className="flex items-center gap-3 group cursor-default"
               >
-                <div 
-                  className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                  style={{ background: 'rgba(255, 255, 255, 0.05)' }}
-                >
-                  <badge.icon className="w-5 h-5" style={{ color: '#22c55e' }} />
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 bg-secondary border border-border">
+                  <badge.icon className="w-5 h-5 text-primary" />
                 </div>
-                <span className="font-medium text-sm whitespace-nowrap transition-colors duration-300" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
+                <span className="font-medium text-sm whitespace-nowrap transition-colors duration-300 text-foreground/80">
                   {badge.label}
                 </span>
               </motion.div>

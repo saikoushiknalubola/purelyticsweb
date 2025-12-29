@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "/#how-it-works", label: "How It Works" },
-  { href: "/#why-purelytics", label: "Why Purelytics" },
-  { href: "/#features", label: "Features" },
+  { href: "/#how-it-works", label: "Solution" },
+  { href: "/#features", label: "Feature" },
+  { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
 ];
 
@@ -16,7 +16,7 @@ export function Header() {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled(window.scrollY > 16);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -28,49 +28,42 @@ export function Header() {
         window.location.href = href;
       } else {
         const element = document.querySelector(href.replace("/#", "#"));
-        if (element) setTimeout(() => element.scrollIntoView({ behavior: "smooth" }), 100);
+        if (element) setTimeout(() => element.scrollIntoView({ behavior: "smooth" }), 80);
       }
     } else {
       window.scrollTo(0, 0);
     }
   };
 
-  const isExternal = (href: string) => href.startsWith("/#");
+  const isHash = (href: string) => href.startsWith("/#");
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "backdrop-blur-xl shadow-lg" : ""
-      }`}
-      style={{ 
-        background: isScrolled ? 'rgba(15, 23, 42, 0.95)' : 'transparent',
-        borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.05)' : 'none'
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      style={{
+        background: isScrolled ? "hsl(var(--background) / 0.88)" : "transparent",
+        backdropFilter: isScrolled ? "blur(14px)" : "none",
+        borderBottom: isScrolled ? "1px solid hsl(var(--border))" : "1px solid transparent",
       }}
     >
       <nav className="container mx-auto flex items-center justify-between h-16 md:h-20">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group">
-          <div 
-            className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300"
-            style={{ background: '#22c55e', boxShadow: '0 0 20px -5px rgba(34, 197, 94, 0.5)' }}
-          >
-            <span className="font-bold text-lg" style={{ color: '#0f172a' }}>P</span>
-          </div>
-          <span className="font-bold text-xl text-white">Purelytics</span>
+        <Link to="/" className="flex items-center gap-2">
+          <span className="font-display text-2xl text-foreground">Purelytics</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            isExternal(link.href) ? (
+        <div className="hidden md:flex items-center gap-6">
+          {navLinks.map((link) =>
+            isHash(link.href) ? (
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => { if (location.pathname === "/") { e.preventDefault(); handleNavClick(link.href); } }}
-                className="px-4 py-2 text-sm font-medium transition-colors duration-300"
-                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
-                onMouseEnter={(e) => e.currentTarget.style.color = 'white'}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)'}
+                onClick={(e) => {
+                  if (location.pathname === "/") {
+                    e.preventDefault();
+                    handleNavClick(link.href);
+                  }
+                }}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
               </a>
@@ -78,58 +71,54 @@ export function Header() {
               <Link
                 key={link.href}
                 to={link.href}
-                className="px-4 py-2 text-sm font-medium transition-colors duration-300"
-                style={{ color: 'rgba(255, 255, 255, 0.7)' }}
+                onClick={() => window.scrollTo(0, 0)}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
               </Link>
             )
-          ))}
+          )}
         </div>
 
-        {/* CTA Button */}
         <div className="hidden md:block">
-          <a 
-            href="/#beta"
-            className="inline-flex items-center justify-center h-10 px-6 rounded-full text-sm font-bold transition-all duration-300"
-            style={{ 
-              background: '#22c55e', 
-              color: '#0f172a',
-              boxShadow: '0 0 20px -5px rgba(34, 197, 94, 0.5)'
-            }}
-          >
-            Join Beta
+          <a href="/#beta" className="inline-flex items-center justify-center h-11 px-6 rounded-full btn-primary">
+            Download app
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 rounded-lg text-white"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden p-2 rounded-lg text-foreground"
+          onClick={() => setIsMobileMenuOpen((s) => !s)}
+          aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden backdrop-blur-xl"
-            style={{ background: 'rgba(15, 23, 42, 0.98)', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}
+            className="md:hidden"
+            style={{
+              background: "hsl(var(--background) / 0.95)",
+              backdropFilter: "blur(14px)",
+              borderTop: "1px solid hsl(var(--border))",
+            }}
           >
-            <div className="container py-6 flex flex-col gap-2">
-              {navLinks.map((link) => (
-                isExternal(link.href) ? (
+            <div className="container py-5 flex flex-col gap-2">
+              {navLinks.map((link) =>
+                isHash(link.href) ? (
                   <a
                     key={link.href}
                     href={link.href}
-                    className="px-4 py-3.5 text-base font-medium rounded-xl transition-colors"
-                    style={{ color: 'rgba(255, 255, 255, 0.7)' }}
-                    onClick={(e) => { if (location.pathname === "/") e.preventDefault(); handleNavClick(link.href); }}
+                    onClick={(e) => {
+                      if (location.pathname === "/") e.preventDefault();
+                      handleNavClick(link.href);
+                    }}
+                    className="px-4 py-3 rounded-xl text-foreground hover:bg-muted transition-colors"
                   >
                     {link.label}
                   </a>
@@ -137,24 +126,29 @@ export function Header() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="px-4 py-3.5 text-base font-medium rounded-xl"
-                    style={{ color: 'rgba(255, 255, 255, 0.7)' }}
-                    onClick={() => { setIsMobileMenuOpen(false); window.scrollTo(0, 0); }}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
+                    className="px-4 py-3 rounded-xl text-foreground hover:bg-muted transition-colors"
                   >
                     {link.label}
                   </Link>
                 )
-              ))}
-              <a 
+              )}
+
+              <a
                 href="/#beta"
-                className="mt-4 inline-flex items-center justify-center h-12 px-6 rounded-full text-base font-bold"
-                style={{ background: '#22c55e', color: '#0f172a' }}
+                className="mt-2 inline-flex items-center justify-center h-11 px-6 rounded-full btn-primary"
                 onClick={(e) => {
-                  if (location.pathname === "/") { e.preventDefault(); document.querySelector("#beta")?.scrollIntoView({ behavior: "smooth" }); }
+                  if (location.pathname === "/") {
+                    e.preventDefault();
+                    document.querySelector("#beta")?.scrollIntoView({ behavior: "smooth" });
+                  }
                   setIsMobileMenuOpen(false);
                 }}
               >
-                Join Beta
+                Download app
               </a>
             </div>
           </motion.div>

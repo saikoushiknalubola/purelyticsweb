@@ -4,49 +4,53 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    /* Theme: cream + olive + gold (matches uploaded reference) */
+    --background: 54 45% 96%;
+    --foreground: 222 25% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 54 45% 97%;
+    --card-foreground: 222 25% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 54 45% 97%;
+    --popover-foreground: 222 25% 12%;
 
-    --primary: 142 71% 45%;
-    --primary-foreground: 0 0% 100%;
+    /* Olive panel */
+    --primary: 78 55% 18%;
+    --primary-foreground: 54 45% 96%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 222 47% 11%;
+    /* Soft sage surfaces */
+    --secondary: 78 25% 90%;
+    --secondary-foreground: 222 25% 12%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 78 22% 92%;
+    --muted-foreground: 222 12% 42%;
 
-    --accent: 142 71% 45%;
-    --accent-foreground: 0 0% 100%;
+    /* Gold CTA */
+    --accent: 43 95% 55%;
+    --accent-foreground: 222 25% 12%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 142 71% 45%;
+    --border: 78 18% 84%;
+    --input: 78 18% 84%;
+    --ring: 78 55% 18%;
 
-    --radius: 0.75rem;
+    --radius: 0.9rem;
 
-    /* Yozu-inspired color palette */
-    --navy: 222 47% 11%;
-    --navy-deep: 224 71% 4%;
-    --navy-light: 222 41% 15%;
-    --emerald: 142 71% 45%;
-    --emerald-light: 142 69% 58%;
-    --emerald-dark: 142 76% 36%;
-    --slate: 215 20% 65%;
+    /* Keep existing extended tokens (mapped to new theme) */
+    --navy: 78 55% 18%;
+    --navy-deep: 78 55% 14%;
+    --navy-light: 78 40% 24%;
+    --emerald: 78 55% 18%;
+    --emerald-light: 78 40% 28%;
+    --emerald-dark: 78 55% 14%;
+    --slate: 222 12% 42%;
 
     /* Shadows */
-    --shadow-glow: 0 0 40px -10px hsl(142 71% 45% / 0.5);
-    --shadow-glow-lg: 0 0 60px -10px hsl(142 71% 45% / 0.6);
-    --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 18px 50px -25px hsl(78 55% 18% / 0.55);
+    --shadow-glow-lg: 0 30px 80px -40px hsl(78 55% 18% / 0.65);
+    --shadow-card: 0 18px 40px -28px hsl(222 25% 12% / 0.35);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -59,25 +63,25 @@
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 142 71% 45%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 222 30% 15%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 222 30% 18%;
-    --muted-foreground: 220 9% 60%;
-    --accent: 142 71% 45%;
-    --accent-foreground: 0 0% 100%;
+    --background: 78 55% 12%;
+    --foreground: 54 45% 96%;
+    --card: 78 55% 14%;
+    --card-foreground: 54 45% 96%;
+    --popover: 78 55% 14%;
+    --popover-foreground: 54 45% 96%;
+    --primary: 43 95% 55%;
+    --primary-foreground: 222 25% 12%;
+    --secondary: 78 40% 20%;
+    --secondary-foreground: 54 45% 96%;
+    --muted: 78 35% 18%;
+    --muted-foreground: 54 20% 85%;
+    --accent: 43 95% 55%;
+    --accent-foreground: 222 25% 12%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 100%;
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 142 71% 45%;
+    --border: 78 35% 22%;
+    --input: 78 35% 22%;
+    --ring: 43 95% 55%;
   }
 }
 
@@ -94,21 +98,31 @@
 }
 
 @layer components {
+  /* Display font utility (serif headings like reference) */
+  .font-display {
+    font-family: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  }
+
+  /* Soft card like the reference (sage tint, gentle shadow) */
   .glass-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    background: hsl(var(--secondary));
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Dark panel surface (olive) */
+  .panel-olive {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
   }
 
   .btn-primary {
-    @apply bg-emerald hover:bg-emerald-light text-white font-semibold;
-    box-shadow: 0 0 20px -5px hsl(142 71% 45% / 0.5);
+    @apply bg-accent text-accent-foreground font-semibold;
+    box-shadow: 0 16px 40px -24px hsl(var(--accent) / 0.8);
   }
 
   .btn-secondary {
-    @apply bg-white/10 hover:bg-white/20 text-white border border-white/20;
+    @apply bg-transparent text-foreground border border-border hover:bg-muted;
   }
 }
 
@@ -118,23 +132,23 @@
   }
 
   .bg-navy {
-    background-color: hsl(222 47% 11%);
+    background-color: hsl(var(--primary));
   }
 
   .bg-navy-deep {
-    background-color: hsl(224 71% 4%);
+    background-color: hsl(var(--primary));
   }
 
   .bg-emerald {
-    background-color: hsl(142 71% 45%);
+    background-color: hsl(var(--accent));
   }
 
   .text-emerald {
-    color: hsl(142 71% 45%);
+    color: hsl(var(--accent));
   }
 
   .border-emerald {
-    border-color: hsl(142 71% 45%);
+    border-color: hsl(var(--accent));
   }
 
   .shadow-glow {
