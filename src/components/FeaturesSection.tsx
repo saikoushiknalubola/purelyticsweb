@@ -1,14 +1,5 @@
 import { motion } from "framer-motion";
-import { 
-  ScanLine, 
-  Brain, 
-  AlertTriangle, 
-  ShieldCheck, 
-  ArrowRightLeft, 
-  Baby, 
-  Eye, 
-  Lock 
-} from "lucide-react";
+import { ScanLine, Brain, AlertTriangle, ShieldCheck, ArrowRightLeft, Baby, Eye, Lock } from "lucide-react";
 
 const features = [
   { icon: ScanLine, title: "Real-time label scanning", description: "Point, scan, and analyze in milliseconds." },
@@ -23,46 +14,27 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section id="features" className="py-24 lg:py-32 bg-navy-light relative overflow-hidden">
+    <section id="features" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: '#1e293b' }}>
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-mint/[0.03] rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px]" style={{ background: 'rgba(34, 197, 94, 0.04)' }} />
       </div>
       
       <div className="container relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-16 lg:mb-20"
-        >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-mint/10 border border-mint/20 text-mint font-semibold text-sm mb-6">
-            Features
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5 tracking-tight">
-            Everything you need to shop smarter
-          </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
-            Powerful features designed with simplicity in mind.
-          </p>
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-center mb-16 lg:mb-20">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.2)', color: '#22c55e' }}>Features</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5 tracking-tight">Everything you need to shop smarter</h2>
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>Powerful features designed with simplicity in mind.</p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="group"
-            >
-              <div className="glass-card rounded-2xl p-6 h-full transition-all duration-500 hover:bg-white/[0.08] group-hover:-translate-y-1">
-                <div className="w-12 h-12 rounded-xl bg-mint/10 flex items-center justify-center mb-4 group-hover:bg-mint/20 group-hover:scale-110 transition-all duration-500">
-                  <feature.icon className="w-6 h-6 text-mint" />
+            <motion.div key={feature.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.05 }} className="group">
+              <div className="glass-card rounded-2xl p-6 h-full transition-all duration-500 hover:-translate-y-1">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110" style={{ background: 'rgba(34, 197, 94, 0.1)' }}>
+                  <feature.icon className="w-6 h-6" style={{ color: '#22c55e' }} />
                 </div>
                 <h3 className="font-semibold text-white mb-1.5">{feature.title}</h3>
-                <p className="text-sm text-white/60 leading-relaxed">{feature.description}</p>
+                <p className="text-sm leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>{feature.description}</p>
               </div>
             </motion.div>
           ))}

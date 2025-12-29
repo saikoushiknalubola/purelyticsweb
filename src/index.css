@@ -13,8 +13,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 158 64% 52%;
-    --primary-foreground: 222 47% 11%;
+    --primary: 142 71% 45%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 220 14% 96%;
     --secondary-foreground: 222 47% 11%;
@@ -22,43 +22,31 @@
     --muted: 220 14% 96%;
     --muted-foreground: 220 9% 46%;
 
-    --accent: 158 64% 52%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 142 71% 45%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 158 64% 52%;
+    --ring: 142 71% 45%;
 
     --radius: 0.75rem;
 
-    /* Custom color tokens - Yozu inspired */
+    /* Yozu-inspired color palette */
     --navy: 222 47% 11%;
-    --navy-light: 222 35% 16%;
-    --navy-lighter: 222 25% 22%;
-    --mint: 158 64% 52%;
-    --mint-light: 158 64% 65%;
-    --mint-dark: 158 64% 40%;
-    --charcoal: 222 47% 11%;
-    --charcoal-light: 222 35% 16%;
-    --off-white: 0 0% 100%;
-    --soft-blue: 217 91% 60%;
-    --amber: 38 92% 50%;
-    --purple: 270 60% 55%;
-
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(222 35% 14%) 50%, hsl(222 47% 11%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 14% 96%) 100%);
-    --gradient-mint: linear-gradient(135deg, hsl(158 64% 52%) 0%, hsl(158 64% 65%) 100%);
+    --navy-deep: 224 71% 4%;
+    --navy-light: 222 41% 15%;
+    --emerald: 142 71% 45%;
+    --emerald-light: 142 69% 58%;
+    --emerald-dark: 142 76% 36%;
+    --slate: 215 20% 65%;
 
     /* Shadows */
-    --shadow-soft: 0 2px 8px -2px hsl(222 47% 11% / 0.08);
-    --shadow-card: 0 4px 24px -4px hsl(222 47% 11% / 0.12);
-    --shadow-elevated: 0 20px 50px -12px hsl(222 47% 11% / 0.25);
-    --shadow-glow: 0 0 40px -8px hsl(158 64% 52% / 0.5);
-    --shadow-glow-lg: 0 0 80px -12px hsl(158 64% 52% / 0.6);
+    --shadow-glow: 0 0 40px -10px hsl(142 71% 45% / 0.5);
+    --shadow-glow-lg: 0 0 60px -10px hsl(142 71% 45% / 0.6);
+    --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -71,42 +59,25 @@
   }
 
   .dark {
-    --background: 222 47% 8%;
+    --background: 224 71% 4%;
     --foreground: 210 40% 98%;
-
     --card: 222 47% 11%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 158 64% 52%;
-    --primary-foreground: 222 47% 11%;
-
+    --primary: 142 71% 45%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 222 30% 15%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 222 30% 18%;
     --muted-foreground: 220 9% 60%;
-
-    --accent: 158 64% 52%;
-    --accent-foreground: 222 47% 11%;
-
+    --accent: 142 71% 45%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 222 30% 18%;
     --input: 222 30% 18%;
-    --ring: 158 64% 52%;
-
-    --sidebar-background: 222 47% 11%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --ring: 142 71% 45%;
   }
 }
 
@@ -114,13 +85,30 @@
   * {
     @apply border-border;
   }
-
   html {
     scroll-behavior: smooth;
   }
-
   body {
     @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-primary {
+    @apply bg-emerald hover:bg-emerald-light text-white font-semibold;
+    box-shadow: 0 0 20px -5px hsl(142 71% 45% / 0.5);
+  }
+
+  .btn-secondary {
+    @apply bg-white/10 hover:bg-white/20 text-white border border-white/20;
   }
 }
 
@@ -130,53 +118,23 @@
   }
 
   .bg-navy {
-    background-color: hsl(var(--navy));
+    background-color: hsl(222 47% 11%);
   }
 
-  .bg-navy-light {
-    background-color: hsl(var(--navy-light));
+  .bg-navy-deep {
+    background-color: hsl(224 71% 4%);
   }
 
-  .bg-mint {
-    background-color: hsl(var(--mint));
+  .bg-emerald {
+    background-color: hsl(142 71% 45%);
   }
 
-  .text-mint {
-    color: hsl(var(--mint));
+  .text-emerald {
+    color: hsl(142 71% 45%);
   }
 
-  .border-mint {
-    border-color: hsl(var(--mint));
-  }
-
-  /* Glass morphism */
-  .glass {
-    @apply bg-background/80 backdrop-blur-xl;
-  }
-
-  .glass-dark {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .glass-card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
-  /* Shadows */
-  .shadow-soft {
-    box-shadow: var(--shadow-soft);
-  }
-
-  .shadow-card {
-    box-shadow: var(--shadow-card);
-  }
-
-  .shadow-elevated {
-    box-shadow: var(--shadow-elevated);
+  .border-emerald {
+    border-color: hsl(142 71% 45%);
   }
 
   .shadow-glow {
@@ -187,15 +145,14 @@
     box-shadow: var(--shadow-glow-lg);
   }
 
-  /* Float animation */
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }
   }
 
   @keyframes float-slow {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(2deg); }
+    0%, 100% { transform: translateY(0px) rotate(-6deg); }
+    50% { transform: translateY(-15px) rotate(-6deg); }
   }
 
   .animate-float {
@@ -203,11 +160,6 @@
   }
 
   .animate-float-slow {
-    animation: float-slow 8s ease-in-out infinite;
-  }
-
-  .animate-float-delayed {
-    animation: float 6s ease-in-out infinite;
-    animation-delay: -3s;
+    animation: float-slow 7s ease-in-out infinite;
   }
 }
