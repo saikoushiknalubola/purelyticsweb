@@ -20,18 +20,18 @@ export function CTASection() {
           </motion.span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl mb-5">Ready to know what's really in your products?</h2>
           <p className="text-base sm:text-lg mb-10 max-w-xl mx-auto leading-relaxed" style={{ color: "hsl(var(--primary-foreground) / 0.78)" }}>Join the early access list and help shape Purelytics.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 sm:px-0">
             <Link
               to="/beta"
               onClick={() => window.scrollTo(0, 0)}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-12 sm:h-[52px] px-8 min-w-[180px] rounded-full text-base font-bold transition-all group bg-accent text-accent-foreground hover:scale-[1.02]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-12 sm:h-[52px] px-8 sm:min-w-[180px] rounded-full text-base font-bold transition-all group bg-accent text-accent-foreground hover:scale-[1.02]"
             >
               Get Early Access
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
             <a 
               href="#how-it-works" 
-              className="w-full sm:w-auto inline-flex items-center justify-center h-12 sm:h-[52px] px-8 min-w-[180px] rounded-full text-base font-semibold bg-background/10 border border-white/18 text-primary-foreground hover:bg-background/15 transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center h-12 sm:h-[52px] px-8 sm:min-w-[180px] rounded-full text-base font-semibold bg-background/10 border border-white/18 text-primary-foreground hover:bg-background/15 transition-colors"
             >
               Learn More
             </a>

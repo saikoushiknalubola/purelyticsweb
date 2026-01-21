@@ -8,28 +8,28 @@ import avatar3 from "@/assets/avatar-3.png";
 const testimonials = [
   {
     quote:
-      "As a mother of two, I finally feel confident about what I'm putting on my kids' skin. Purelytics is a game-changer.",
-    author: "Priya Sharma",
-    role: "Parent & Early Tester",
-    location: "Mumbai",
+      "I used to spend hours researching ingredients online. Now I just scan and get clear answers. It's become my go-to before buying any skincare.",
+    author: "Vennela",
+    role: "Skincare Enthusiast",
+    location: "Warangal",
     rating: 5,
     avatar: avatar1,
   },
   {
     quote:
-      "I've been into skincare for years, but never truly understood ingredients until now. This app makes it so simple.",
-    author: "Ananya Reddy",
-    role: "Skincare Enthusiast",
-    location: "Hyderabad",
+      "As someone with sensitive skin, knowing exactly what's in my products has been life-changing. I trust Purelytics completely.",
+    author: "Saanve",
+    role: "Early Tester",
+    location: "Warangal",
     rating: 5,
     avatar: avatar2,
   },
   {
     quote:
-      "Finally, an Indian app that understands our local products and regulations. The FSSAI integration is brilliant.",
-    author: "Rahul Verma",
-    role: "Health Blogger",
-    location: "Delhi",
+      "The ingredient breakdown is so easy to understand. I finally know which products are actually safe for my family.",
+    author: "Ashrad",
+    role: "Parent & Beta User",
+    location: "Hyderabad",
     rating: 5,
     avatar: avatar3,
   },

@@ -105,7 +105,7 @@ export function Header() {
         </div>
 
         <button
-          className="md:hidden p-2 rounded-lg text-foreground"
+          className="md:hidden ml-auto p-2 rounded-lg text-foreground flex items-center justify-center"
           onClick={() => setIsMobileMenuOpen((s) => !s)}
           aria-label="Toggle menu"
         >
