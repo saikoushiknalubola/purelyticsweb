@@ -4,6 +4,39 @@ import { Link } from "react-router-dom";
 
 const trustPoints = ["Free during beta", "No app install needed", "100% private & secure"];
 
+const wordAnimation = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.08,
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+    },
+  }),
+};
+
+function AnimatedText({ text, className }: { text: string; className?: string }) {
+  const words = text.split(" ");
+  return (
+    <span className={className}>
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          custom={i}
+          variants={wordAnimation}
+          initial="hidden"
+          animate="visible"
+          className="inline-block mr-[0.25em]"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
 export function HeroSection() {
   return (
     <header className="relative pt-28 pb-16 sm:pb-20 md:pt-32 lg:pt-40 lg:pb-28 bg-background overflow-hidden">
@@ -21,8 +54,10 @@ export function HeroSection() {
           className="max-w-3xl mx-auto text-center"
         >
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] text-foreground">
-            Scan any product.
-            <span className="block text-primary mt-1">Instantly know what's inside.</span>
+            <AnimatedText text="Scan any product." />
+            <span className="block text-primary mt-1">
+              <AnimatedText text="Instantly know what's inside." className="delay-300" />
+            </span>
           </h1>
 
           <p className="mt-6 text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">

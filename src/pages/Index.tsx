@@ -12,6 +12,7 @@ import { FAQSection } from "@/components/FAQSection";
 import { BlogSection } from "@/components/BlogSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
+import { FloatingBetaButton } from "@/components/FloatingBetaButton";
 
 const Index = () => {
   return (
@@ -32,6 +33,7 @@ const Index = () => {
         <CTASection />
       </main>
       <Footer />
+      <FloatingBetaButton />
     </div>
   );
 };

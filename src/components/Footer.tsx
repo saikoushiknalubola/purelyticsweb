@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Instagram, Linkedin, Mail, MapPin, Twitter } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const footerLinks = {
   quick: [
@@ -33,11 +36,39 @@ const socialLinks = [
 
 export function Footer() {
   const location = useLocation();
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("/#") && location.pathname === "/") {
       e.preventDefault();
       document.querySelector(href.replace("/", ""))?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.from("newsletter_signups").insert({ email: email.trim() });
+
+      if (error) {
+        if (error.code === "23505") {
+          toast.error("Already subscribed!", { description: "This email is already on our list." });
+        } else {
+          throw error;
+        }
+      } else {
+        toast.success("Subscribed!", { description: "You'll receive updates on ingredient safety." });
+        setEmail("");
+      }
+    } catch (error) {
+      console.error("Newsletter signup error:", error);
+      toast.error("Something went wrong", { description: "Please try again later." });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -178,14 +209,21 @@ export function Footer() {
                 Subscribe to our newsletter to receive updates on ingredient safety and product transparency.
               </p>
 
-              <form className="mt-5 flex items-center gap-3">
+              <form onSubmit={handleNewsletterSubmit} className="mt-5 flex items-center gap-3">
                 <input
                   type="email"
                   placeholder="Your Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                   className="h-12 w-full rounded-2xl px-4 bg-background/10 border border-white/15 text-primary-foreground placeholder:text-primary-foreground/50 outline-none"
                 />
-                <button type="submit" className="h-12 px-5 rounded-2xl bg-accent text-accent-foreground font-semibold">
-                  Send
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="h-12 px-5 rounded-2xl bg-accent text-accent-foreground font-semibold disabled:opacity-50"
+                >
+                  {isSubmitting ? "..." : "Send"}
                 </button>
               </form>
             </div>
