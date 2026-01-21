@@ -115,58 +115,78 @@ export function Header() {
 
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden"
-            style={{
-              background: "hsl(var(--background) / 0.95)",
-              backdropFilter: "blur(14px)",
-              borderTop: "1px solid hsl(var(--border))",
-            }}
-          >
-            <div className="container py-5 flex flex-col gap-2">
-              {navLinks.map((link) =>
-                isHash(link.href) ? (
-                  <a
+          <>
+            {/* Backdrop overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="md:hidden fixed inset-0 top-16 bg-background/80 backdrop-blur-sm z-40"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            
+            {/* Menu panel */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="md:hidden absolute top-16 left-0 right-0 z-50 bg-background border-b border-border shadow-xl"
+            >
+              <div className="container py-4 flex flex-col gap-1">
+                {navLinks.map((link, index) => (
+                  <motion.div
                     key={link.href}
-                    href={link.href}
-                    onClick={(e) => {
-                      if (location.pathname === "/") e.preventDefault();
-                      handleNavClick(link.href);
-                    }}
-                    className="px-4 py-3 rounded-xl text-foreground hover:bg-muted transition-colors"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
                   >
-                    {link.label}
-                  </a>
-                ) : (
+                    {isHash(link.href) ? (
+                      <a
+                        href={link.href}
+                        onClick={(e) => {
+                          if (location.pathname === "/") e.preventDefault();
+                          handleNavClick(link.href);
+                        }}
+                        className="block px-4 py-3 rounded-xl text-foreground font-medium hover:bg-secondary transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          window.scrollTo(0, 0);
+                        }}
+                        className="block px-4 py-3 rounded-xl text-foreground font-medium hover:bg-secondary transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
+                  </motion.div>
+                ))}
+
+                <motion.div
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navLinks.length * 0.05 }}
+                  className="pt-3 mt-2 border-t border-border"
+                >
                   <Link
-                    key={link.href}
-                    to={link.href}
+                    to="/beta"
+                    className="block w-full text-center py-3 rounded-xl btn-primary font-semibold"
                     onClick={() => {
-                      setIsMobileMenuOpen(false);
+                      handleDownloadClick();
                       window.scrollTo(0, 0);
                     }}
-                    className="px-4 py-3 rounded-xl text-foreground hover:bg-muted transition-colors"
                   >
-                    {link.label}
+                    Download app
                   </Link>
-                )
-              )}
-
-              <Link
-                to="/beta"
-                className="mt-2 inline-flex items-center justify-center h-11 px-6 rounded-full btn-primary"
-                onClick={() => {
-                  handleDownloadClick();
-                  window.scrollTo(0, 0);
-                }}
-              >
-                Download app
-              </Link>
-            </div>
-          </motion.div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>
