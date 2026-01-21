@@ -175,12 +175,12 @@ const Blog = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="group"
+                    className="group h-full"
                   >
                     <Link to={`/blog/${post.id}`} onClick={() => window.scrollTo(0, 0)} className="block h-full">
-                      <div className="h-full bg-card rounded-xl sm:rounded-2xl border border-border/50 overflow-hidden hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 flex flex-col">
+                      <div className="min-h-[340px] sm:min-h-[380px] h-full bg-card rounded-xl sm:rounded-2xl border border-border/50 overflow-hidden hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 flex flex-col">
                         {/* Header with image */}
-                        <div className="h-36 sm:h-40 lg:h-48 overflow-hidden relative">
+                        <div className="h-40 sm:h-44 lg:h-48 overflow-hidden relative flex-shrink-0">
                           <img 
                             src={post.image} 
                             alt={post.title}
@@ -196,20 +196,20 @@ const Blog = () => {
 
                         {/* Content */}
                         <div className="p-4 sm:p-5 lg:p-6 flex-1 flex flex-col">
-                          <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-3 sm:mb-4 w-fit">
+                          <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-3 w-fit">
                             {post.categoryLabel}
                           </span>
 
-                          <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-foreground mb-2 sm:mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                          <h2 className="text-base sm:text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
                             {post.title}
                           </h2>
 
-                          <p className="text-muted-foreground text-xs sm:text-sm mb-4 line-clamp-2 sm:line-clamp-3 flex-1">
+                          <p className="text-muted-foreground text-xs sm:text-sm mb-4 line-clamp-2 flex-1">
                             {post.excerpt}
                           </p>
 
-                          <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-border/50 mt-auto">
-                            <div className="flex items-center gap-3 sm:gap-4 text-xs text-muted-foreground">
+                          <div className="flex items-center justify-between pt-3 border-t border-border/50 mt-auto">
+                            <div className="flex items-center gap-3 text-xs text-muted-foreground">
                               <span className="flex items-center gap-1">
                                 <Calendar className="w-3 h-3" />
                                 {post.date}

@@ -56,7 +56,7 @@ export function Header() {
     >
       <nav className="container mx-auto flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center gap-2" onClick={() => window.scrollTo(0, 0)}>
-          <span className="font-display text-2xl text-foreground">Purelytics</span>
+          <span className="font-display text-2xl text-foreground">Ply<span className="text-primary">.</span></span>
         </Link>
 
         <div className="hidden md:flex items-center gap-6">

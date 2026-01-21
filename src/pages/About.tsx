@@ -125,14 +125,14 @@ export default function About() {
                     Our mission is to democratize health information and empower informed choices.
                   </p>
                   
-                  <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
-                    <Button variant="outline" size="sm" asChild>
+                  <div className="flex flex-row gap-3 justify-center lg:justify-start">
+                    <Button variant="outline" size="sm" className="min-w-[110px]" asChild>
                       <a href="https://www.linkedin.com/in/saikoushiknalubola/" target="_blank" rel="noopener noreferrer">
                         <Linkedin className="w-4 h-4 mr-2" />
                         LinkedIn
                       </a>
                     </Button>
-                    <Button variant="outline" size="sm" asChild>
+                    <Button variant="outline" size="sm" className="min-w-[110px]" asChild>
                       <a href="mailto:purelytics@gmail.com">
                         <Mail className="w-4 h-4 mr-2" />
                         Contact
@@ -171,7 +171,7 @@ export default function About() {
       </section>
 
       {/* What We Do */}
-      <section className="py-16 lg:py-24 bg-charcoal text-primary-foreground">
+      <section className="py-16 lg:py-24 panel-olive">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -180,8 +180,8 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12 lg:mb-16"
           >
-            <p className="text-primary font-semibold mb-3">What We Do</p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+            <p className="text-accent font-semibold mb-3">What We Do</p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
               Revolutionizing how people understand product safety
             </h2>
           </motion.div>
@@ -194,13 +194,13 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-primary-foreground/5 border border-primary-foreground/10 rounded-2xl p-6 text-center hover:bg-primary-foreground/10 transition-colors duration-300"
+                className="bg-primary-foreground/10 border border-primary-foreground/20 rounded-2xl p-6 text-center hover:bg-primary-foreground/15 transition-colors duration-300"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="w-6 h-6 text-accent" />
                 </div>
-                <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
-                <p className="text-primary-foreground/70 text-sm leading-relaxed">
+                <h3 className="text-lg font-bold text-primary-foreground mb-2">{feature.title}</h3>
+                <p className="text-primary-foreground/80 text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
