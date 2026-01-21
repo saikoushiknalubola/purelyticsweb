@@ -54,12 +54,14 @@ export function Header() {
         borderBottom: isScrolled ? "1px solid hsl(var(--border))" : "1px solid transparent",
       }}
     >
-      <nav className="container mx-auto flex items-center justify-between h-16 md:h-20">
+      <nav className="container mx-auto grid grid-cols-2 md:grid-cols-3 items-center h-16 md:h-20">
+        {/* Logo - Left */}
         <Link to="/" className="flex items-center gap-2" onClick={() => window.scrollTo(0, 0)}>
           <span className="font-display text-2xl text-foreground">Ply<span className="text-primary">.</span></span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-6">
+        {/* Nav Links - Center */}
+        <div className="hidden md:flex items-center justify-center gap-6">
           {navLinks.map((link) =>
             isHash(link.href) ? (
               <a
@@ -88,7 +90,8 @@ export function Header() {
           )}
         </div>
 
-        <div className="hidden md:block">
+        {/* CTA Button - Right */}
+        <div className="hidden md:flex justify-end">
           <Link
             to="/beta"
             onClick={() => {

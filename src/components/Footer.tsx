@@ -80,7 +80,7 @@ export function Footer() {
             {/* Brand */}
             <div className="lg:col-span-4">
               <Link to="/" className="inline-flex items-center gap-2">
-                <span className="font-display text-3xl">Ply<span className="text-accent">.</span></span>
+                <span className="font-display text-3xl">Purelytics<span className="text-accent">.</span></span>
               </Link>
               <p className="mt-4 max-w-sm leading-relaxed" style={{ color: "hsl(var(--primary-foreground) / 0.75)" }}>
                 Empowering consumers with instant ingredient clarity.

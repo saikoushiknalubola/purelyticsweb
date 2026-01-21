@@ -64,11 +64,11 @@ export function HeroSection() {
             Purelytics decodes ingredients, reveals toxicity, and suggests safer alternatives — in seconds.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center items-center">
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               to="/beta"
               onClick={() => window.scrollTo(0, 0)}
-              className="w-full sm:w-auto inline-flex items-center justify-center h-12 sm:h-13 px-8 min-w-[180px] rounded-full btn-primary text-base font-semibold"
+              className="w-full sm:w-auto inline-flex items-center justify-center h-12 sm:h-[52px] px-8 min-w-[180px] rounded-full btn-primary text-base font-semibold"
             >
               Get Early Access
               <ArrowRight className="ml-2 w-4 h-4" />
@@ -76,7 +76,7 @@ export function HeroSection() {
 
             <a
               href="#how-it-works"
-              className="w-full sm:w-auto inline-flex items-center justify-center h-12 sm:h-13 px-8 min-w-[180px] rounded-full btn-secondary text-base font-medium"
+              className="w-full sm:w-auto inline-flex items-center justify-center h-12 sm:h-[52px] px-8 min-w-[180px] rounded-full btn-secondary text-base font-medium"
             >
               See how it works
             </a>
