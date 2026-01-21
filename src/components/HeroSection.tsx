@@ -47,13 +47,13 @@ export function HeroSection() {
             </a>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 justify-center">
+          <div className="mt-10 grid grid-cols-3 gap-4 sm:flex sm:flex-wrap sm:items-center sm:gap-6 justify-center max-w-lg mx-auto sm:max-w-none">
             {trustPoints.map((point) => (
-              <div key={point} className="flex items-center gap-2 text-sm text-muted-foreground">
-                <div className="w-5 h-5 rounded-full flex items-center justify-center bg-secondary border border-border">
-                  <Check className="w-3 h-3 text-primary" />
+              <div key={point} className="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
+                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-secondary border border-border flex-shrink-0">
+                  <Check className="w-3.5 h-3.5 text-primary" />
                 </div>
-                {point}
+                <span className="text-xs sm:text-sm text-muted-foreground">{point}</span>
               </div>
             ))}
           </div>
