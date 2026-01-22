@@ -100,7 +100,7 @@ export function Header() {
             }}
             className="inline-flex items-center justify-center h-11 px-6 rounded-full btn-primary"
           >
-            Download app
+            Try it now
           </Link>
         </div>
 
@@ -181,7 +181,7 @@ export function Header() {
                       window.scrollTo(0, 0);
                     }}
                   >
-                    Download app
+                    Try it now
                   </Link>
                 </motion.div>
               </div>
