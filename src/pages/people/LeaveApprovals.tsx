@@ -17,20 +17,17 @@ export default function LeaveApprovals() {
   const [filter, setFilter] = useState<"pending"|"all">("pending");
 
   const load = async () => {
-    let q = supabase.from("leave_requests").select("*, leave_types(name), profiles!leave_requests_user_id_fkey(full_name,email)").order("created_at", { ascending: false });
+    let q = supabase.from("leave_requests").select("*, leave_types(name)").order("created_at", { ascending: false });
     if (filter === "pending") q = q.eq("status", "pending");
-    const { data, error } = await q;
-    if (error) {
-      // Fallback without join if FK name differs
-      const { data: d2 } = await supabase.from("leave_requests").select("*, leave_types(name)").order("created_at", { ascending: false });
-      const ids = Array.from(new Set((d2 ?? []).map((r:any)=>r.user_id)));
-      const { data: profs } = ids.length ? await supabase.from("profiles").select("id, full_name, email").in("id", ids) : { data: [] as any };
-      const map: Record<string, any> = {};
-      (profs ?? []).forEach((p:any)=>map[p.id]=p);
-      setRows((d2 ?? []).filter((r:any)=> filter==="all" || r.status==="pending").map((r:any)=>({ ...r, profiles: map[r.user_id] })));
-      return;
+    const { data } = await q;
+    const list = (data ?? []) as any[];
+    const ids = Array.from(new Set(list.map((r) => r.user_id)));
+    let map: Record<string, any> = {};
+    if (ids.length) {
+      const { data: profs } = await supabase.from("profiles").select("id, full_name, email").in("id", ids);
+      (profs ?? []).forEach((p: any) => (map[p.id] = p));
     }
-    setRows(data ?? []);
+    setRows(list.map((r) => ({ ...r, profiles: map[r.user_id] })));
   };
 
   useEffect(() => { load(); /* eslint-disable-next-line */ }, [filter]);
