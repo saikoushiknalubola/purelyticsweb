@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      announcements: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          posted_by: string | null
+          title: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          posted_by?: string | null
+          title: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          posted_by?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      attendance_sessions: {
+        Row: {
+          check_in_at: string
+          check_out_at: string | null
+          created_at: string
+          id: string
+          note: string | null
+          source: string | null
+          user_id: string
+        }
+        Insert: {
+          check_in_at?: string
+          check_out_at?: string | null
+          created_at?: string
+          id?: string
+          note?: string | null
+          source?: string | null
+          user_id: string
+        }
+        Update: {
+          check_in_at?: string
+          check_out_at?: string | null
+          created_at?: string
+          id?: string
+          note?: string | null
+          source?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       beta_signups: {
         Row: {
           age: string | null
@@ -47,6 +101,139 @@ export type Database = {
         }
         Relationships: []
       }
+      departments: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      leave_balances: {
+        Row: {
+          id: string
+          leave_type_id: string
+          total: number
+          used: number
+          user_id: string
+          year: number
+        }
+        Insert: {
+          id?: string
+          leave_type_id: string
+          total?: number
+          used?: number
+          user_id: string
+          year: number
+        }
+        Update: {
+          id?: string
+          leave_type_id?: string
+          total?: number
+          used?: number
+          user_id?: string
+          year?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leave_balances_leave_type_id_fkey"
+            columns: ["leave_type_id"]
+            isOneToOne: false
+            referencedRelation: "leave_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leave_requests: {
+        Row: {
+          created_at: string
+          days: number
+          from_date: string
+          id: string
+          leave_type_id: string
+          reason: string | null
+          reviewed_at: string | null
+          reviewer_id: string | null
+          reviewer_note: string | null
+          status: string
+          to_date: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          days: number
+          from_date: string
+          id?: string
+          leave_type_id: string
+          reason?: string | null
+          reviewed_at?: string | null
+          reviewer_id?: string | null
+          reviewer_note?: string | null
+          status?: string
+          to_date: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          days?: number
+          from_date?: string
+          id?: string
+          leave_type_id?: string
+          reason?: string | null
+          reviewed_at?: string | null
+          reviewer_id?: string | null
+          reviewer_note?: string | null
+          status?: string
+          to_date?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leave_requests_leave_type_id_fkey"
+            columns: ["leave_type_id"]
+            isOneToOne: false
+            referencedRelation: "leave_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leave_types: {
+        Row: {
+          created_at: string
+          default_annual_quota: number
+          id: string
+          name: string
+          paid: boolean
+        }
+        Insert: {
+          created_at?: string
+          default_annual_quota?: number
+          id?: string
+          name: string
+          paid?: boolean
+        }
+        Update: {
+          created_at?: string
+          default_annual_quota?: number
+          id?: string
+          name?: string
+          paid?: boolean
+        }
+        Relationships: []
+      }
       newsletter_signups: {
         Row: {
           created_at: string
@@ -65,15 +252,132 @@ export type Database = {
         }
         Relationships: []
       }
+      org_settings: {
+        Row: {
+          full_day_threshold_hours: number
+          half_day_threshold_hours: number
+          id: number
+          updated_at: string
+          weekend_days: number[]
+          working_hours: number
+        }
+        Insert: {
+          full_day_threshold_hours?: number
+          half_day_threshold_hours?: number
+          id?: number
+          updated_at?: string
+          weekend_days?: number[]
+          working_hours?: number
+        }
+        Update: {
+          full_day_threshold_hours?: number
+          half_day_threshold_hours?: number
+          id?: number
+          updated_at?: string
+          weekend_days?: number[]
+          working_hours?: number
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          address: string | null
+          avatar_url: string | null
+          created_at: string
+          department_id: string | null
+          designation: string | null
+          email: string | null
+          emergency_contact: string | null
+          full_name: string | null
+          id: string
+          joining_date: string | null
+          manager_id: string | null
+          phone: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          avatar_url?: string | null
+          created_at?: string
+          department_id?: string | null
+          designation?: string | null
+          email?: string | null
+          emergency_contact?: string | null
+          full_name?: string | null
+          id: string
+          joining_date?: string | null
+          manager_id?: string | null
+          phone?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          avatar_url?: string | null
+          created_at?: string
+          department_id?: string | null
+          designation?: string | null
+          email?: string | null
+          emergency_contact?: string | null
+          full_name?: string | null
+          id?: string
+          joining_date?: string | null
+          manager_id?: string | null
+          phone?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_manager_of: {
+        Args: { _employee: string; _manager: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "manager" | "employee"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -200,6 +504,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "manager", "employee"],
+    },
   },
 } as const
