@@ -63,8 +63,13 @@ export default function PeopleLayout() {
       {/* Sidebar (desktop) */}
       <aside className="hidden lg:flex fixed inset-y-0 left-0 w-64 border-r border-border bg-card flex-col">
         <div className="h-16 flex items-center px-5 border-b border-border">
-          <Link to="/people" className="font-serif text-xl text-primary">
-            Purelytics <span className="text-accent">People</span>
+          <Link to="/people" className="flex flex-col leading-none">
+            <span className="font-display text-2xl text-primary tracking-tight">
+              Purelytics<span className="text-accent">.</span>
+            </span>
+            <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
+              People · HRMS
+            </span>
           </Link>
         </div>
         <nav className="flex-1 p-3 space-y-1">
@@ -101,8 +106,9 @@ export default function PeopleLayout() {
 
       {/* Mobile topbar */}
       <header className="lg:hidden h-14 flex items-center justify-between px-4 border-b border-border bg-card sticky top-0 z-30">
-        <Link to="/people" className="font-serif text-lg text-primary">
-          Purelytics <span className="text-accent">People</span>
+        <Link to="/people" className="font-display text-xl text-primary tracking-tight">
+          Purelytics<span className="text-accent">.</span>
+          <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground ml-2">People</span>
         </Link>
         <Button variant="ghost" size="icon" onClick={() => setOpen(true)}>
           <Menu className="h-5 w-5" />
@@ -113,7 +119,9 @@ export default function PeopleLayout() {
         <div className="lg:hidden fixed inset-0 z-50 bg-black/40" onClick={() => setOpen(false)}>
           <aside className="absolute inset-y-0 left-0 w-72 bg-card p-4 flex flex-col" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-4">
-              <span className="font-serif text-lg text-primary">People</span>
+              <span className="font-display text-xl text-primary">
+                Purelytics<span className="text-accent">.</span>
+              </span>
               <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
                 <X className="h-5 w-5" />
               </Button>
