@@ -38,6 +38,47 @@ export type Database = {
         }
         Relationships: []
       }
+      attendance_breaks: {
+        Row: {
+          break_end: string | null
+          break_start: string
+          created_at: string
+          id: string
+          reason: string | null
+          session_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          break_end?: string | null
+          break_start?: string
+          created_at?: string
+          id?: string
+          reason?: string | null
+          session_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          break_end?: string | null
+          break_start?: string
+          created_at?: string
+          id?: string
+          reason?: string | null
+          session_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_breaks_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "attendance_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       attendance_sessions: {
         Row: {
           check_in_at: string
@@ -45,8 +86,10 @@ export type Database = {
           created_at: string
           id: string
           note: string | null
+          notes: string | null
           source: string | null
           user_id: string
+          work_mode: string | null
         }
         Insert: {
           check_in_at?: string
@@ -54,8 +97,10 @@ export type Database = {
           created_at?: string
           id?: string
           note?: string | null
+          notes?: string | null
           source?: string | null
           user_id: string
+          work_mode?: string | null
         }
         Update: {
           check_in_at?: string
@@ -63,8 +108,10 @@ export type Database = {
           created_at?: string
           id?: string
           note?: string | null
+          notes?: string | null
           source?: string | null
           user_id?: string
+          work_mode?: string | null
         }
         Relationships: []
       }
@@ -116,6 +163,39 @@ export type Database = {
           created_at?: string
           id?: string
           name?: string
+        }
+        Relationships: []
+      }
+      holidays: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          holiday_date: string
+          id: string
+          is_optional: boolean
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          holiday_date: string
+          id?: string
+          is_optional?: boolean
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          holiday_date?: string
+          id?: string
+          is_optional?: boolean
+          name?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -283,50 +363,77 @@ export type Database = {
         Row: {
           address: string | null
           avatar_url: string | null
+          blood_group: string | null
           created_at: string
+          date_of_birth: string | null
           department_id: string | null
           designation: string | null
           email: string | null
           emergency_contact: string | null
+          emergency_contact_name: string | null
+          emergency_contact_phone: string | null
+          employee_id: string | null
+          employment_type: string | null
           full_name: string | null
+          gender: string | null
           id: string
           joining_date: string | null
+          location: string | null
           manager_id: string | null
           phone: string | null
           status: string
           updated_at: string
+          work_mode: string | null
         }
         Insert: {
           address?: string | null
           avatar_url?: string | null
+          blood_group?: string | null
           created_at?: string
+          date_of_birth?: string | null
           department_id?: string | null
           designation?: string | null
           email?: string | null
           emergency_contact?: string | null
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          employee_id?: string | null
+          employment_type?: string | null
           full_name?: string | null
+          gender?: string | null
           id: string
           joining_date?: string | null
+          location?: string | null
           manager_id?: string | null
           phone?: string | null
           status?: string
           updated_at?: string
+          work_mode?: string | null
         }
         Update: {
           address?: string | null
           avatar_url?: string | null
+          blood_group?: string | null
           created_at?: string
+          date_of_birth?: string | null
           department_id?: string | null
           designation?: string | null
           email?: string | null
           emergency_contact?: string | null
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          employee_id?: string | null
+          employment_type?: string | null
           full_name?: string | null
+          gender?: string | null
           id?: string
           joining_date?: string | null
+          location?: string | null
           manager_id?: string | null
           phone?: string | null
           status?: string
           updated_at?: string
+          work_mode?: string | null
         }
         Relationships: [
           {
