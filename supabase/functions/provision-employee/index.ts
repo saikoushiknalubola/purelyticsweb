@@ -58,6 +58,18 @@ Deno.serve(async (req) => {
     const joining_date = body.joining_date ? String(body.joining_date) : null;
     const role = (["admin", "manager", "employee"].includes(body.role) ? body.role : "employee") as
       "admin" | "manager" | "employee";
+    const employee_id = body.employee_id ? String(body.employee_id) : null;
+    const phone = body.phone ? String(body.phone) : null;
+    const gender = body.gender ? String(body.gender) : null;
+    const date_of_birth = body.date_of_birth ? String(body.date_of_birth) : null;
+    const address = body.address ? String(body.address) : null;
+    const location = body.location ? String(body.location) : null;
+    const employment_type = body.employment_type ? String(body.employment_type) : "full_time";
+    const work_mode = body.work_mode ? String(body.work_mode) : "office";
+    const emergency_contact_name = body.emergency_contact_name ? String(body.emergency_contact_name) : null;
+    const emergency_contact_phone = body.emergency_contact_phone ? String(body.emergency_contact_phone) : null;
+    const blood_group = body.blood_group ? String(body.blood_group) : null;
+    const customPwd = body.password ? String(body.password) : "";
 
     if (!email || !full_name) {
       return new Response(JSON.stringify({ error: "email and full_name required" }), {
@@ -65,7 +77,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    const password = tempPassword();
+    const password = customPwd && customPwd.length >= 8 ? customPwd : tempPassword();
     const { data: created, error: cErr } = await admin.auth.admin.createUser({
       email, password, email_confirm: true,
       user_metadata: { full_name },
@@ -79,6 +91,8 @@ Deno.serve(async (req) => {
 
     await admin.from("profiles").upsert({
       id: newId, email, full_name, designation, department_id, manager_id, joining_date,
+      employee_id, phone, gender, date_of_birth, address, location, employment_type,
+      work_mode, emergency_contact_name, emergency_contact_phone, blood_group,
       status: "active",
     }, { onConflict: "id" });
 
