@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { Zap, Globe, UserCheck, MessageCircle, Database, ShoppingBag } from "lucide-react";
 
 const benefits = [
@@ -20,7 +21,7 @@ export function WhyPurelyticsSection() {
       <div className="container relative z-10">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12 lg:mb-16">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-5 bg-background border border-border text-foreground">Why Purelytics</span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-foreground mb-4">Transparency you can trust</h2>
+          <AnimatedHeading className="font-display text-3xl sm:text-4xl lg:text-5xl text-foreground mb-4">Transparency you can trust</AnimatedHeading>
           <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-muted-foreground">We're building the ingredient transparency platform that consumers deserve.</p>
         </motion.div>
 
