@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { Star, Quote, User } from "lucide-react";
 
 const testimonials = [

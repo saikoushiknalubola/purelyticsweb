@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { Baby, Utensils, Droplets, SprayCan, Heart, Leaf } from "lucide-react";
 
 const useCases = [

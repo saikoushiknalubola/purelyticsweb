@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import illusScan from "@/assets/illus-scan.png";

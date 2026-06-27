@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { Camera, Search, BookOpen, Sparkles } from "lucide-react";
 
 const steps = [
