@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -18,7 +19,7 @@ export function CTASection() {
             <Sparkles className="w-4 h-4" />
             <span>Be part of the transparency movement</span>
           </motion.span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl mb-5">Ready to know what's really in your products?</h2>
+          <AnimatedHeading className="font-display text-3xl sm:text-4xl lg:text-5xl mb-5">Ready to know what's really in your products?</AnimatedHeading>
           <p className="text-base sm:text-lg mb-10 max-w-xl mx-auto leading-relaxed" style={{ color: "hsl(var(--primary-foreground) / 0.78)" }}>Join the early access list and help shape Purelytics.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 sm:px-0">
             <Link

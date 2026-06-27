@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import illusScan from "@/assets/illus-scan.png";
@@ -41,9 +42,9 @@ export function FeaturesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14 lg:mb-18"
         >
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-foreground mb-4">
+          <AnimatedHeading className="font-display text-3xl sm:text-4xl lg:text-5xl text-foreground mb-4">
             Features and benefits
-          </h2>
+          </AnimatedHeading>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Practices such as mindful shopping and ingredient awareness can help you cultivate a sense of confidence and reduce anxiety.
           </p>

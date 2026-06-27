@@ -123,17 +123,17 @@ export function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="md:hidden fixed inset-0 top-16 bg-background/80 backdrop-blur-sm z-40"
+              className="md:hidden fixed inset-0 top-16 bg-foreground/40 backdrop-blur-sm z-40"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             
             {/* Menu panel */}
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="md:hidden absolute top-16 left-0 right-0 z-50 bg-background border-b border-border shadow-xl"
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              className="md:hidden fixed top-16 left-0 right-0 z-50 bg-background border-b border-border shadow-2xl max-h-[calc(100vh-4rem)] overflow-y-auto"
             >
               <div className="container py-4 flex flex-col gap-1">
                 {navLinks.map((link, index) => (

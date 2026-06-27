@@ -1,37 +1,47 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Sparkles } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const trustPoints = ["Free during beta", "No app install needed", "100% private & secure"];
 
 const wordAnimation = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 28, filter: "blur(10px)" },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
+    filter: "blur(0px)",
     transition: {
-      delay: i * 0.08,
-      duration: 0.4,
+      delay: 0.15 + i * 0.09,
+      duration: 0.7,
       ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
     },
   }),
 };
 
-function AnimatedText({ text, className }: { text: string; className?: string }) {
+function AnimatedText({
+  text,
+  className,
+  offset = 0,
+}: {
+  text: string;
+  className?: string;
+  offset?: number;
+}) {
   const words = text.split(" ");
   return (
     <span className={className}>
       {words.map((word, i) => (
-        <motion.span
-          key={i}
-          custom={i}
-          variants={wordAnimation}
-          initial="hidden"
-          animate="visible"
-          className="inline-block mr-[0.25em]"
-        >
-          {word}
-        </motion.span>
+        <span key={i} className="inline-block overflow-hidden align-baseline mr-[0.25em]">
+          <motion.span
+            custom={i + offset}
+            variants={wordAnimation}
+            initial="hidden"
+            animate="visible"
+            className="inline-block"
+          >
+            {word}
+          </motion.span>
+        </span>
       ))}
     </span>
   );
@@ -60,28 +70,11 @@ export function HeroSection() {
       </div>
 
       <div className="container relative">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mx-auto text-center"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary border border-border mb-6"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-accent" />
-            <span className="text-xs font-medium text-foreground/80">
-              F6S #1 Top Company · June 2026
-            </span>
-          </motion.div>
-
+        <div className="max-w-3xl mx-auto text-center">
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] text-foreground">
             <AnimatedText text="Scan any product." />
             <span className="block text-primary mt-1">
-              <AnimatedText text="Instantly know what's inside." className="delay-300" />
+              <AnimatedText text="Instantly know what's inside." offset={3} />
             </span>
           </h1>
 
@@ -136,7 +129,7 @@ export function HeroSection() {
               </motion.div>
             ))}
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </header>
   );

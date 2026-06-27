@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { AnimatedHeading } from "@/components/AnimatedHeading";
 import { Baby, Utensils, Droplets, SprayCan, Heart, Leaf } from "lucide-react";
 
 const useCases = [
@@ -20,7 +21,7 @@ export function UseCasesSection() {
       <div className="container relative z-10">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12 lg:mb-16">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-5 bg-secondary border border-border text-foreground">Who It's For</span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-foreground mb-4">Built for every conscious shopper</h2>
+          <AnimatedHeading className="font-display text-3xl sm:text-4xl lg:text-5xl text-foreground mb-4">Built for every conscious shopper</AnimatedHeading>
           <p className="text-base sm:text-lg max-w-2xl mx-auto text-muted-foreground">Whether you're a parent, health enthusiast, or just someone who cares — Purelytics is for you.</p>
         </motion.div>
 

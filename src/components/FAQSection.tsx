@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { AnimatedHeading } from "@/components/AnimatedHeading";
 import {
   Accordion,
   AccordionContent,
@@ -65,9 +66,9 @@ export function FAQSection() {
             <span className="inline-block text-primary font-semibold mb-3 tracking-wide text-xs sm:text-sm uppercase">
               FAQ
             </span>
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-foreground mb-4">
+            <AnimatedHeading className="font-display text-2xl sm:text-3xl lg:text-4xl text-foreground mb-4">
               Frequently asked questions
-            </h2>
+            </AnimatedHeading>
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
               Got questions? We've got answers.
             </p>
