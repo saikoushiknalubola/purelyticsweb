@@ -68,7 +68,7 @@ export default function PeopleLayout() {
               Purelytics<span className="text-accent">.</span>
             </span>
             <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mt-1">
-              People · HRMS
+              People · Workspace
             </span>
           </Link>
         </div>

@@ -8,7 +8,6 @@ import { Switch } from "@/components/ui/switch";
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter,
 } from "@/components/ui/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
@@ -134,135 +133,119 @@ export default function Employees() {
                 <p className="text-sm text-muted-foreground">Create their account and seed their profile in one step.</p>
               </DialogHeader>
 
-              <Tabs defaultValue="account" className="mt-2">
-                <TabsList className="grid grid-cols-3 w-full">
-                  <TabsTrigger value="account">Account</TabsTrigger>
-                  <TabsTrigger value="work">Work</TabsTrigger>
-                  <TabsTrigger value="personal">Personal</TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="account" className="space-y-4 mt-4">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="col-span-2"><Label>Full name *</Label>
-                      <Input value={form.full_name} onChange={(e) => set("full_name", e.target.value)} placeholder="Anita Sharma" /></div>
-                    <div><Label>Work email *</Label>
-                      <Input type="email" value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="anita@purelytics.tech" /></div>
-                    <div><Label>Employee ID</Label>
-                      <Input value={form.employee_id} onChange={(e) => set("employee_id", e.target.value)} placeholder="PUR-0024" /></div>
-                    <div>
-                      <Label>Role</Label>
-                      <Select value={form.role} onValueChange={(v: Role) => set("role", v)}>
-                        <SelectTrigger><SelectValue /></SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="employee">Employee</SelectItem>
-                          <SelectItem value="manager">Manager</SelectItem>
-                          <SelectItem value="admin">Admin</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div><Label>Joining date</Label>
-                      <Input type="date" value={form.joining_date} onChange={(e) => set("joining_date", e.target.value)} /></div>
+              <div className="space-y-6 mt-4">
+                {/* Identity */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="col-span-2"><Label>Full name *</Label>
+                    <Input value={form.full_name} onChange={(e) => set("full_name", e.target.value)} placeholder="Anita Sharma" /></div>
+                  <div><Label>Work email *</Label>
+                    <Input type="email" value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="anita@purelytics.tech" /></div>
+                  <div><Label>Employee ID</Label>
+                    <Input value={form.employee_id} onChange={(e) => set("employee_id", e.target.value)} placeholder="PUR-0024" /></div>
+                  <div>
+                    <Label>Role</Label>
+                    <Select value={form.role} onValueChange={(v: Role) => set("role", v)}>
+                      <SelectTrigger><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="employee">Employee</SelectItem>
+                        <SelectItem value="manager">Manager</SelectItem>
+                        <SelectItem value="admin">Admin</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
-
-                  <div className="border-t pt-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <Label>Set a password</Label>
-                        <p className="text-xs text-muted-foreground">If off, a secure temporary password is generated.</p>
-                      </div>
-                      <Switch checked={form.use_custom_password} onCheckedChange={(v) => set("use_custom_password", v)} />
-                    </div>
-                    {form.use_custom_password && (
-                      <Input
-                        type="text"
-                        value={form.password}
-                        onChange={(e) => set("password", e.target.value)}
-                        placeholder="Min 8 characters"
-                        className="mt-2 font-mono"
-                      />
-                    )}
+                  <div><Label>Joining date</Label>
+                    <Input type="date" value={form.joining_date} onChange={(e) => set("joining_date", e.target.value)} /></div>
+                  <div><Label>Designation</Label>
+                    <Input value={form.designation} onChange={(e) => set("designation", e.target.value)} placeholder="Product Designer" /></div>
+                  <div>
+                    <Label>Department</Label>
+                    <Select value={form.department_id} onValueChange={(v) => set("department_id", v)}>
+                      <SelectTrigger><SelectValue placeholder="Pick department" /></SelectTrigger>
+                      <SelectContent>
+                        {depts.map((d) => <SelectItem key={d.id} value={d.id}>{d.name}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
                   </div>
-                </TabsContent>
-
-                <TabsContent value="work" className="space-y-4 mt-4">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div><Label>Designation</Label>
-                      <Input value={form.designation} onChange={(e) => set("designation", e.target.value)} placeholder="Product Designer" /></div>
-                    <div>
-                      <Label>Department</Label>
-                      <Select value={form.department_id} onValueChange={(v) => set("department_id", v)}>
-                        <SelectTrigger><SelectValue placeholder="Pick department" /></SelectTrigger>
-                        <SelectContent>
-                          {depts.map((d) => <SelectItem key={d.id} value={d.id}>{d.name}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label>Employment type</Label>
-                      <Select value={form.employment_type} onValueChange={(v) => set("employment_type", v)}>
-                        <SelectTrigger><SelectValue /></SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="full_time">Full-time</SelectItem>
-                          <SelectItem value="part_time">Part-time</SelectItem>
-                          <SelectItem value="contract">Contract</SelectItem>
-                          <SelectItem value="intern">Intern</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label>Work mode</Label>
-                      <Select value={form.work_mode} onValueChange={(v) => set("work_mode", v)}>
-                        <SelectTrigger><SelectValue /></SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="office">In office</SelectItem>
-                          <SelectItem value="remote">Remote</SelectItem>
-                          <SelectItem value="hybrid">Hybrid</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="col-span-2"><Label>Location</Label>
-                      <Input value={form.location} onChange={(e) => set("location", e.target.value)} placeholder="Hyderabad, IN" /></div>
-                    <div className="col-span-2">
-                      <Label>Reports to</Label>
-                      <Select value={form.manager_id} onValueChange={(v) => set("manager_id", v)}>
-                        <SelectTrigger><SelectValue placeholder="None" /></SelectTrigger>
-                        <SelectContent>
-                          {rows.map((r) => <SelectItem key={r.id} value={r.id}>{r.full_name ?? r.email}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
-                    </div>
+                  <div>
+                    <Label>Employment type</Label>
+                    <Select value={form.employment_type} onValueChange={(v) => set("employment_type", v)}>
+                      <SelectTrigger><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="full_time">Full-time</SelectItem>
+                        <SelectItem value="part_time">Part-time</SelectItem>
+                        <SelectItem value="contract">Contract</SelectItem>
+                        <SelectItem value="intern">Intern</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
-                </TabsContent>
-
-                <TabsContent value="personal" className="space-y-4 mt-4">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div><Label>Phone</Label>
-                      <Input value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+91 ..." /></div>
-                    <div><Label>Date of birth</Label>
-                      <Input type="date" value={form.date_of_birth} onChange={(e) => set("date_of_birth", e.target.value)} /></div>
-                    <div>
-                      <Label>Gender</Label>
-                      <Select value={form.gender} onValueChange={(v) => set("gender", v)}>
-                        <SelectTrigger><SelectValue placeholder="Pick" /></SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="female">Female</SelectItem>
-                          <SelectItem value="male">Male</SelectItem>
-                          <SelectItem value="non_binary">Non-binary</SelectItem>
-                          <SelectItem value="prefer_not">Prefer not to say</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div><Label>Blood group</Label>
-                      <Input value={form.blood_group} onChange={(e) => set("blood_group", e.target.value)} placeholder="O+" /></div>
-                    <div className="col-span-2"><Label>Address</Label>
-                      <Textarea rows={2} value={form.address} onChange={(e) => set("address", e.target.value)} /></div>
-                    <div><Label>Emergency contact name</Label>
-                      <Input value={form.emergency_contact_name} onChange={(e) => set("emergency_contact_name", e.target.value)} /></div>
-                    <div><Label>Emergency contact phone</Label>
-                      <Input value={form.emergency_contact_phone} onChange={(e) => set("emergency_contact_phone", e.target.value)} /></div>
+                  <div>
+                    <Label>Work mode</Label>
+                    <Select value={form.work_mode} onValueChange={(v) => set("work_mode", v)}>
+                      <SelectTrigger><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="office">In office</SelectItem>
+                        <SelectItem value="remote">Remote</SelectItem>
+                        <SelectItem value="hybrid">Hybrid</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
-                </TabsContent>
-              </Tabs>
+                  <div><Label>Location</Label>
+                    <Input value={form.location} onChange={(e) => set("location", e.target.value)} placeholder="Hyderabad, IN" /></div>
+                  <div className="col-span-2">
+                    <Label>Reports to</Label>
+                    <Select value={form.manager_id} onValueChange={(v) => set("manager_id", v)}>
+                      <SelectTrigger><SelectValue placeholder="None" /></SelectTrigger>
+                      <SelectContent>
+                        {rows.map((r) => <SelectItem key={r.id} value={r.id}>{r.full_name ?? r.email}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div><Label>Phone</Label>
+                    <Input value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+91 ..." /></div>
+                  <div><Label>Date of birth</Label>
+                    <Input type="date" value={form.date_of_birth} onChange={(e) => set("date_of_birth", e.target.value)} /></div>
+                  <div>
+                    <Label>Gender</Label>
+                    <Select value={form.gender} onValueChange={(v) => set("gender", v)}>
+                      <SelectTrigger><SelectValue placeholder="Pick" /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="female">Female</SelectItem>
+                        <SelectItem value="male">Male</SelectItem>
+                        <SelectItem value="non_binary">Non-binary</SelectItem>
+                        <SelectItem value="prefer_not">Prefer not to say</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div><Label>Blood group</Label>
+                    <Input value={form.blood_group} onChange={(e) => set("blood_group", e.target.value)} placeholder="O+" /></div>
+                  <div className="col-span-2"><Label>Address</Label>
+                    <Textarea rows={2} value={form.address} onChange={(e) => set("address", e.target.value)} /></div>
+                  <div><Label>Emergency contact name</Label>
+                    <Input value={form.emergency_contact_name} onChange={(e) => set("emergency_contact_name", e.target.value)} /></div>
+                  <div><Label>Emergency contact phone</Label>
+                    <Input value={form.emergency_contact_phone} onChange={(e) => set("emergency_contact_phone", e.target.value)} /></div>
+                </div>
+
+                {/* Password */}
+                <div className="border-t pt-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <Label>Set a password manually</Label>
+                      <p className="text-xs text-muted-foreground">If off, a secure temporary password is generated.</p>
+                    </div>
+                    <Switch checked={form.use_custom_password} onCheckedChange={(v) => set("use_custom_password", v)} />
+                  </div>
+                  {form.use_custom_password && (
+                    <Input
+                      type="text"
+                      value={form.password}
+                      onChange={(e) => set("password", e.target.value)}
+                      placeholder="Min 8 characters"
+                      className="mt-2 font-mono"
+                    />
+                  )}
+                </div>
+              </div>
 
               <DialogFooter className="mt-4">
                 <Button variant="outline" onClick={() => setOpen(false)} disabled={busy}>Cancel</Button>

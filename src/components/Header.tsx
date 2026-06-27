@@ -57,7 +57,9 @@ export function Header() {
       <nav className="container mx-auto grid grid-cols-2 md:grid-cols-3 items-center h-16 md:h-20">
         {/* Logo - Left */}
         <Link to="/" className="flex items-center gap-2" onClick={() => window.scrollTo(0, 0)}>
-          <span className="font-display text-2xl text-foreground">Ply<span className="text-primary">.</span></span>
+          <span className="font-display text-2xl md:text-3xl text-foreground tracking-tight">
+            Purelytics<span className="text-accent">.</span>
+          </span>
         </Link>
 
         {/* Nav Links - Center */}
