@@ -21,7 +21,7 @@ export function HowItWorksSection() {
             <span className="w-2 h-2 rounded-full animate-pulse bg-accent" />
             How It Works
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-foreground mb-4">Clarity in four simple steps</h2>
+          <AnimatedHeading className="font-display text-3xl sm:text-4xl lg:text-5xl text-foreground mb-4">Clarity in four simple steps</AnimatedHeading>
           <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-muted-foreground">From scanning to understanding — the entire process takes just seconds.</p>
         </motion.div>
 

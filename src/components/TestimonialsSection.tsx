@@ -43,9 +43,9 @@ export function TestimonialsSection() {
           <span className="inline-block text-primary font-semibold mb-3 tracking-wide text-xs sm:text-sm uppercase">
             Early Feedback
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-foreground mb-4">
+          <AnimatedHeading className="font-display text-2xl sm:text-3xl lg:text-4xl text-foreground mb-4">
             What our beta testers say
-          </h2>
+          </AnimatedHeading>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
             Real feedback from real users who tried Purelytics early.
           </p>
