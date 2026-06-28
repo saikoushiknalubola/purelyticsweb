@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import f6sAsset from "@/assets/f6s-top-company.png.asset.json";
+import f6sBadge from "@/assets/f6s-top-company.png";
 
 export function F6SRecognitionSection() {
   return (
@@ -23,7 +23,7 @@ export function F6SRecognitionSection() {
             className="group block rounded-2xl border border-border bg-card p-5 sm:p-7 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-0.5"
           >
             <motion.img
-              src={f6sAsset.url}
+              src={f6sBadge}
               alt="F6S #1 Top Company — Companies and Startups, June 2026"
               loading="lazy"
               className="w-full h-auto"
