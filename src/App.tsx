@@ -17,6 +17,8 @@ import Employees from "@/pages/people/Employees";
 import PeopleSettings from "@/pages/people/Settings";
 import Profile from "@/pages/people/Profile";
 import Announcements from "@/pages/people/Announcements";
+import Documents from "@/pages/people/Documents";
+import Onboarding from "@/pages/people/Onboarding";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +39,8 @@ const App = () => (
             <Route path="leaves/approvals" element={<LeaveApprovals />} />
             <Route path="directory" element={<Directory />} />
             <Route path="employees" element={<Employees />} />
+            <Route path="documents" element={<Documents />} />
+            <Route path="onboarding" element={<Onboarding />} />
             <Route path="announcements" element={<Announcements />} />
             <Route path="settings" element={<PeopleSettings />} />
             <Route path="profile" element={<Profile />} />

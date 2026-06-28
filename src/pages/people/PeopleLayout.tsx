@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Clock, Users, CalendarDays, CheckSquare, Building2, Settings, UserCircle2,
-  LogOut, Menu, X, Megaphone,
+  LogOut, Menu, X, Megaphone, FileText, ListChecks,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -79,6 +79,8 @@ export default function PeopleLayout() {
           <NavItem to="/people/leaves" icon={CalendarDays} label="My Leaves" />
           {isManager && <NavItem to="/people/leaves/approvals" icon={CheckSquare} label="Approvals" />}
           <NavItem to="/people/directory" icon={Building2} label="Directory" />
+          <NavItem to="/people/documents" icon={FileText} label="Documents" />
+          <NavItem to="/people/onboarding" icon={ListChecks} label="Onboarding" />
           {isAdmin && <NavItem to="/people/employees" icon={Users} label="Employees" />}
           {isAdmin && <NavItem to="/people/announcements" icon={Megaphone} label="Announcements" />}
           {isAdmin && <NavItem to="/people/settings" icon={Settings} label="Settings" />}
@@ -133,6 +135,8 @@ export default function PeopleLayout() {
               <NavItem to="/people/leaves" icon={CalendarDays} label="My Leaves" />
               {isManager && <NavItem to="/people/leaves/approvals" icon={CheckSquare} label="Approvals" />}
               <NavItem to="/people/directory" icon={Building2} label="Directory" />
+              <NavItem to="/people/documents" icon={FileText} label="Documents" />
+              <NavItem to="/people/onboarding" icon={ListChecks} label="Onboarding" />
               {isAdmin && <NavItem to="/people/employees" icon={Users} label="Employees" />}
               {isAdmin && <NavItem to="/people/announcements" icon={Megaphone} label="Announcements" />}
               {isAdmin && <NavItem to="/people/settings" icon={Settings} label="Settings" />}
