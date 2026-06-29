@@ -19,6 +19,11 @@ import Profile from "@/pages/people/Profile";
 import Announcements from "@/pages/people/Announcements";
 import Documents from "@/pages/people/Documents";
 import Onboarding from "@/pages/people/Onboarding";
+import Projects from "@/pages/people/Projects";
+import Timesheets from "@/pages/people/Timesheets";
+import TimesheetApprovals from "@/pages/people/TimesheetApprovals";
+import Goals from "@/pages/people/Goals";
+import Reviews from "@/pages/people/Reviews";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +46,11 @@ const App = () => (
             <Route path="employees" element={<Employees />} />
             <Route path="documents" element={<Documents />} />
             <Route path="onboarding" element={<Onboarding />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="timesheets" element={<Timesheets />} />
+            <Route path="timesheets/approvals" element={<TimesheetApprovals />} />
+            <Route path="goals" element={<Goals />} />
+            <Route path="reviews" element={<Reviews />} />
             <Route path="announcements" element={<Announcements />} />
             <Route path="settings" element={<PeopleSettings />} />
             <Route path="profile" element={<Profile />} />
