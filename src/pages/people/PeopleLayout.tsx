@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Clock, Users, CalendarDays, CheckSquare, Building2, Settings, UserCircle2,
-  LogOut, Menu, X, Megaphone, FileText, ListChecks,
+  LogOut, Menu, X, Megaphone, FileText, ListChecks, Briefcase, Timer, Target, Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
