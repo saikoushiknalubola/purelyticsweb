@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Clock, Users, CalendarDays, CheckSquare, Building2, Settings, UserCircle2,
-  LogOut, Menu, X, Megaphone, FileText, ListChecks,
+  LogOut, Menu, X, Megaphone, FileText, ListChecks, Briefcase, Timer, Target, Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -78,6 +78,11 @@ export default function PeopleLayout() {
           {isManager && <NavItem to="/people/attendance/all" icon={Users} label="Team Attendance" />}
           <NavItem to="/people/leaves" icon={CalendarDays} label="My Leaves" />
           {isManager && <NavItem to="/people/leaves/approvals" icon={CheckSquare} label="Approvals" />}
+          <NavItem to="/people/timesheets" icon={Timer} label="Timesheets" />
+          {isManager && <NavItem to="/people/timesheets/approvals" icon={CheckSquare} label="Timesheet Approvals" />}
+          {isManager && <NavItem to="/people/projects" icon={Briefcase} label="Projects" />}
+          <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
+          <NavItem to="/people/reviews" icon={Star} label="Reviews" />
           <NavItem to="/people/directory" icon={Building2} label="Directory" />
           <NavItem to="/people/documents" icon={FileText} label="Documents" />
           <NavItem to="/people/onboarding" icon={ListChecks} label="Onboarding" />
@@ -134,6 +139,11 @@ export default function PeopleLayout() {
               {isManager && <NavItem to="/people/attendance/all" icon={Users} label="Team Attendance" />}
               <NavItem to="/people/leaves" icon={CalendarDays} label="My Leaves" />
               {isManager && <NavItem to="/people/leaves/approvals" icon={CheckSquare} label="Approvals" />}
+              <NavItem to="/people/timesheets" icon={Timer} label="Timesheets" />
+              {isManager && <NavItem to="/people/timesheets/approvals" icon={CheckSquare} label="Timesheet Approvals" />}
+              {isManager && <NavItem to="/people/projects" icon={Briefcase} label="Projects" />}
+              <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
+              <NavItem to="/people/reviews" icon={Star} label="Reviews" />
               <NavItem to="/people/directory" icon={Building2} label="Directory" />
               <NavItem to="/people/documents" icon={FileText} label="Documents" />
               <NavItem to="/people/onboarding" icon={ListChecks} label="Onboarding" />
