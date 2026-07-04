@@ -24,6 +24,8 @@ import Timesheets from "@/pages/people/Timesheets";
 import TimesheetApprovals from "@/pages/people/TimesheetApprovals";
 import Goals from "@/pages/people/Goals";
 import Reviews from "@/pages/people/Reviews";
+import Payroll from "@/pages/people/Payroll";
+import Payslips from "@/pages/people/Payslips";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +53,8 @@ const App = () => (
             <Route path="timesheets/approvals" element={<TimesheetApprovals />} />
             <Route path="goals" element={<Goals />} />
             <Route path="reviews" element={<Reviews />} />
+            <Route path="payroll" element={<Payroll />} />
+            <Route path="payslips" element={<Payslips />} />
             <Route path="announcements" element={<Announcements />} />
             <Route path="settings" element={<PeopleSettings />} />
             <Route path="profile" element={<Profile />} />
