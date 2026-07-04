@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Clock, Users, CalendarDays, CheckSquare, Building2, Settings, UserCircle2,
-  LogOut, Menu, X, Megaphone, FileText, ListChecks, Briefcase, Timer, Target, Star,
+  LogOut, Menu, X, Megaphone, FileText, ListChecks, Briefcase, Timer, Target, Star, Wallet, Receipt,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -83,10 +83,12 @@ export default function PeopleLayout() {
           {isManager && <NavItem to="/people/projects" icon={Briefcase} label="Projects" />}
           <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
           <NavItem to="/people/reviews" icon={Star} label="Reviews" />
+          <NavItem to="/people/payslips" icon={Receipt} label="My Payslips" />
           <NavItem to="/people/directory" icon={Building2} label="Directory" />
           <NavItem to="/people/documents" icon={FileText} label="Documents" />
           <NavItem to="/people/onboarding" icon={ListChecks} label="Onboarding" />
           {isAdmin && <NavItem to="/people/employees" icon={Users} label="Employees" />}
+          {isAdmin && <NavItem to="/people/payroll" icon={Wallet} label="Payroll" />}
           {isAdmin && <NavItem to="/people/announcements" icon={Megaphone} label="Announcements" />}
           {isAdmin && <NavItem to="/people/settings" icon={Settings} label="Settings" />}
           <div className="pt-4 mt-4 border-t border-border space-y-1">
@@ -144,10 +146,12 @@ export default function PeopleLayout() {
               {isManager && <NavItem to="/people/projects" icon={Briefcase} label="Projects" />}
               <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
               <NavItem to="/people/reviews" icon={Star} label="Reviews" />
+              <NavItem to="/people/payslips" icon={Receipt} label="My Payslips" />
               <NavItem to="/people/directory" icon={Building2} label="Directory" />
               <NavItem to="/people/documents" icon={FileText} label="Documents" />
               <NavItem to="/people/onboarding" icon={ListChecks} label="Onboarding" />
               {isAdmin && <NavItem to="/people/employees" icon={Users} label="Employees" />}
+              {isAdmin && <NavItem to="/people/payroll" icon={Wallet} label="Payroll" />}
               {isAdmin && <NavItem to="/people/announcements" icon={Megaphone} label="Announcements" />}
               {isAdmin && <NavItem to="/people/settings" icon={Settings} label="Settings" />}
               <NavItem to="/people/profile" icon={UserCircle2} label="My Profile" />
