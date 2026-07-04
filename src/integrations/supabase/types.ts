@@ -729,6 +729,129 @@ export type Database = {
         }
         Relationships: []
       }
+      payroll_runs: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          employee_count: number
+          finalized_at: string | null
+          id: string
+          notes: string | null
+          period_month: number
+          period_year: number
+          status: string
+          total_deductions: number
+          total_gross: number
+          total_net: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          employee_count?: number
+          finalized_at?: string | null
+          id?: string
+          notes?: string | null
+          period_month: number
+          period_year: number
+          status?: string
+          total_deductions?: number
+          total_gross?: number
+          total_net?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          employee_count?: number
+          finalized_at?: string | null
+          id?: string
+          notes?: string | null
+          period_month?: number
+          period_year?: number
+          status?: string
+          total_deductions?: number
+          total_gross?: number
+          total_net?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      payslips: {
+        Row: {
+          created_at: string
+          currency: string
+          deductions: Json
+          earnings: Json
+          employee_id: string
+          gross: number
+          id: string
+          issued_at: string | null
+          lop_days: number
+          net_pay: number
+          period_month: number
+          period_year: number
+          run_id: string
+          status: string
+          total_deductions: number
+          updated_at: string
+          working_days: number
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          deductions?: Json
+          earnings?: Json
+          employee_id: string
+          gross?: number
+          id?: string
+          issued_at?: string | null
+          lop_days?: number
+          net_pay?: number
+          period_month: number
+          period_year: number
+          run_id: string
+          status?: string
+          total_deductions?: number
+          updated_at?: string
+          working_days?: number
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          deductions?: Json
+          earnings?: Json
+          employee_id?: string
+          gross?: number
+          id?: string
+          issued_at?: string | null
+          lop_days?: number
+          net_pay?: number
+          period_month?: number
+          period_year?: number
+          run_id?: string
+          status?: string
+          total_deductions?: number
+          updated_at?: string
+          working_days?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payslips_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payslips_run_id_fkey"
+            columns: ["run_id"]
+            isOneToOne: false
+            referencedRelation: "payroll_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       performance_reviews: {
         Row: {
           comments: string | null
@@ -986,6 +1109,68 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      salary_structures: {
+        Row: {
+          basic: number
+          created_at: string
+          ctc_annual: number
+          currency: string
+          effective_from: string
+          employee_id: string
+          hra: number
+          id: string
+          notes: string | null
+          other_allowances: number
+          other_deductions: number
+          pf_deduction: number
+          special_allowance: number
+          tax_deduction: number
+          updated_at: string
+        }
+        Insert: {
+          basic?: number
+          created_at?: string
+          ctc_annual?: number
+          currency?: string
+          effective_from?: string
+          employee_id: string
+          hra?: number
+          id?: string
+          notes?: string | null
+          other_allowances?: number
+          other_deductions?: number
+          pf_deduction?: number
+          special_allowance?: number
+          tax_deduction?: number
+          updated_at?: string
+        }
+        Update: {
+          basic?: number
+          created_at?: string
+          ctc_annual?: number
+          currency?: string
+          effective_from?: string
+          employee_id?: string
+          hra?: number
+          id?: string
+          notes?: string | null
+          other_allowances?: number
+          other_deductions?: number
+          pf_deduction?: number
+          special_allowance?: number
+          tax_deduction?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "salary_structures_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       timesheet_entries: {
         Row: {
