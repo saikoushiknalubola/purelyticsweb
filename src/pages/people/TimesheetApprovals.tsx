@@ -31,7 +31,7 @@ export default function TimesheetApprovals() {
     setLoading(true);
     const { data, error } = await supabase
       .from("timesheet_weeks")
-      .select("*, profile:profiles!timesheet_weeks_user_id_fkey(id,full_name,email)")
+      .select("*, profile:profiles!timesheet_weeks_user_id_profiles_fkey(id,full_name,email)")
       .in("status", ["submitted", "approved", "rejected"])
       .order("submitted_at", { ascending: false })
       .limit(50);
