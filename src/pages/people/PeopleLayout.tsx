@@ -74,11 +74,11 @@ export default function PeopleLayout() {
         </div>
         <nav className="flex-1 p-3 space-y-1">
           <NavItem to="/people" icon={LayoutDashboard} label="Dashboard" end />
-          <NavItem to="/people/attendance" icon={Clock} label="My Attendance" />
+          <NavItem to="/people/attendance" icon={Clock} label="My Attendance" end />
           {isManager && <NavItem to="/people/attendance/all" icon={Users} label="Team Attendance" />}
-          <NavItem to="/people/leaves" icon={CalendarDays} label="My Leaves" />
+          <NavItem to="/people/leaves" icon={CalendarDays} label="My Leaves" end />
           {isManager && <NavItem to="/people/leaves/approvals" icon={CheckSquare} label="Approvals" />}
-          <NavItem to="/people/timesheets" icon={Timer} label="Timesheets" />
+          <NavItem to="/people/timesheets" icon={Timer} label="Timesheets" end />
           {isManager && <NavItem to="/people/timesheets/approvals" icon={CheckSquare} label="Timesheet Approvals" />}
           {isManager && <NavItem to="/people/projects" icon={Briefcase} label="Projects" />}
           <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
@@ -137,11 +137,11 @@ export default function PeopleLayout() {
             </div>
             <div onClick={() => setOpen(false)} className="space-y-1">
               <NavItem to="/people" icon={LayoutDashboard} label="Dashboard" end />
-              <NavItem to="/people/attendance" icon={Clock} label="My Attendance" />
+              <NavItem to="/people/attendance" icon={Clock} label="My Attendance" end />
               {isManager && <NavItem to="/people/attendance/all" icon={Users} label="Team Attendance" />}
-              <NavItem to="/people/leaves" icon={CalendarDays} label="My Leaves" />
+              <NavItem to="/people/leaves" icon={CalendarDays} label="My Leaves" end />
               {isManager && <NavItem to="/people/leaves/approvals" icon={CheckSquare} label="Approvals" />}
-              <NavItem to="/people/timesheets" icon={Timer} label="Timesheets" />
+              <NavItem to="/people/timesheets" icon={Timer} label="Timesheets" end />
               {isManager && <NavItem to="/people/timesheets/approvals" icon={CheckSquare} label="Timesheet Approvals" />}
               {isManager && <NavItem to="/people/projects" icon={Briefcase} label="Projects" />}
               <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
@@ -166,7 +166,7 @@ export default function PeopleLayout() {
       )}
 
       <main className="lg:pl-64">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-6 lg:py-8">
+        <div className="w-full px-4 lg:px-8 py-6 lg:py-8">
           <Outlet context={{ user, profile, isAdmin, isManager }} />
         </div>
       </main>
