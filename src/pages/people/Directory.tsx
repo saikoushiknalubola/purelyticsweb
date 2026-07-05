@@ -14,7 +14,11 @@ export default function Directory() {
 
   useEffect(() => {
     Promise.all([
-      supabase.from("profiles").select("*").eq("status","active").order("full_name"),
+      supabase
+        .from("employee_directory")
+        .select("id, full_name, email, avatar_url, department_id, designation, manager_id, joining_date, status, employee_id, location, work_mode, employment_type")
+        .eq("status", "active")
+        .order("full_name"),
       supabase.from("departments").select("id, name"),
     ]).then(([p, d]) => {
       setRows(p.data ?? []);
