@@ -7,6 +7,29 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
+
+const ALLOWED_CATEGORIES = ["skincare", "food", "baby", "haircare", "cleaning"] as const;
+
+const betaSignupSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be under 100 characters"),
+  email: z.string().trim().email("Please enter a valid email").max(255, "Email must be under 255 characters"),
+  age: z
+    .string()
+    .trim()
+    .max(3, "Please enter a valid age")
+    .optional()
+    .refine(
+      (v) => !v || (/^\d+$/.test(v) && Number(v) >= 13 && Number(v) <= 120),
+      "Age must be a number between 13 and 120",
+    ),
+  city: z.string().trim().max(100, "City must be under 100 characters").optional(),
+  categories: z
+    .array(z.enum(ALLOWED_CATEGORIES))
+    .max(ALLOWED_CATEGORIES.length, "Too many categories selected")
+    .optional(),
+  frustration: z.string().trim().max(1000, "Please keep your response under 1000 characters").optional(),
+});
 
 const categories = [
   { id: "skincare", label: "Skincare" },
@@ -39,13 +62,33 @@ export function BetaSignupSection() {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase.from("beta_signups").insert({
+      const parsed = betaSignupSchema.safeParse({
         name: formData.name,
         email: formData.email,
-        age: formData.age || null,
-        city: formData.city || null,
-        categories: formData.categories.length > 0 ? formData.categories : null,
-        frustration: formData.frustration || null,
+        age: formData.age || undefined,
+        city: formData.city || undefined,
+        categories: (formData.categories.length > 0 ? formData.categories : undefined) as
+          | (typeof ALLOWED_CATEGORIES)[number][]
+          | undefined,
+        frustration: formData.frustration || undefined,
+      });
+
+      if (!parsed.success) {
+        toast.error("Please check your details", {
+          description: parsed.error.issues[0]?.message ?? "Some fields are invalid.",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      const v = parsed.data;
+      const { error } = await supabase.from("beta_signups").insert({
+        name: v.name,
+        email: v.email,
+        age: v.age ?? null,
+        city: v.city ?? null,
+        categories: v.categories && v.categories.length > 0 ? v.categories : null,
+        frustration: v.frustration ?? null,
       });
 
       if (error) {
@@ -71,7 +114,9 @@ export function BetaSignupSection() {
         });
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error submitting form:", error);
+      }
       toast.error("Something went wrong", {
         description: "Please try again later.",
       });

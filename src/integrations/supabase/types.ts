@@ -217,7 +217,21 @@ export type Database = {
             foreignKeyName: "documents_employee_id_fkey"
             columns: ["employee_id"]
             isOneToOne: false
+            referencedRelation: "employee_directory"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "documents_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "documents_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "employee_directory"
             referencedColumns: ["id"]
           },
           {
@@ -268,7 +282,21 @@ export type Database = {
             foreignKeyName: "employee_onboarding_assigned_by_fkey"
             columns: ["assigned_by"]
             isOneToOne: false
+            referencedRelation: "employee_directory"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "employee_onboarding_assigned_by_fkey"
+            columns: ["assigned_by"]
+            isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "employee_onboarding_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: true
+            referencedRelation: "employee_directory"
             referencedColumns: ["id"]
           },
           {
@@ -319,6 +347,13 @@ export type Database = {
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "employee_onboarding_progress_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "employee_directory"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "employee_onboarding_progress_employee_id_fkey"
             columns: ["employee_id"]
@@ -442,6 +477,13 @@ export type Database = {
             foreignKeyName: "goals_created_by_profiles_fkey"
             columns: ["created_by"]
             isOneToOne: false
+            referencedRelation: "employee_directory"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goals_created_by_profiles_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
@@ -457,6 +499,13 @@ export type Database = {
             columns: ["parent_goal_id"]
             isOneToOne: false
             referencedRelation: "goals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "goals_user_id_profiles_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "employee_directory"
             referencedColumns: ["id"]
           },
           {
@@ -711,6 +760,13 @@ export type Database = {
             foreignKeyName: "onboarding_templates_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
+            referencedRelation: "employee_directory"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "onboarding_templates_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
@@ -850,6 +906,13 @@ export type Database = {
           working_days?: number
         }
         Relationships: [
+          {
+            foreignKeyName: "payslips_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "employee_directory"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "payslips_employee_id_fkey"
             columns: ["employee_id"]
@@ -1045,6 +1108,13 @@ export type Database = {
             foreignKeyName: "project_members_user_id_profiles_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "employee_directory"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_members_user_id_profiles_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
@@ -1188,6 +1258,13 @@ export type Database = {
             foreignKeyName: "salary_structures_employee_id_fkey"
             columns: ["employee_id"]
             isOneToOne: false
+            referencedRelation: "employee_directory"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "salary_structures_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
@@ -1298,7 +1375,21 @@ export type Database = {
             foreignKeyName: "timesheet_weeks_reviewed_by_profiles_fkey"
             columns: ["reviewed_by"]
             isOneToOne: false
+            referencedRelation: "employee_directory"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "timesheet_weeks_reviewed_by_profiles_fkey"
+            columns: ["reviewed_by"]
+            isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "timesheet_weeks_user_id_profiles_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "employee_directory"
             referencedColumns: ["id"]
           },
           {
@@ -1333,24 +1424,65 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      employee_directory: {
+        Row: {
+          avatar_url: string | null
+          department_id: string | null
+          designation: string | null
+          email: string | null
+          employee_id: string | null
+          employment_type: string | null
+          full_name: string | null
+          id: string | null
+          joining_date: string | null
+          location: string | null
+          manager_id: string | null
+          status: string | null
+          work_mode: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          department_id?: string | null
+          designation?: string | null
+          email?: string | null
+          employee_id?: string | null
+          employment_type?: string | null
+          full_name?: string | null
+          id?: string | null
+          joining_date?: string | null
+          location?: string | null
+          manager_id?: string | null
+          status?: string | null
+          work_mode?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          department_id?: string | null
+          designation?: string | null
+          email?: string | null
+          employee_id?: string | null
+          employment_type?: string | null
+          full_name?: string | null
+          id?: string | null
+          joining_date?: string | null
+          location?: string | null
+          manager_id?: string | null
+          status?: string | null
+          work_mode?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
-      has_role: {
-        Args: {
-          _role: Database["public"]["Enums"]["app_role"]
-          _user_id: string
-        }
-        Returns: boolean
-      }
-      is_manager_of: {
-        Args: { _employee: string; _manager: string }
-        Returns: boolean
-      }
-      is_project_member: {
-        Args: { _project: string; _user: string }
-        Returns: boolean
-      }
+      [_ in never]: never
     }
     Enums: {
       app_role: "admin" | "manager" | "employee"
