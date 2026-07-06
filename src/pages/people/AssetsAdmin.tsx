@@ -32,15 +32,16 @@ export default function AssetsAdmin() {
     setLoading(true);
     const [{ data: a }, { data: aa }, { data: r }, { data: emp }] = await Promise.all([
       supabase.from("assets").select("*").order("created_at", { ascending: false }),
-      supabase.from("asset_assignments").select("*, profiles!asset_assignments_user_id_fkey(full_name,email)").is("returned_at", null),
-      supabase.from("asset_requests").select("*, profiles!asset_requests_user_id_fkey(full_name,email)").order("created_at", { ascending: false }),
+      supabase.from("asset_assignments").select("*").is("returned_at", null),
+      supabase.from("asset_requests").select("*").order("created_at", { ascending: false }),
       supabase.from("profiles").select("id,full_name,email").eq("status", "active").order("full_name"),
     ]);
     setAssets(a ?? []);
+    const empMap = new Map((emp ?? []).map((e: any) => [e.id, e]));
     const map: Record<string, any> = {};
-    (aa ?? []).forEach((x: any) => (map[x.asset_id] = x));
+    (aa ?? []).forEach((x: any) => (map[x.asset_id] = { ...x, profiles: empMap.get(x.user_id) }));
     setAssignments(map);
-    setReqs(r ?? []);
+    setReqs((r ?? []).map((x: any) => ({ ...x, profiles: empMap.get(x.user_id) })));
     setEmployees(emp ?? []);
     setLoading(false);
   };
