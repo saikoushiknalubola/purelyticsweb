@@ -1,52 +1,97 @@
-## What's already shipped this turn
+## Scope
 
-- Removed the "F6S #1 Top Company · June 2026" chip from the hero
-- Hero headline now uses a premium word-by-word blur-and-rise reveal
-- Every section title (Features, How it works, Why Purelytics, Use Cases, Testimonials, FAQ, CTA) now animates word-by-word on scroll using a shared `AnimatedHeading` component
-- Mobile menu fixed: now uses `position: fixed`, full-height scrollable panel, dimmed backdrop
-- **F6S badge fix for Netlify**: image was hosted on Lovable's CDN (`/__l5e/...`) which doesn't resolve on `purelytics.tech`. Downloaded the badge into `src/assets/` so Vite bundles it into the Netlify build. Push to GitHub and the badge will appear on the live site.
+Ship four new Zoho People-style modules end-to-end (schema → RLS → UI → approvals → dashboards) and audit every existing `/people/*` page for consistent spacing, empty states, loading skeletons, and mobile layout.
 
-## People — next features (proposed phasing)
+## New modules
 
-Building all four modules in one shot would be a 1500+ line change and impossible to review safely. Here's a phased rollout. Each phase is one migration + one set of pages, fully wired and shippable on its own.
+### 1. Training & Learning (LMS)
+- **Tables**: `courses`, `course_modules` (ordered lessons), `course_enrollments` (status: not_started/in_progress/completed, progress %), `course_completions` (certificate no., issued_at).
+- **Pages**:
+  - `/people/learning` — course catalog cards, filter by category, "Enroll" action.
+  - `/people/learning/:id` — modules list, mark complete, progress bar, certificate download when 100%.
+  - `/people/learning/admin` (admin) — create/edit courses & modules, assign to employees/departments.
+- **Dashboard tile**: "Courses in progress" for employees, "Enrollment completion %" for admins.
 
-### Phase 1 — Documents & Onboarding
-- Tables: `documents` (file storage, type, employee, visibility), `onboarding_templates`, `onboarding_tasks`, `employee_onboarding`
-- Storage bucket `people-documents` with RLS (employee sees own, admin sees all)
-- Pages:
-  - `/people/documents` — upload, categorize (Offer Letter, ID Proof, Contract, Payslip, Other), preview, download
-  - `/people/onboarding` — admin creates checklist templates; new hire sees their checklist with progress
-  - In Add Employee dialog: auto-assign onboarding template + upload offer letter
+### 2. Assets & IT Provisioning
+- **Tables**: `assets` (tag, category: laptop/monitor/phone/access-card/other, serial, purchase_date, status, condition), `asset_assignments` (asset_id, user_id, assigned_at, returned_at, notes, assigned_by), `asset_requests` (user_id, category, reason, status, decided_by).
+- **Pages**:
+  - `/people/assets` (employee) — my assigned assets + "Request asset" form + request history.
+  - `/people/assets/admin` (admin) — inventory table, assign/return, approve requests.
+- **Dashboard tile**: "Assets assigned to you".
 
-### Phase 2 — Timesheets & Projects
-- Tables: `projects` (name, client, billable, status), `project_members`, `timesheet_entries` (date, hours, project, task, billable, notes), `timesheet_weeks` (submission/approval status)
-- Pages:
-  - `/people/projects` — admin/manager CRUD projects, assign members
-  - `/people/timesheets` — weekly grid (Mon–Sun × projects), inline hour entry, submit week
-  - `/people/timesheet-approvals` — manager queue, approve/reject with notes
-  - Dashboard widget: billable vs non-billable hours this week
+### 3. Helpdesk / HR Cases
+- **Tables**: `helpdesk_categories`, `helpdesk_tickets` (subject, description, category_id, priority, status, requester_id, assignee_id, sla_due_at, resolved_at), `helpdesk_comments` (threaded replies).
+- **Pages**:
+  - `/people/helpdesk` — my tickets list + "New ticket".
+  - `/people/helpdesk/:id` — ticket detail, comment thread, status transitions.
+  - `/people/helpdesk/queue` (admin) — all tickets, assign, filter, SLA badge.
+- **Dashboard tile**: "Open tickets" for admin, "My open cases" for employee.
 
-### Phase 3 — Performance & Goals
-- Tables: `review_cycles` (quarterly/annual), `goals` (KRA/OKR, owner, target, progress, status), `goal_checkins`, `reviews` (self + manager), `one_on_ones` (notes, action items)
-- Pages:
-  - `/people/goals` — employee creates goals, updates progress; manager sees team goals
-  - `/people/reviews` — cycle-based self review form + manager review + rating
-  - `/people/one-on-ones` — recurring 1:1 notes between employee and manager
-  - Dashboard widget: open goals, upcoming reviews
+### 4. Travel & Expenses (bonus "most important" module)
+- **Tables**: `expense_categories`, `expense_reports` (title, purpose, total, status, submitter_id, approver_id, decided_at), `expense_items` (report_id, category_id, spent_on, amount, currency, merchant, receipt_url), `travel_requests` (destination, from/to date, purpose, estimated_cost, status, approver_id).
+- **Pages**:
+  - `/people/expenses` — my reports, create report + add items with receipt upload to `people-documents` bucket.
+  - `/people/expenses/approvals` (manager) — pending reports, approve/reject with comment.
+  - `/people/travel` — my travel requests + new request.
+  - `/people/travel/approvals` (manager) — approve/reject.
+- **Dashboard tile**: "Pending expense approvals" for managers.
 
-### Phase 4 — Payroll & Payslips
-- Tables: `salary_structures` (employee, ctc, basic, hra, allowances, deductions, effective_from), `payroll_runs` (month, status, totals), `payslips` (per employee per run, gross, deductions, net, PDF URL)
-- Edge function: `generate-payslip` (renders HTML → PDF, uploads to storage bucket `payslips`)
-- Pages:
-  - `/people/payroll` — admin sets salary structure per employee, runs monthly payroll, locks the run
-  - `/people/payslips` — employee sees list of monthly payslips, downloads PDF
-  - Dashboard widget: latest payslip card with net pay
+## Security model
 
-### Cross-cutting
-- Update People sidebar with new nav groups: **Work** (Attendance, Timesheets, Projects), **Growth** (Goals, Reviews, 1:1s), **Records** (Documents, Onboarding, Payroll, Payslips)
-- All policies follow existing pattern: self + manager (via `is_manager_of`) + admin (via `has_role`)
-- All file storage in private Supabase Storage buckets with signed-URL downloads
+- Every new table: `GRANT` for `authenticated` + `service_role`, `ENABLE RLS`.
+- Employee policies: self-scoped via `auth.uid()`.
+- Manager policies: use existing `private.is_manager_of(auth.uid(), user_id)` helper.
+- Admin policies: use `private.has_role(auth.uid(), 'admin')`.
+- Receipts stored in existing `people-documents` bucket under `expenses/{user_id}/…`.
 
-## What I need from you
+## Global UI/UX polish pass
 
-Reply with **"start phase 1"** (or whichever phase you want first) and I'll ship the full migration + pages in the next turn. I'll move through phases sequentially as you approve each.
+Apply consistently to every `/people/*` page:
+- **Loading**: replace inline "Loading…" text with `<Skeleton>` blocks matching the card/table shape.
+- **Empty states**: standard component with icon, headline, one-line hint, primary action.
+- **Spacing**: unified `space-y-6/8` rhythm, consistent `PageHeader` usage.
+- **Tables**: sticky header, zebra rows, mobile → stacked card fallback under `md`.
+- **Mobile**: verify no horizontal overflow, sidebar drawer closes on nav, header offsets correct.
+- **Nav highlighting**: audit `end` prop on every parent route with children so only one item highlights.
+- **Toasts**: standardize success/error copy via `sonner`.
+
+## Routing additions in `src/App.tsx`
+
+```
+/people/learning              → Learning
+/people/learning/:id          → LearningDetail
+/people/learning/admin        → LearningAdmin  (admin gated)
+/people/assets                → Assets
+/people/assets/admin          → AssetsAdmin    (admin gated)
+/people/helpdesk              → Helpdesk
+/people/helpdesk/:id          → HelpdeskTicket
+/people/helpdesk/queue        → HelpdeskQueue  (admin gated)
+/people/expenses              → Expenses
+/people/expenses/approvals    → ExpenseApprovals (manager)
+/people/travel                → Travel
+/people/travel/approvals      → TravelApprovals  (manager)
+```
+
+Sidebar in `PeopleLayout.tsx` gets grouped sections: **Work** (Attendance, Leaves, Timesheets), **Growth** (Goals, Reviews, Learning), **Services** (Assets, Helpdesk, Expenses, Travel), **Admin** (Employees, Payroll, Announcements, Settings).
+
+## Execution order
+
+1. Migration 1 — Learning tables + RLS + grants.
+2. Migration 2 — Assets tables + RLS + grants.
+3. Migration 3 — Helpdesk tables + RLS + grants.
+4. Migration 4 — Expenses & Travel tables + RLS + grants.
+5. Build pages + wire routes + sidebar sections.
+6. Regenerate types, refactor Dashboard to add new tiles.
+7. Global polish pass: shared `<EmptyState>` and `<LoadingCard>` helpers, apply across all People pages.
+8. Playwright smoke: sign in, visit each new route, verify no console errors and no layout overflow at mobile + desktop.
+
+## Technical notes
+
+- Reuse existing helpers in `private` schema (`has_role`, `is_manager_of`).
+- Certificate PDF: client-side generation with `jspdf` on completion (no server work).
+- File uploads reuse existing `people-documents` bucket with per-user prefix RLS already in place.
+- No new external services; all AI-adjacent features skipped for this pass.
+
+## Out of scope (future phases)
+
+- Recruitment/ATS, shift scheduling, org chart visualization, mobile push notifications, Slack/Teams integration — flag for a later phase.
