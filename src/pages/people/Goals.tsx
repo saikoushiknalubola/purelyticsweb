@@ -51,7 +51,7 @@ export default function Goals() {
     setLoading(true);
     let q = supabase
       .from("goals")
-      .select("*, profile:profiles!goals_user_id_fkey(id,full_name,email), cycle:review_cycles(name)")
+      .select("*, profile:profiles!goals_user_id_profiles_fkey(id,full_name,email), cycle:review_cycles(name)")
       .order("created_at", { ascending: false });
     if (tab === "mine") q = q.eq("user_id", user.id);
     const { data, error } = await q;

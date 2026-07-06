@@ -75,7 +75,7 @@ export default function Projects() {
     setMemberOpen(p);
     const { data } = await supabase
       .from("project_members")
-      .select("*, profile:profiles!project_members_user_id_fkey(id,full_name,email)")
+      .select("*, profile:profiles!project_members_user_id_profiles_fkey(id,full_name,email)")
       .eq("project_id", p.id);
     setMembers(data ?? []);
   };

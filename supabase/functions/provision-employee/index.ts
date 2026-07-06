@@ -42,8 +42,13 @@ Deno.serve(async (req) => {
       });
     }
     const callerId = userData.user.id;
-    const { data: isAdmin } = await admin.rpc("has_role", { _user_id: callerId, _role: "admin" });
-    if (!isAdmin) {
+    const { data: adminRow } = await admin
+      .from("user_roles")
+      .select("user_id")
+      .eq("user_id", callerId)
+      .eq("role", "admin")
+      .maybeSingle();
+    if (!adminRow) {
       return new Response(JSON.stringify({ error: "Forbidden — admin only" }), {
         status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
