@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-do
 import {
   LayoutDashboard, Clock, Users, CalendarDays, CheckSquare, Building2, Settings, UserCircle2,
   LogOut, Menu, X, Megaphone, FileText, ListChecks, Briefcase, Timer, Target, Star, Wallet, Receipt,
+  BookOpen, Laptop, LifeBuoy,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -83,6 +84,9 @@ export default function PeopleLayout() {
           {isManager && <NavItem to="/people/projects" icon={Briefcase} label="Projects" />}
           <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
           <NavItem to="/people/reviews" icon={Star} label="Reviews" />
+          <NavItem to="/people/learning" icon={BookOpen} label="Learning" end />
+          <NavItem to="/people/assets" icon={Laptop} label="Assets" end />
+          <NavItem to="/people/helpdesk" icon={LifeBuoy} label="Helpdesk" end />
           <NavItem to="/people/payslips" icon={Receipt} label="My Payslips" />
           <NavItem to="/people/directory" icon={Building2} label="Directory" />
           <NavItem to="/people/documents" icon={FileText} label="Documents" />
@@ -146,6 +150,9 @@ export default function PeopleLayout() {
               {isManager && <NavItem to="/people/projects" icon={Briefcase} label="Projects" />}
               <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
               <NavItem to="/people/reviews" icon={Star} label="Reviews" />
+              <NavItem to="/people/learning" icon={BookOpen} label="Learning" end />
+              <NavItem to="/people/assets" icon={Laptop} label="Assets" end />
+              <NavItem to="/people/helpdesk" icon={LifeBuoy} label="Helpdesk" end />
               <NavItem to="/people/payslips" icon={Receipt} label="My Payslips" />
               <NavItem to="/people/directory" icon={Building2} label="Directory" />
               <NavItem to="/people/documents" icon={FileText} label="Documents" />
