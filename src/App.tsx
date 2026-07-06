@@ -26,6 +26,13 @@ import Goals from "@/pages/people/Goals";
 import Reviews from "@/pages/people/Reviews";
 import Payroll from "@/pages/people/Payroll";
 import Payslips from "@/pages/people/Payslips";
+import Learning from "@/pages/people/Learning";
+import LearningDetail from "@/pages/people/LearningDetail";
+import LearningAdmin from "@/pages/people/LearningAdmin";
+import Assets from "@/pages/people/Assets";
+import AssetsAdmin from "@/pages/people/AssetsAdmin";
+import Helpdesk from "@/pages/people/Helpdesk";
+import HelpdeskTicket from "@/pages/people/HelpdeskTicket";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +62,13 @@ const App = () => (
             <Route path="reviews" element={<Reviews />} />
             <Route path="payroll" element={<Payroll />} />
             <Route path="payslips" element={<Payslips />} />
+            <Route path="learning" element={<Learning />} />
+            <Route path="learning/admin" element={<LearningAdmin />} />
+            <Route path="learning/:id" element={<LearningDetail />} />
+            <Route path="assets" element={<Assets />} />
+            <Route path="assets/admin" element={<AssetsAdmin />} />
+            <Route path="helpdesk" element={<Helpdesk />} />
+            <Route path="helpdesk/:id" element={<HelpdeskTicket />} />
             <Route path="announcements" element={<Announcements />} />
             <Route path="settings" element={<PeopleSettings />} />
             <Route path="profile" element={<Profile />} />
