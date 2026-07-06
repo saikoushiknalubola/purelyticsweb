@@ -38,6 +38,134 @@ export type Database = {
         }
         Relationships: []
       }
+      asset_assignments: {
+        Row: {
+          asset_id: string
+          assigned_at: string
+          assigned_by: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          returned_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          asset_id: string
+          assigned_at?: string
+          assigned_by?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          returned_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          asset_id?: string
+          assigned_at?: string
+          assigned_by?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          returned_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "asset_assignments_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: false
+            referencedRelation: "assets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      asset_requests: {
+        Row: {
+          category: string
+          created_at: string
+          decided_at: string | null
+          decided_by: string | null
+          decision_note: string | null
+          id: string
+          reason: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          decision_note?: string | null
+          id?: string
+          reason: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          decision_note?: string | null
+          id?: string
+          reason?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      assets: {
+        Row: {
+          category: string
+          condition: string
+          created_at: string
+          id: string
+          name: string
+          notes: string | null
+          purchase_cost: number | null
+          purchase_date: string | null
+          serial_no: string | null
+          status: string
+          tag: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          condition?: string
+          created_at?: string
+          id?: string
+          name: string
+          notes?: string | null
+          purchase_cost?: number | null
+          purchase_date?: string | null
+          serial_no?: string | null
+          status?: string
+          tag: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          condition?: string
+          created_at?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          purchase_cost?: number | null
+          purchase_date?: string | null
+          serial_no?: string | null
+          status?: string
+          tag?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       attendance_breaks: {
         Row: {
           break_end: string | null
@@ -145,6 +273,139 @@ export type Database = {
           frustration?: string | null
           id?: string
           name?: string
+        }
+        Relationships: []
+      }
+      course_enrollments: {
+        Row: {
+          certificate_no: string | null
+          completed_at: string | null
+          completed_modules: string[]
+          course_id: string
+          created_at: string
+          enrolled_at: string
+          id: string
+          progress: number
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          certificate_no?: string | null
+          completed_at?: string | null
+          completed_modules?: string[]
+          course_id: string
+          created_at?: string
+          enrolled_at?: string
+          id?: string
+          progress?: number
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          certificate_no?: string | null
+          completed_at?: string | null
+          completed_modules?: string[]
+          course_id?: string
+          created_at?: string
+          enrolled_at?: string
+          id?: string
+          progress?: number
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_enrollments_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      course_modules: {
+        Row: {
+          content: string | null
+          course_id: string
+          created_at: string
+          duration_minutes: number | null
+          id: string
+          position: number
+          title: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          content?: string | null
+          course_id: string
+          created_at?: string
+          duration_minutes?: number | null
+          id?: string
+          position?: number
+          title: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          content?: string | null
+          course_id?: string
+          created_at?: string
+          duration_minutes?: number | null
+          id?: string
+          position?: number
+          title?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_modules_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      courses: {
+        Row: {
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          duration_minutes: number | null
+          id: string
+          is_published: boolean
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration_minutes?: number | null
+          id?: string
+          is_published?: boolean
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration_minutes?: number | null
+          id?: string
+          is_published?: boolean
+          title?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -370,6 +631,129 @@ export type Database = {
           },
         ]
       }
+      expense_categories: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+        }
+        Relationships: []
+      }
+      expense_items: {
+        Row: {
+          amount: number
+          category_id: string | null
+          created_at: string
+          currency: string
+          description: string | null
+          id: string
+          merchant: string | null
+          receipt_url: string | null
+          report_id: string
+          spent_on: string
+        }
+        Insert: {
+          amount?: number
+          category_id?: string | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          merchant?: string | null
+          receipt_url?: string | null
+          report_id: string
+          spent_on?: string
+        }
+        Update: {
+          amount?: number
+          category_id?: string | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          merchant?: string | null
+          receipt_url?: string | null
+          report_id?: string
+          spent_on?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expense_items_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "expense_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expense_items_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "expense_reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      expense_reports: {
+        Row: {
+          approver_id: string | null
+          created_at: string
+          currency: string
+          decided_at: string | null
+          decision_note: string | null
+          id: string
+          purpose: string | null
+          status: string
+          submitted_at: string | null
+          submitter_id: string
+          title: string
+          total: number
+          updated_at: string
+        }
+        Insert: {
+          approver_id?: string | null
+          created_at?: string
+          currency?: string
+          decided_at?: string | null
+          decision_note?: string | null
+          id?: string
+          purpose?: string | null
+          status?: string
+          submitted_at?: string | null
+          submitter_id: string
+          title: string
+          total?: number
+          updated_at?: string
+        }
+        Update: {
+          approver_id?: string | null
+          created_at?: string
+          currency?: string
+          decided_at?: string | null
+          decision_note?: string | null
+          id?: string
+          purpose?: string | null
+          status?: string
+          submitted_at?: string | null
+          submitter_id?: string
+          title?: string
+          total?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       goal_checkins: {
         Row: {
           created_at: string
@@ -513,6 +897,115 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      helpdesk_categories: {
+        Row: {
+          created_at: string
+          default_sla_hours: number
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          default_sla_hours?: number
+          description?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          default_sla_hours?: number
+          description?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      helpdesk_comments: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+          ticket_id: string
+        }
+        Insert: {
+          author_id: string
+          body: string
+          created_at?: string
+          id?: string
+          ticket_id: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          ticket_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "helpdesk_comments_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "helpdesk_tickets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      helpdesk_tickets: {
+        Row: {
+          assignee_id: string | null
+          category_id: string | null
+          created_at: string
+          description: string
+          id: string
+          priority: string
+          requester_id: string
+          resolved_at: string | null
+          sla_due_at: string | null
+          status: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          assignee_id?: string | null
+          category_id?: string | null
+          created_at?: string
+          description: string
+          id?: string
+          priority?: string
+          requester_id: string
+          resolved_at?: string | null
+          sla_due_at?: string | null
+          status?: string
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          assignee_id?: string | null
+          category_id?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          priority?: string
+          requester_id?: string
+          resolved_at?: string | null
+          sla_due_at?: string | null
+          status?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "helpdesk_tickets_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "helpdesk_categories"
             referencedColumns: ["id"]
           },
         ]
@@ -1400,6 +1893,57 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      travel_requests: {
+        Row: {
+          approver_id: string | null
+          created_at: string
+          currency: string
+          decided_at: string | null
+          decision_note: string | null
+          destination: string
+          estimated_cost: number | null
+          from_date: string
+          id: string
+          purpose: string
+          status: string
+          to_date: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          approver_id?: string | null
+          created_at?: string
+          currency?: string
+          decided_at?: string | null
+          decision_note?: string | null
+          destination: string
+          estimated_cost?: number | null
+          from_date: string
+          id?: string
+          purpose: string
+          status?: string
+          to_date: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          approver_id?: string | null
+          created_at?: string
+          currency?: string
+          decided_at?: string | null
+          decision_note?: string | null
+          destination?: string
+          estimated_cost?: number | null
+          from_date?: string
+          id?: string
+          purpose?: string
+          status?: string
+          to_date?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {
