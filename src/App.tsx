@@ -33,6 +33,10 @@ import Assets from "@/pages/people/Assets";
 import AssetsAdmin from "@/pages/people/AssetsAdmin";
 import Helpdesk from "@/pages/people/Helpdesk";
 import HelpdeskTicket from "@/pages/people/HelpdeskTicket";
+import Expenses from "@/pages/people/Expenses";
+import ExpenseApprovals from "@/pages/people/ExpenseApprovals";
+import Travel from "@/pages/people/Travel";
+import TravelApprovals from "@/pages/people/TravelApprovals";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +73,10 @@ const App = () => (
             <Route path="assets/admin" element={<AssetsAdmin />} />
             <Route path="helpdesk" element={<Helpdesk />} />
             <Route path="helpdesk/:id" element={<HelpdeskTicket />} />
+            <Route path="expenses" element={<Expenses />} />
+            <Route path="expenses/approvals" element={<ExpenseApprovals />} />
+            <Route path="travel" element={<Travel />} />
+            <Route path="travel/approvals" element={<TravelApprovals />} />
             <Route path="announcements" element={<Announcements />} />
             <Route path="settings" element={<PeopleSettings />} />
             <Route path="profile" element={<Profile />} />
