@@ -1763,6 +1763,27 @@ export type Database = {
           },
         ]
       }
+      site_visits: {
+        Row: {
+          id: string
+          path: string | null
+          ua: string | null
+          visited_at: string
+        }
+        Insert: {
+          id?: string
+          path?: string | null
+          ua?: string | null
+          visited_at?: string
+        }
+        Update: {
+          id?: string
+          path?: string | null
+          ua?: string | null
+          visited_at?: string
+        }
+        Relationships: []
+      }
       timesheet_entries: {
         Row: {
           billable: boolean
