@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-do
 import {
   LayoutDashboard, Clock, Users, CalendarDays, CheckSquare, Building2, Settings, UserCircle2,
   LogOut, Menu, X, Megaphone, FileText, ListChecks, Briefcase, Timer, Target, Star, Wallet, Receipt,
-  BookOpen, Laptop, LifeBuoy,
+  BookOpen, Laptop, LifeBuoy, Plane,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -17,16 +17,27 @@ function NavItem({ to, icon: Icon, label, end }: { to: string; icon: any; label:
       to={to}
       end={end}
       className={({ isActive }) =>
-        `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
+        `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
           isActive
-            ? "bg-primary text-primary-foreground"
+            ? "bg-primary text-primary-foreground shadow-sm"
             : "text-foreground/70 hover:bg-secondary hover:text-foreground"
         }`
       }
     >
-      <Icon className="h-4 w-4" />
-      <span>{label}</span>
+      <Icon className="h-4 w-4 shrink-0" />
+      <span className="truncate">{label}</span>
     </NavLink>
+  );
+}
+
+function NavGroup({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="pt-3 first:pt-0">
+      <div className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground/70">
+        {label}
+      </div>
+      <div className="space-y-0.5">{children}</div>
+    </div>
   );
 }
 
@@ -59,6 +70,59 @@ export default function PeopleLayout() {
 
   const displayName = profile?.full_name || user.email;
 
+  const NavContents = (
+    <>
+      <NavGroup label="Overview">
+        <NavItem to="/people" icon={LayoutDashboard} label="Dashboard" end />
+      </NavGroup>
+
+      <NavGroup label="Time & Leave">
+        <NavItem to="/people/attendance" icon={Clock} label="My Attendance" end />
+        {isManager && <NavItem to="/people/attendance/all" icon={Users} label="Team Attendance" />}
+        <NavItem to="/people/leaves" icon={CalendarDays} label="My Leaves" end />
+        {isManager && <NavItem to="/people/leaves/approvals" icon={CheckSquare} label="Leave Approvals" />}
+        <NavItem to="/people/timesheets" icon={Timer} label="Timesheets" end />
+        {isManager && <NavItem to="/people/timesheets/approvals" icon={CheckSquare} label="Timesheet Approvals" />}
+      </NavGroup>
+
+      <NavGroup label="Work">
+        {isManager && <NavItem to="/people/projects" icon={Briefcase} label="Projects" />}
+        <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
+        <NavItem to="/people/reviews" icon={Star} label="Reviews" />
+        <NavItem to="/people/learning" icon={BookOpen} label="Learning" end />
+      </NavGroup>
+
+      <NavGroup label="Services">
+        <NavItem to="/people/assets" icon={Laptop} label="Assets" end />
+        <NavItem to="/people/helpdesk" icon={LifeBuoy} label="Helpdesk" end />
+        <NavItem to="/people/expenses" icon={Wallet} label="Expenses" end />
+        {isManager && <NavItem to="/people/expenses/approvals" icon={CheckSquare} label="Expense Approvals" />}
+        <NavItem to="/people/travel" icon={Plane} label="Travel" end />
+        {isManager && <NavItem to="/people/travel/approvals" icon={CheckSquare} label="Travel Approvals" />}
+      </NavGroup>
+
+      <NavGroup label="Company">
+        <NavItem to="/people/payslips" icon={Receipt} label="My Payslips" />
+        <NavItem to="/people/directory" icon={Building2} label="Directory" />
+        <NavItem to="/people/documents" icon={FileText} label="Documents" />
+        <NavItem to="/people/onboarding" icon={ListChecks} label="Onboarding" />
+      </NavGroup>
+
+      {isAdmin && (
+        <NavGroup label="Admin">
+          <NavItem to="/people/employees" icon={Users} label="Employees" />
+          <NavItem to="/people/payroll" icon={Wallet} label="Payroll" />
+          <NavItem to="/people/announcements" icon={Megaphone} label="Announcements" />
+          <NavItem to="/people/settings" icon={Settings} label="Settings" />
+        </NavGroup>
+      )}
+
+      <NavGroup label="Account">
+        <NavItem to="/people/profile" icon={UserCircle2} label="My Profile" />
+      </NavGroup>
+    </>
+  );
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Sidebar (desktop) */}
@@ -73,32 +137,7 @@ export default function PeopleLayout() {
             </span>
           </Link>
         </div>
-        <nav className="flex-1 p-3 space-y-1">
-          <NavItem to="/people" icon={LayoutDashboard} label="Dashboard" end />
-          <NavItem to="/people/attendance" icon={Clock} label="My Attendance" end />
-          {isManager && <NavItem to="/people/attendance/all" icon={Users} label="Team Attendance" />}
-          <NavItem to="/people/leaves" icon={CalendarDays} label="My Leaves" end />
-          {isManager && <NavItem to="/people/leaves/approvals" icon={CheckSquare} label="Approvals" />}
-          <NavItem to="/people/timesheets" icon={Timer} label="Timesheets" end />
-          {isManager && <NavItem to="/people/timesheets/approvals" icon={CheckSquare} label="Timesheet Approvals" />}
-          {isManager && <NavItem to="/people/projects" icon={Briefcase} label="Projects" />}
-          <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
-          <NavItem to="/people/reviews" icon={Star} label="Reviews" />
-          <NavItem to="/people/learning" icon={BookOpen} label="Learning" end />
-          <NavItem to="/people/assets" icon={Laptop} label="Assets" end />
-          <NavItem to="/people/helpdesk" icon={LifeBuoy} label="Helpdesk" end />
-          <NavItem to="/people/payslips" icon={Receipt} label="My Payslips" />
-          <NavItem to="/people/directory" icon={Building2} label="Directory" />
-          <NavItem to="/people/documents" icon={FileText} label="Documents" />
-          <NavItem to="/people/onboarding" icon={ListChecks} label="Onboarding" />
-          {isAdmin && <NavItem to="/people/employees" icon={Users} label="Employees" />}
-          {isAdmin && <NavItem to="/people/payroll" icon={Wallet} label="Payroll" />}
-          {isAdmin && <NavItem to="/people/announcements" icon={Megaphone} label="Announcements" />}
-          {isAdmin && <NavItem to="/people/settings" icon={Settings} label="Settings" />}
-          <div className="pt-4 mt-4 border-t border-border space-y-1">
-            <NavItem to="/people/profile" icon={UserCircle2} label="My Profile" />
-          </div>
-        </nav>
+        <nav className="flex-1 p-3 space-y-1 overflow-y-auto">{NavContents}</nav>
         <div className="p-3 border-t border-border">
           <div className="flex items-center gap-3 px-2 py-2">
             <Avatar className="h-8 w-8">
@@ -118,53 +157,65 @@ export default function PeopleLayout() {
       </aside>
 
       {/* Mobile topbar */}
-      <header className="lg:hidden h-14 flex items-center justify-between px-4 border-b border-border bg-card sticky top-0 z-30">
-        <Link to="/people" className="font-display text-xl text-primary tracking-tight">
+      <header className="lg:hidden h-14 flex items-center justify-between px-4 border-b border-border bg-card/95 backdrop-blur sticky top-0 z-30">
+        <Link to="/people" className="flex items-baseline gap-2 font-display text-xl text-primary tracking-tight">
           Purelytics<span className="text-accent">.</span>
-          <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground ml-2">People</span>
+          <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">People</span>
         </Link>
-        <Button variant="ghost" size="icon" onClick={() => setOpen(true)}>
-          <Menu className="h-5 w-5" />
-        </Button>
+        <div className="flex items-center gap-1">
+          <Avatar className="h-8 w-8">
+            <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+              {initials(profile?.full_name, user.email)}
+            </AvatarFallback>
+          </Avatar>
+          <Button variant="ghost" size="icon" onClick={() => setOpen(true)} aria-label="Open menu">
+            <Menu className="h-5 w-5" />
+          </Button>
+        </div>
       </header>
 
       {open && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-black/40" onClick={() => setOpen(false)}>
-          <aside className="absolute inset-y-0 left-0 w-72 bg-card p-4 flex flex-col" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between mb-4">
-              <span className="font-display text-xl text-primary">
-                Purelytics<span className="text-accent">.</span>
-              </span>
-              <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
+        <div
+          className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={() => setOpen(false)}
+        >
+          <aside
+            className="absolute inset-y-0 left-0 w-[86%] max-w-[320px] bg-card flex flex-col shadow-2xl animate-in slide-in-from-left duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="h-16 flex items-center justify-between px-4 border-b border-border">
+              <Link to="/people" onClick={() => setOpen(false)} className="flex flex-col leading-none">
+                <span className="font-display text-xl text-primary">
+                  Purelytics<span className="text-accent">.</span>
+                </span>
+                <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mt-1">People</span>
+              </Link>
+              <Button variant="ghost" size="icon" onClick={() => setOpen(false)} aria-label="Close menu">
                 <X className="h-5 w-5" />
               </Button>
             </div>
-            <div onClick={() => setOpen(false)} className="space-y-1">
-              <NavItem to="/people" icon={LayoutDashboard} label="Dashboard" end />
-              <NavItem to="/people/attendance" icon={Clock} label="My Attendance" end />
-              {isManager && <NavItem to="/people/attendance/all" icon={Users} label="Team Attendance" />}
-              <NavItem to="/people/leaves" icon={CalendarDays} label="My Leaves" end />
-              {isManager && <NavItem to="/people/leaves/approvals" icon={CheckSquare} label="Approvals" />}
-              <NavItem to="/people/timesheets" icon={Timer} label="Timesheets" end />
-              {isManager && <NavItem to="/people/timesheets/approvals" icon={CheckSquare} label="Timesheet Approvals" />}
-              {isManager && <NavItem to="/people/projects" icon={Briefcase} label="Projects" />}
-              <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
-              <NavItem to="/people/reviews" icon={Star} label="Reviews" />
-              <NavItem to="/people/learning" icon={BookOpen} label="Learning" end />
-              <NavItem to="/people/assets" icon={Laptop} label="Assets" end />
-              <NavItem to="/people/helpdesk" icon={LifeBuoy} label="Helpdesk" end />
-              <NavItem to="/people/payslips" icon={Receipt} label="My Payslips" />
-              <NavItem to="/people/directory" icon={Building2} label="Directory" />
-              <NavItem to="/people/documents" icon={FileText} label="Documents" />
-              <NavItem to="/people/onboarding" icon={ListChecks} label="Onboarding" />
-              {isAdmin && <NavItem to="/people/employees" icon={Users} label="Employees" />}
-              {isAdmin && <NavItem to="/people/payroll" icon={Wallet} label="Payroll" />}
-              {isAdmin && <NavItem to="/people/announcements" icon={Megaphone} label="Announcements" />}
-              {isAdmin && <NavItem to="/people/settings" icon={Settings} label="Settings" />}
-              <NavItem to="/people/profile" icon={UserCircle2} label="My Profile" />
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
+              <Avatar className="h-9 w-9">
+                <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                  {initials(profile?.full_name, user.email)}
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-medium truncate">{displayName}</div>
+                <div className="text-xs text-muted-foreground truncate">{user.email}</div>
+              </div>
             </div>
-            <div className="mt-auto pt-4 border-t border-border">
-              <Button variant="ghost" size="sm" className="w-full justify-start" onClick={signOut}>
+            <nav
+              className="flex-1 overflow-y-auto p-3 space-y-1"
+              onClick={(e) => {
+                const t = e.target as HTMLElement;
+                if (t.closest("a")) setOpen(false);
+              }}
+            >
+              {NavContents}
+            </nav>
+            <div className="p-3 border-t border-border">
+              <Button variant="outline" size="sm" className="w-full justify-start" onClick={signOut}>
                 <LogOut className="h-4 w-4 mr-2" /> Sign out
               </Button>
             </div>
@@ -172,8 +223,8 @@ export default function PeopleLayout() {
         </div>
       )}
 
-      <main className="lg:pl-64">
-        <div className="w-full px-4 lg:px-8 py-6 lg:py-8">
+      <main className="lg:pl-64 min-h-screen">
+        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
           <Outlet context={{ user, profile, isAdmin, isManager }} />
         </div>
       </main>
