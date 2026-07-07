@@ -1763,6 +1763,27 @@ export type Database = {
           },
         ]
       }
+      site_visits: {
+        Row: {
+          id: string
+          path: string | null
+          ua: string | null
+          visited_at: string
+        }
+        Insert: {
+          id?: string
+          path?: string | null
+          ua?: string | null
+          visited_at?: string
+        }
+        Update: {
+          id?: string
+          path?: string | null
+          ua?: string | null
+          visited_at?: string
+        }
+        Relationships: []
+      }
       timesheet_entries: {
         Row: {
           billable: boolean
@@ -2026,7 +2047,10 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      record_site_visit: {
+        Args: { _path?: string; _ua?: string }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "admin" | "manager" | "employee"

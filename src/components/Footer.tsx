@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Instagram, Linkedin, Mail, MapPin, Twitter } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { VisitorCounter } from "./VisitorCounter";
 
 const footerLinks = {
   quick: [
@@ -235,6 +236,7 @@ export function Footer() {
             <div className="text-sm" style={{ color: "hsl(var(--primary-foreground) / 0.6)" }}>
               © {new Date().getFullYear()} Purelytics. All rights reserved.
             </div>
+            <VisitorCounter />
             <div className="flex items-center gap-4 text-sm" style={{ color: "hsl(var(--primary-foreground) / 0.6)" }}>
               <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
               <span>|</span>
