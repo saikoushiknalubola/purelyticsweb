@@ -2047,7 +2047,10 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      record_site_visit: {
+        Args: { _path?: string; _ua?: string }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "admin" | "manager" | "employee"
