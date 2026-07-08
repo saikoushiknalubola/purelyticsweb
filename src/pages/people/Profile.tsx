@@ -10,6 +10,7 @@ import { PageHeader } from "./PeopleLayout";
 import { toast } from "sonner";
 import { useOutletContext } from "react-router-dom";
 import { fmtDate } from "./_hooks";
+import { UserCircle2 } from "lucide-react";
 
 export default function Profile() {
   const { user, profile } = useOutletContext<{ user: any; profile: any }>();
@@ -26,6 +27,8 @@ export default function Profile() {
   }, [profile, user.id]);
 
   if (!form) return null;
+
+  const isEmpty = !form.full_name && !form.phone && !form.address && !form.date_of_birth && !form.location;
 
   const save = async () => {
     setSaving(true);
@@ -56,6 +59,19 @@ export default function Profile() {
   return (
     <div>
       <PageHeader title="My Profile" subtitle="Keep your details up to date." />
+      {isEmpty && (
+        <Card className="p-5 mb-6 border-accent/40 bg-accent/5 flex items-start gap-4">
+          <div className="h-10 w-10 rounded-xl bg-accent/15 text-accent flex items-center justify-center shrink-0">
+            <UserCircle2 className="h-5 w-5" />
+          </div>
+          <div className="flex-1">
+            <div className="font-medium">Complete your profile</div>
+            <p className="text-sm text-muted-foreground mt-0.5">
+              Add your name, phone and emergency contact so HR, payroll and your team can reach you when it matters.
+            </p>
+          </div>
+        </Card>
+      )}
       <div className="grid gap-6 xl:grid-cols-3">
         <Card className="p-6 space-y-4 xl:col-span-2">
           <h2 className="font-serif text-lg">Personal details</h2>

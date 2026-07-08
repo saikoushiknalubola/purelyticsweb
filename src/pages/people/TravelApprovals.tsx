@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { PageHeader } from "./PeopleLayout";
 import { LoadingCards, EmptyState, StatusBadge } from "./_ui";
-import { Plane, Check, X, MapPin, Calendar } from "lucide-react";
+import { Plane, Check, X, MapPin, Calendar, Inbox } from "lucide-react";
 import { toast } from "sonner";
 import { fmtDate } from "./_hooks";
 
@@ -73,7 +73,11 @@ export default function TravelApprovals() {
         <>
           <h2 className="font-medium">Pending ({pending.length})</h2>
           {pending.length === 0 ? (
-            <Card className="p-6 text-sm text-muted-foreground text-center">Nothing to review.</Card>
+            <EmptyState
+              icon={Inbox}
+              title="Nothing to review"
+              description="No pending travel requests from your team right now. New submissions will appear here for approval."
+            />
           ) : (
             <div className="grid md:grid-cols-2 gap-4">
               {pending.map((r) => (
