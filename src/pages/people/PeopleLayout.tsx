@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Clock, Users, CalendarDays, CheckSquare, Building2, Settings, UserCircle2,
@@ -46,6 +46,57 @@ export default function PeopleLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const drawerRef = useRef<HTMLElement | null>(null);
+  const openBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  // Close drawer on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
+  // Mobile drawer: focus trap, Escape, body scroll lock, restore focus
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = "hidden";
+
+    // Focus the first focusable element in the drawer
+    const focusables = () =>
+      Array.from(
+        drawerRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        ) ?? []
+      ).filter((el) => !el.hasAttribute("data-focus-skip"));
+    const first = focusables()[0];
+    first?.focus();
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (e.key === "Tab") {
+        const list = focusables();
+        if (list.length === 0) return;
+        const firstEl = list[0];
+        const lastEl = list[list.length - 1];
+        if (e.shiftKey && document.activeElement === firstEl) {
+          e.preventDefault();
+          lastEl.focus();
+        } else if (!e.shiftKey && document.activeElement === lastEl) {
+          e.preventDefault();
+          firstEl.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = "";
+      previous?.focus?.();
+    };
+  }, [open]);
 
   if (loading) {
     return (
@@ -168,7 +219,16 @@ export default function PeopleLayout() {
               {initials(profile?.full_name, user.email)}
             </AvatarFallback>
           </Avatar>
-          <Button variant="ghost" size="icon" onClick={() => setOpen(true)} aria-label="Open menu">
+          <Button
+            ref={openBtnRef}
+            variant="ghost"
+            size="icon"
+            onClick={() => setOpen(true)}
+            aria-label="Open navigation menu"
+            aria-haspopup="dialog"
+            aria-expanded={open}
+            aria-controls="people-mobile-drawer"
+          >
             <Menu className="h-5 w-5" />
           </Button>
         </div>
@@ -180,6 +240,11 @@ export default function PeopleLayout() {
           onClick={() => setOpen(false)}
         >
           <aside
+            ref={drawerRef as any}
+            id="people-mobile-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-label="People navigation"
             className="absolute inset-y-0 left-0 w-[86%] max-w-[320px] bg-card flex flex-col shadow-2xl animate-in slide-in-from-left duration-200"
             onClick={(e) => e.stopPropagation()}
           >
