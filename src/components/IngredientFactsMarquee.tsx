@@ -1,4 +1,4 @@
-import { AlertTriangle, FlaskConical, Leaf, ShieldAlert, Sparkles, Beaker } from "lucide-react";
+import { AlertTriangle, FlaskConical, Leaf, ShieldAlert, ShieldCheck, Beaker } from "lucide-react";
 
 const facts = [
   { icon: AlertTriangle, text: "1 in 5 spice samples in South Asia test positive for adulteration — from brick dust in chili to lead chromate in turmeric." },
@@ -6,7 +6,7 @@ const facts = [
   { icon: ShieldAlert, text: "Palm oil is relabeled under 30+ names — ‘vegetable oil’, ‘glyceryl stearate’, ‘sodium palmate’ and more." },
   { icon: Beaker, text: "Milk in bulk supply chains is routinely diluted, then ‘corrected’ with urea, detergent, or synthetic fat." },
   { icon: Leaf, text: "‘Organic’ on the front doesn't mean organic inside — only certified seals with a valid ID number are enforceable." },
-  { icon: Sparkles, text: "Titanium dioxide, banned as a food additive in the EU since 2022, still appears in candies and coatings sold elsewhere." },
+  { icon: ShieldCheck, text: "Titanium dioxide, banned as a food additive in the EU since 2022, still appears in candies and coatings sold elsewhere." },
   { icon: AlertTriangle, text: "Honey is the third-most faked food on earth — most ‘pure honey’ jars are cut with rice or corn syrup." },
   { icon: FlaskConical, text: "‘No added sugar’ can still mean glucose syrup, maltodextrin, fruit juice concentrate — all sugar, differently spelled." },
 ];
@@ -39,7 +39,7 @@ export function IngredientFactsMarquee() {
       <div className="container">
         <div className="max-w-2xl mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-semibold uppercase tracking-[0.18em] mb-4">
-            <Sparkles className="h-3.5 w-3.5" /> The truth on the label
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" /> The truth on the label
           </div>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight text-primary">
             What's really in the things you eat, drink, and put on your skin.
@@ -65,18 +65,6 @@ export function IngredientFactsMarquee() {
           </div>
         </div>
 
-        <div className="mt-10 grid sm:grid-cols-3 gap-4 max-w-3xl">
-          {[
-            { k: "3,200+", v: "adulterants tracked" },
-            { k: "40+", v: "regulatory bodies referenced" },
-            { k: "< 3s", v: "to decode a label" },
-          ].map((s) => (
-            <div key={s.v} className="rounded-2xl bg-background p-5 border border-border/60">
-              <div className="font-display text-3xl text-primary">{s.k}</div>
-              <div className="text-sm text-muted-foreground mt-1">{s.v}</div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

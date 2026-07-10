@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-const STORAGE_KEY = "purelytics_visit_recorded";
+const STORAGE_KEY = "purelytics_visit_recorded_v2";
 
 type State =
   | { status: "loading" }
@@ -16,13 +16,24 @@ export function VisitorCounter() {
   useEffect(() => {
     let cancelled = false;
 
+    const fetchCount = async () => {
+      const { count, error } = await supabase
+        .from("site_visits")
+        .select("*", { count: "exact", head: true });
+      if (cancelled) return;
+      if (error) {
+        setState({ status: "error" });
+        return;
+      }
+      setState({ status: "ready", count: count ?? 0 });
+    };
+
     const load = async () => {
       if (typeof navigator !== "undefined" && navigator.onLine === false) {
         if (!cancelled) setState({ status: "offline" });
         return;
       }
       try {
-        // Only record one visit per browser session
         const already = sessionStorage.getItem(STORAGE_KEY);
         if (!already) {
           sessionStorage.setItem(STORAGE_KEY, "1");
@@ -31,15 +42,7 @@ export function VisitorCounter() {
             _ua: navigator.userAgent.slice(0, 240),
           });
         }
-        const { count, error } = await supabase
-          .from("site_visits")
-          .select("*", { count: "exact", head: true });
-        if (cancelled) return;
-        if (error) {
-          setState({ status: "error" });
-          return;
-        }
-        setState({ status: "ready", count: count ?? 0 });
+        await fetchCount();
       } catch {
         if (!cancelled) setState({ status: "error" });
       }
@@ -52,10 +55,18 @@ export function VisitorCounter() {
     window.addEventListener("online", onOnline);
     window.addEventListener("offline", onOffline);
 
+    // Refresh count periodically so the number stays live without flicker.
+    const interval = window.setInterval(() => {
+      if (document.visibilityState === "visible" && navigator.onLine !== false) {
+        fetchCount();
+      }
+    }, 30000);
+
     return () => {
       cancelled = true;
       window.removeEventListener("online", onOnline);
       window.removeEventListener("offline", onOffline);
+      window.clearInterval(interval);
     };
   }, []);
 
@@ -104,10 +115,11 @@ export function VisitorCounter() {
       className={baseCls + " animate-in fade-in duration-500"}
       style={style}
       aria-label={`${state.count.toLocaleString()} total site visits`}
+      title="Total page visits recorded"
     >
       <Eye className="h-3.5 w-3.5" />
       <span className="font-medium tabular-nums">{state.count.toLocaleString()}</span>
-      <span className="opacity-70">visits</span>
+      <span className="opacity-70">total visits</span>
     </div>
   );
 }

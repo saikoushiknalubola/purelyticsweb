@@ -37,6 +37,7 @@ import Expenses from "@/pages/people/Expenses";
 import ExpenseApprovals from "@/pages/people/ExpenseApprovals";
 import Travel from "@/pages/people/Travel";
 import TravelApprovals from "@/pages/people/TravelApprovals";
+import Kudos from "@/pages/people/Kudos";
 
 const queryClient = new QueryClient();
 
@@ -77,6 +78,7 @@ const App = () => (
             <Route path="expenses/approvals" element={<ExpenseApprovals />} />
             <Route path="travel" element={<Travel />} />
             <Route path="travel/approvals" element={<TravelApprovals />} />
+            <Route path="kudos" element={<Kudos />} />
             <Route path="announcements" element={<Announcements />} />
             <Route path="settings" element={<PeopleSettings />} />
             <Route path="profile" element={<Profile />} />

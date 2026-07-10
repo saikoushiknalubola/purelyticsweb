@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-do
 import {
   LayoutDashboard, Clock, Users, CalendarDays, CheckSquare, Building2, Settings, UserCircle2,
   LogOut, Menu, X, Megaphone, FileText, ListChecks, Briefcase, Timer, Target, Star, Wallet, Receipt,
-  BookOpen, Laptop, LifeBuoy, Plane,
+  BookOpen, Laptop, LifeBuoy, Plane, Award,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -141,6 +141,7 @@ export default function PeopleLayout() {
         <NavItem to="/people/goals" icon={Target} label="Goals & OKRs" />
         <NavItem to="/people/reviews" icon={Star} label="Reviews" />
         <NavItem to="/people/learning" icon={BookOpen} label="Learning" end />
+        <NavItem to="/people/kudos" icon={Award} label="Kudos" />
       </NavGroup>
 
       <NavGroup label="Services">

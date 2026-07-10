@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function CTASection() {
@@ -16,7 +16,7 @@ export function CTASection() {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6 bg-background/12 border border-white/12"
           >
-            <Sparkles className="w-4 h-4" />
+            <Rocket className="w-4 h-4" />
             <span>Be part of the transparency movement</span>
           </motion.span>
           <AnimatedHeading className="font-display text-3xl sm:text-4xl lg:text-5xl mb-5">Ready to know what's really in your products?</AnimatedHeading>

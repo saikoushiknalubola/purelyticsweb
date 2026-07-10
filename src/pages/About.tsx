@@ -11,7 +11,7 @@ import {
   Heart,
   Cpu,
   Scan,
-  Sparkles,
+  Zap,
   Users,
   MapPin
 } from "lucide-react";
@@ -47,7 +47,7 @@ const features = [
     description: "Simply scan any product label with your phone camera and get comprehensive ingredient analysis in seconds."
   },
   {
-    icon: Sparkles,
+    icon: Zap,
     title: "Personalized Insights",
     description: "Receive tailored recommendations based on your health profile and preferences for safer product alternatives."
   },
