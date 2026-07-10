@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, ListChecks, Sparkles, UserPlus } from "lucide-react";
+import { Loader2, ListChecks, Wand2, UserPlus } from "lucide-react";
 import { toast } from "sonner";
 import { PageHeader } from "./PeopleLayout";
 import { fmtDate } from "./_hooks";
@@ -255,7 +255,7 @@ export default function Onboarding() {
         <div className="flex items-center justify-between gap-4 mb-5">
           <div>
             <div className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-accent" />
+              <Wand2 className="h-4 w-4 text-accent" />
               <h2 className="font-display text-xl text-foreground">My checklist</h2>
             </div>
             {assignment?.template?.name && (
