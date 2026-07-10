@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PageHeader } from "./PeopleLayout";
 import { LoadingCards, EmptyState, StatusBadge } from "./_ui";
-import { Wallet, Plus, Trash2, Send, Upload } from "lucide-react";
+import { Wallet, Plus, Trash2, Send, Upload, Receipt } from "lucide-react";
 import { toast } from "sonner";
 import { fmtDate } from "./_hooks";
 
@@ -199,9 +199,16 @@ export default function Expenses() {
 
           <div className="space-y-4">
             {!activeReport ? (
-              <Card className="p-10 text-center text-muted-foreground">
-                Select a report on the left to view items.
-              </Card>
+              <EmptyState
+                icon={Receipt}
+                title="Pick a report to view items"
+                description="Choose a report from the list to review expenses, add receipts, or submit for approval."
+                action={
+                  <Button variant="outline" onClick={() => setOpenNew(true)}>
+                    <Plus className="h-4 w-4 mr-2" /> New report
+                  </Button>
+                }
+              />
             ) : (
               <>
                 <Card className="p-5">

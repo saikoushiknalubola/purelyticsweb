@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Rocket } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
@@ -144,7 +144,7 @@ export function BetaSignupSection() {
             className="text-center mb-10"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border text-foreground font-medium text-xs sm:text-sm mb-5">
-              <Sparkles className="w-4 h-4" />
+              <Rocket className="w-4 h-4" />
               Limited beta spots available
             </div>
             <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-foreground mb-4">

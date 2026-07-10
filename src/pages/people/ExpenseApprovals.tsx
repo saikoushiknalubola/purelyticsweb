@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PageHeader } from "./PeopleLayout";
 import { LoadingCards, EmptyState, StatusBadge } from "./_ui";
-import { Wallet, Check, X } from "lucide-react";
+import { Wallet, Check, X, Inbox } from "lucide-react";
 import { toast } from "sonner";
 import { fmtDate } from "./_hooks";
 
@@ -83,7 +83,11 @@ export default function ExpenseApprovals() {
           <div className="space-y-3">
             <h2 className="font-medium">Pending ({pending.length})</h2>
             {pending.length === 0 ? (
-              <Card className="p-6 text-sm text-muted-foreground text-center">All caught up.</Card>
+              <EmptyState
+                icon={Inbox}
+                title="All caught up"
+                description="No expense reports are waiting on your decision. New submissions from your team will appear here automatically."
+              />
             ) : (
               pending.map((r) => (
                 <Card key={r.id} className="p-5 space-y-3">

@@ -5,12 +5,15 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { supabase } from "@/integrations/supabase/client";
 import { PageHeader } from "./PeopleLayout";
 import { initials } from "./_hooks";
-import { Search, Mail, Building2 } from "lucide-react";
+import { EmptyState, LoadingCards } from "./_ui";
+import { Button } from "@/components/ui/button";
+import { Search, Mail, Building2, Users } from "lucide-react";
 
 export default function Directory() {
   const [rows, setRows] = useState<any[]>([]);
   const [depts, setDepts] = useState<Record<string, string>>({});
   const [q, setQ] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([
@@ -25,6 +28,7 @@ export default function Directory() {
       const m: Record<string,string> = {};
       (d.data ?? []).forEach((x:any) => m[x.id] = x.name);
       setDepts(m);
+      setLoading(false);
     });
   }, []);
 
@@ -35,6 +39,28 @@ export default function Directory() {
       || (r.email ?? "").toLowerCase().includes(s)
       || (r.designation ?? "").toLowerCase().includes(s);
   });
+
+  if (loading) {
+    return (
+      <div>
+        <PageHeader title="Directory" subtitle="Find anyone on the team." />
+        <LoadingCards count={4} />
+      </div>
+    );
+  }
+
+  if (rows.length === 0) {
+    return (
+      <div>
+        <PageHeader title="Directory" subtitle="Find anyone on the team." />
+        <EmptyState
+          icon={Users}
+          title="Directory is empty"
+          description="No active teammates yet. Once employees are added and activated, they'll show up here — searchable by name, role, or email."
+        />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -62,7 +88,14 @@ export default function Directory() {
           </Card>
         ))}
         {filtered.length === 0 && (
-          <Card className="p-8 col-span-full text-center text-sm text-muted-foreground">No matches.</Card>
+          <div className="col-span-full">
+            <EmptyState
+              icon={Search}
+              title={`No matches for “${q}”`}
+              description="Try a different name, email, or role — or clear the search to browse everyone."
+              action={<Button variant="outline" onClick={() => setQ("")}>Clear search</Button>}
+            />
+          </div>
         )}
       </div>
     </div>

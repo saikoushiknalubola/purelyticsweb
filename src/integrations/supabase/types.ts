@@ -1043,6 +1043,36 @@ export type Database = {
         }
         Relationships: []
       }
+      kudos: {
+        Row: {
+          badge: string
+          created_at: string
+          from_user: string
+          id: string
+          message: string
+          to_user: string
+          visibility: string
+        }
+        Insert: {
+          badge?: string
+          created_at?: string
+          from_user: string
+          id?: string
+          message: string
+          to_user: string
+          visibility?: string
+        }
+        Update: {
+          badge?: string
+          created_at?: string
+          from_user?: string
+          id?: string
+          message?: string
+          to_user?: string
+          visibility?: string
+        }
+        Relationships: []
+      }
       leave_balances: {
         Row: {
           id: string

@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
-import { Camera, Search, BookOpen, Sparkles } from "lucide-react";
+import { Camera, Search, BookOpen, Bell } from "lucide-react";
 
 const steps = [
   { icon: Camera, title: "Scan", description: "Point your camera at any product label. Purelytics instantly extracts the ingredients.", step: "01" },
   { icon: Search, title: "Decode", description: "Every chemical is analyzed, normalized, and matched against scientific toxicity datasets.", step: "02" },
   { icon: BookOpen, title: "Understand", description: "Clear explanations in simple language — what's safe, what's harmful, and why.", step: "03" },
-  { icon: Sparkles, title: "Improve", description: "Personalized alerts based on allergies and safer product recommendations.", step: "04" },
+  { icon: Bell, title: "Improve", description: "Personalized alerts based on allergies and safer product recommendations.", step: "04" },
 ];
 
 export function HowItWorksSection() {
