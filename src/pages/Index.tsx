@@ -6,6 +6,7 @@ import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { WhyPurelyticsSection } from "@/components/WhyPurelyticsSection";
 import { UseCasesSection } from "@/components/UseCasesSection";
 import { IngredientFactsMarquee } from "@/components/IngredientFactsMarquee";
+import { OurStorySection } from "@/components/OurStorySection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { SocialProofSection } from "@/components/SocialProofSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
@@ -28,6 +29,7 @@ const Index = () => {
         <WhyPurelyticsSection />
         <UseCasesSection />
         <IngredientFactsMarquee />
+        <OurStorySection />
         <FeaturesSection />
         <SocialProofSection />
         <TestimonialsSection />
