@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Users, WifiOff, Loader2, AlertCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const STORAGE_KEY = "purelytics_visit_recorded_v2";
@@ -84,19 +84,19 @@ export function VisitorCounter() {
         style={style}
         role="status"
         aria-live="polite"
-        aria-label="Loading visitor count"
+        aria-label="Loading verified visitor count"
       >
         <Loader2 className="h-3.5 w-3.5 animate-spin" />
-        <span className="opacity-70">counting visits…</span>
+        <span className="opacity-70">loading visits…</span>
       </div>
     );
   }
 
   if (state.status === "offline") {
     return (
-      <div className={baseCls} style={style} aria-label="Visitor count unavailable — offline">
-        <EyeOff className="h-3.5 w-3.5" />
-        <span className="opacity-70">offline</span>
+      <div className={baseCls} style={style} aria-label="Visitor count unavailable — you are offline">
+        <WifiOff className="h-3.5 w-3.5" />
+        <span className="opacity-70">visits unavailable offline</span>
       </div>
     );
   }
@@ -104,8 +104,8 @@ export function VisitorCounter() {
   if (state.status === "error") {
     return (
       <div className={baseCls} style={style} aria-label="Visitor count temporarily unavailable">
-        <EyeOff className="h-3.5 w-3.5" />
-        <span className="opacity-70">count unavailable</span>
+        <AlertCircle className="h-3.5 w-3.5" />
+        <span className="opacity-70">visits unavailable</span>
       </div>
     );
   }
@@ -114,12 +114,12 @@ export function VisitorCounter() {
     <div
       className={baseCls + " animate-in fade-in duration-500"}
       style={style}
-      aria-label={`${state.count.toLocaleString()} total site visits`}
-      title="Total page visits recorded"
+      aria-label={`${state.count.toLocaleString()} verified site visits`}
+      title="Verified visits recorded by our backend"
     >
-      <Eye className="h-3.5 w-3.5" />
+      <Users className="h-3.5 w-3.5" />
       <span className="font-medium tabular-nums">{state.count.toLocaleString()}</span>
-      <span className="opacity-70">total visits</span>
+      <span className="opacity-70">verified visits</span>
     </div>
   );
 }
